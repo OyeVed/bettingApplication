@@ -17,7 +17,7 @@ $query->execute();
 
 if($query->rowCount() === 0){
 
-    $status = 400;
+    $status = 203;
     $response = [
         "msg" => "Bad Request - User does not exist"
     ];
@@ -37,7 +37,7 @@ if($query->rowCount() === 0){
             ]
         ];
     }else{
-        $status = 401;
+        $status = 203;
         $response = [
             "msg" => "Unauthorized - Password does not match"
         ];
