@@ -40,6 +40,10 @@
   --breakpoint-xl: 1200px;
   --font-family-sans-serif: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  /* custom */
+  --default-bg-1: linear-gradient(162.17deg, #057085 1.24%, #22545F 32.79%, #002129 98.63%);
+  --default-bg-2: #22545F;
+  --default-text-1: #0E687A;
 }
 
 *,
@@ -162,7 +166,7 @@ sup {
 }
 
 a {
-  color: #009688;
+  color: var(--default-text-1);
   text-decoration: none;
   background-color: transparent;
 }
@@ -2046,7 +2050,7 @@ pre code {
 .form-control:focus {
   color: #495057;
   background-color: #FFF;
-  border-color: #009688;
+  border-color: var(--default-text-1);
   outline: 0;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -2619,8 +2623,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #FFF;
-  background-color: #009688;
-  border-color: #009688;
+  background-color: var(--default-bg-2);
+  border-color: var(--default-text-1);
 }
 
 .btn-primary:hover {
@@ -14987,7 +14991,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .app-sidebar__toggle:before {
-  content: "\f0c9";
+  content: "\f036";
   font-size: 21px;
 }
 
@@ -15656,7 +15660,7 @@ be a descendant of the grid when it is being dragged.
 
 .animated-checkbox input[type="checkbox"]:checked + .label-text:before {
   content: "";
-  color: #009688;
+  color: var(--default-text-1);
   -webkit-animation: tick 180ms ease-in;
           animation: tick 180ms ease-in;
 }
@@ -15893,7 +15897,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .material-half-bg .cover {
-  background-color: #009688;
+  background: var(--default-bg-1);
   height: 50vh;
 }
 
