@@ -16734,13 +16734,3 @@ be a descendant of the grid when it is being dragged.
 .user .user-settings label {
   color: #666;
 }
-/* /////////////////////////////////////////////////// */
-/*  ////////////////// Custome  //////////////////*/
-/* //////////////////////////////////////////////// */
-
-.myAlert-top{
-  position: fixed;
-  top: 5px; 
-  left:2%;
-  width: 96%;
-}

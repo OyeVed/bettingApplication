@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,10 +17,19 @@
 </head>
 
 <body>
+    <!-- NOTE: START: -->
+    <!-- Alert -->
     <div class="myAlert-top alert alert-success" id="alert_div">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Indicates a successful or positive action.
     </div>
+    <!-- loader -->
+    <div class="overlay"></div>
+    <div class="spanner">
+        <div class="loader"></div>
+        <!-- <p>Uploading music file, please be patient.</p> -->
+    </div>
+    <!-- END: -->
     <section class="material-half-bg">
         <div class="cover"></div>
     </section>
@@ -87,7 +97,7 @@
         });
         // login request
         function handleUserLogin() {
-
+            startLoader()
             let username = document.getElementById('login_username').value
             let password = document.getElementById('login_password').value
             // TODO: remove matkaApplicaton
@@ -97,7 +107,7 @@
                     "password": password
                 }
             ).then((response) => {
-                console.log(response)
+                endLoader()
                 if (response.status === 200) {
                     showAlert('success', response.data?.msg)
                     location.href = "dashboard.html";
@@ -105,9 +115,10 @@
                     showAlert('danger', response.data?.msg)
                 }
             }, (error) => {
+                endLoader()
                 console.log('error', error);
                 showAlert('danger', 'Something went wrong! Please try again.')
-            });
+            })
         }
     </script>
 </body>
