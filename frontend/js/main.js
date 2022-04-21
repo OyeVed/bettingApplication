@@ -28,5 +28,17 @@
 
   //Activate bootstrip tooltips
   $("[data-toggle='tooltip']").tooltip();
-})();
 
+  // check device
+  console.log("Device checking start");
+  let deviceNow;
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+    ? (deviceNow = "Mobile")
+    : (deviceNow = "Desktop");
+  // TODO: replace the url
+  if (deviceNow === "Desktop") {
+    location.href = "http://localhost/matkaApplicaton/frontend/matka.html";
+  }
+})();
