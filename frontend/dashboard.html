@@ -22,6 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -119,7 +120,7 @@
                         class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Home</span></a>
             </li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">History</span><i
+                        class="app-menu__icon fa fa-history"></i><span class="app-menu__label">History</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="bidding-history.html"><i class="icon fa fa-circle-o"></i>Bidding
@@ -127,12 +128,19 @@
                     <li><a class="treeview-item" href="winning-history.html"><i class="icon fa fa-circle-o"></i>Winning
                             History</a>
                     </li>
+                    <li><a class="treeview-item" href="winning-history.html"><i class="icon fa fa-circle-o"></i>Deposit
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="winning-history.html"><i
+                                class="icon fa fa-circle-o"></i>Withdrawal
+                            History</a>
+                    </li>
                 </ul>
             </li>
-            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-pie-chart"></i><span
+            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-asterisk"></i><span
                         class="app-menu__label">Withdrawal</span></a></li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Help</span><i
+                        class="app-menu__icon fa fa-question-circle"></i><span class="app-menu__label">Help</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
@@ -145,78 +153,31 @@
                             Rules Board</a></li>
                 </ul>
             </li>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Contact Us</span><i
-                        class="treeview-indicator fa fa-angle-right"></i></a>
-            </li>
-            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-file-code-o"></i><span
+            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-phone"></i><span
+                        class="app-menu__label">Contact Us</span></a></li>
+            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-share-alt"></i><span
                         class="app-menu__label">Share with Friends</span></a></li>
-            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-file-code-o"></i><span
+            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-sign-out"></i><span
                         class="app-menu__label">Logout</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
-        <div class="app-title">
-            <div>
-                <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
-                <p>A free and open source Bootstrap 4 admin template</p>
+        <div class="d-flex justify-content-around ">
+            <div class="d-flex justify-content-end flex-column ">
+                <h6 id="ongoing_tab" class="active_tab_dashboard" onclick="updateTab('ongoing');">ONGOING</h6>
             </div>
-            <ul class="app-breadcrumb breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-                    <div class="info">
-                        <h4>Users</h4>
-                        <p><b>5</b></p>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-end flex-column ">
+                <img src="assets/images/dashboard_coin.png" style="height: 80px;width: 100px;" alt="">
             </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="widget-small info coloured-icon"><i class="icon fa fa-thumbs-o-up fa-3x"></i>
-                    <div class="info">
-                        <h4>Likes</h4>
-                        <p><b>25</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
-                    <div class="info">
-                        <h4>Uploades</h4>
-                        <p><b>10</b></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="widget-small danger coloured-icon"><i class="icon fa fa-star fa-3x"></i>
-                    <div class="info">
-                        <h4>Stars</h4>
-                        <p><b>500</b></p>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-end flex-column ">
+                <h6 id="upcoming_tab" onclick="updateTab('upcoming');">UPCOMING</h6>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Monthly Sales</h3>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="tile">
-                    <h3 class="tile-title">Support Requests</h3>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <canvas class="embed-responsive-item" id="pieChartDemo"></canvas>
-                    </div>
-                </div>
-            </div>
+        <div id="ongoing_tab_content">
+            <h1>Ths is ongoing</h1>
+        </div>
+        <div id="upcoming_tab_content" class="d-none">
+            <h1>This is upcoming</h1>
         </div>
     </main>
     <!-- Essential javascripts for application to work-->
@@ -224,68 +185,29 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/globalFunction.js"></script>
     <!-- The javascript plugin to display page loading on top-->
     <script src="js/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="js/plugins/chart.js"></script>
-    <script type="text/javascript">
-        var data = {
-            labels: ["January", "February", "March", "April", "May"],
-            datasets: [
-                {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56]
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: [28, 48, 40, 19, 86]
-                }
-            ]
-        };
-        var pdata = [
-            {
-                value: 300,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Complete"
-            },
-            {
-                value: 50,
-                color: "#F7464A",
-                highlight: "#FF5A5E",
-                label: "In-Progress"
+    <!-- control tab click -->
+    <script>
+        function updateTab(type) {
+            let ongoing_tab = document.getElementById('ongoing_tab')
+            let upcoming_tab = document.getElementById('upcoming_tab')
+            let ongoing_tab_content = document.getElementById('ongoing_tab_content');
+            let upcoming_tab_content = document.getElementById('upcoming_tab_content')
+            if (type == 'ongoing') {
+                ongoing_tab_content.className = ''
+                upcoming_tab_content.className = 'd-none'
+                ongoing_tab.className = 'active_tab_dashboard'
+                upcoming_tab.className = ''
+            } else {
+                ongoing_tab_content.className = 'd-none'
+                upcoming_tab_content.className = ''
+                ongoing_tab.className = ''
+                upcoming_tab.className = 'active_tab_dashboard'
             }
-        ]
-
-        var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-        var lineChart = new Chart(ctxl).Line(data);
-
-        var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-        var pieChart = new Chart(ctxp).Pie(pdata);
-    </script>
-    <!-- Google analytics script-->
-    <script type="text/javascript">
-        if (document.location.hostname == 'pratikborsadiya.in') {
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-72504830-1', 'auto');
-            ga('send', 'pageview');
         }
     </script>
 </body>
