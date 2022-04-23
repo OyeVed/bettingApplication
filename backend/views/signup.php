@@ -39,7 +39,7 @@ if($query->rowCount() === 0){
             ]
         ];
     }else{
-        $status = 500;
+        $status = 203;
         $response = [
             "msg" => "Internal Server Error - User creation failed"
         ];
@@ -47,7 +47,7 @@ if($query->rowCount() === 0){
 
 }else{
 
-    $status = 400;
+    $status = 203;
     $response = [
         "msg" => "Bad Request - User already exists"
     ];

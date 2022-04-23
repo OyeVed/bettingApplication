@@ -51,7 +51,7 @@ class Router{
                 $_POST = json_decode(file_get_contents("php://input"), true);
                 foreach ($params_to_check as $param_to_check) {
                     if(!isset($_POST[$param_to_check])){
-                        http_response_code(400);
+                        http_response_code(203);
                         echo json_encode(["msg" => "Bad Request -'$param_to_check' argument not provided"]);
                         exit();
                     }
@@ -59,14 +59,20 @@ class Router{
 
                 $file = str_replace(".php", "", $file);
                 $TIMEZONE_SET = TRUE;
-                require_once("views/$file.php");
+                require_once("$file.php");
 
+                if(!isset($status)){
+                    $status = 200;
+                }
+                
                 if(!isset($response)){
-                    $status = 400;
+                    $status = 203;
                     $response = [
                         "msg" => "Bad Request - No response returned"
                     ];
                 }
+
+                $response["status"] = $status;
 
                 header('Content-Type: application/json');
                 http_response_code($status);
