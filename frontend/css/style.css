@@ -1,3 +1,17 @@
+:root {
+  --default-bg-1: linear-gradient(
+    162.17deg,
+    #057085 1.24%,
+    #22545f 32.79%,
+    #002129 98.63%
+  );
+  --default-bg-2: #22545f;
+  --default-bg-3: white;
+  --default-text-1: #0e687a;
+  --default-text-2: white;
+  --default-text-3: black;
+}
+
 /* /////////////////////////////////////////////////// */
 /*  ////////////////// Custom //////////////////*/
 /* //////////////////////////////////////////////// */
@@ -108,10 +122,39 @@
   opacity: 1;
 }
 
-
 /* /////////////////////////////////////////////////// */
 /*  ////////////////// dashboard //////////////////*/
 /* //////////////////////////////////////////////// */
-.active_tab_dashboard{
-  border-bottom: 2px solid #D1A94A;
+.active_tab_dashboard {
+  border-bottom: 2px solid #d1a94a;
+}
+.ongoing_card {
+  background: var(--default-bg-3);
+  color: var(--default-text-3);
+  margin: 10px 0px;
+  height: 84px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+.ongoing_card img {
+  width: 90%;
+}
+.ongoing_card > div{
+  margin-bottom: 5px;
+}
+.ongoing_card > div > p{
+  background: var(--default-bg-2);
+  padding: 2px 0px;
+  border-radius: 5px;
+  font-size: 10px;
+}
+.ongoing_card > div > p > span{
+  background-color: var(--default-bg-3);
+  border-radius: 5px;
+  margin: 0px 1px;
+  padding: 1px 2px;
 }
