@@ -128,11 +128,15 @@
 .active_tab_dashboard {
   border-bottom: 2px solid #d1a94a;
 }
+.home_page_main_container {
+  height: calc(100vh - 160px);
+  overflow: auto;
+}
 .ongoing_card {
   background: var(--default-bg-3);
   color: var(--default-text-3);
-  margin: 10px 0px;
-  height: 84px;
+  margin: 10px 0px 0px;
+  height: 90px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -143,18 +147,43 @@
 .ongoing_card img {
   width: 90%;
 }
-.ongoing_card > div{
+.ongoing_card > div {
   margin-bottom: 5px;
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
 }
-.ongoing_card > div > p{
+.ongoing_card > div .result_box_home {
+  padding-top: 10px;
+  width: 30%;
+  display: flex;
+  justify-content: flex-start;
+}
+.ongoing_card > div .result_box_home p {
   background: var(--default-bg-2);
   padding: 2px 0px;
   border-radius: 5px;
   font-size: 10px;
+  font-weight: bold;
 }
-.ongoing_card > div > p > span{
+.ongoing_card > div .result_box_home p > span {
   background-color: var(--default-bg-3);
   border-radius: 5px;
   margin: 0px 1px;
   padding: 1px 2px;
+  font-weight: bold;
+}
+.ongoing_card > div img {
+  height: 35px;
+  width: 35px;
+}
+.ongoing_card > div .home_time_box {
+  font-size: 11px;
+  font-weight: 500;
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+}
+.upcoming_combo {
+  padding-top: 5px;
 }
