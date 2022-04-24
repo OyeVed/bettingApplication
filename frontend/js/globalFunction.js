@@ -1,5 +1,6 @@
 // show alert
 function showAlert(type, msg) {
+  console.log('alert',type,msg)
   $(".myAlert-top").hide();
   let alertComponent = document.getElementById("alert_div");
   if (type === "success") {

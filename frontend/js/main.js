@@ -39,6 +39,6 @@
     : (deviceNow = "Desktop");
   // TODO: replace the url
   if (deviceNow === "Desktop") {
-    location.href = "http://localhost/matkaApplicaton/frontend/matka.html";
+    location.href = "http://localhost/gameApplication/frontend/matka.html";
   }
 })();

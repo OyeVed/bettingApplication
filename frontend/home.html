@@ -2,21 +2,38 @@
 <html lang="en">
 
 <head>
-    <title>Arena - Win Your Game</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Arena</title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body class="app sidebar-mini">
+    <!-- NOTE: START: -->
+    <!-- Alert -->
+    <div class="myAlert-top alert alert-success" id="alert_div">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Indicates a successful or positive action 123.
+    </div>
+    <!-- loader -->
+    <div class="overlay"></div>
+    <div class="spanner">
+        <div class="loader"></div>
+        <!-- <p>Uploading music file, please be patient.</p> -->
+    </div>
+    <!-- END: -->
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="dashboard.html">Arena</a>
+    <header class="app-header"><a class="app-header__logo" href="home.html">Arena</a>
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
             aria-label="Hide Sidebar"></a>
         <!-- Navbar Right Menu-->
@@ -102,7 +119,7 @@
             <p class="app-sidebar__user-designation">9937159477</p>
         </div>
         <ul class="app-menu">
-            <li><a class="app-menu__item active" href="dashboard.html"><i class="app-menu__icon fa fa-home"></i><span
+            <li><a class="app-menu__item active" href="home.html"><i class="app-menu__icon fa fa-home"></i><span
                         class="app-menu__label">Home</span></a>
             </li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
@@ -371,11 +388,27 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/globalFunction.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script type="text/javascript" src="js/plugins/chart.js"></script>
+    <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript">
+        // onload
+        $(".myAlert-top").hide();
+        window.onload = function () {
+            startLoader()
+            axios.get('/gameApplication/backend/home/').then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    showAlert('success', `status ${response.status}`)
+                } else {
+                    showAlert('danger', `status ${response.status}`)
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                showAlert('danger', 'Something went wrong! Please try again.')
+            })
+        }
+    </script>
     <!-- control tab click -->
     <script>
         function updateTab(type) {
