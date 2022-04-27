@@ -7,6 +7,7 @@
   );
   --default-bg-2: #22545f;
   --default-bg-3: white;
+  --default-bg-4: #71a6b1;
   --default-text-1: #0e687a;
   --default-text-2: white;
   --default-text-3: black;
@@ -124,7 +125,7 @@
 }
 
 /* /////////////////////////////////////////////////// */
-/*  ////////////////// dashboard //////////////////*/
+/*  ////////////////// home //////////////////*/
 /* //////////////////////////////////////////////// */
 .active_tab_dashboard {
   border-bottom: 2px solid #d1a94a;
@@ -158,7 +159,7 @@
   right: 10px;
 }
 .ongoing_card .game_card_play_btn.closed_game_btn {
-  opacity: 0.4; 
+  opacity: 0.4;
 }
 .ongoing_card h4 {
   margin-top: 5px;
@@ -186,4 +187,56 @@
 }
 .ongoing_card.upcoming_card p img {
   height: 10px;
+}
+
+/* /////////////////////////////////////////////////// */
+/*  ////////////////// withdrawal //////////////////*/
+/* //////////////////////////////////////////////// */
+.transaction_main_container {
+  background-color: var(--default-bg-3);
+  color: var(--default-text-3);
+  border-radius: 6px;
+  margin-top: 4px;
+}
+.transaction_main_container h4 {
+  background-color: var(--default-bg-4);
+  color: var(--default-text-2);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px 6px 0px 0px;
+}
+.transaction_main_container .transaction_content_container {
+  height: calc(100vh - 204px);
+  overflow: auto;
+}
+.transaction_main_container .transaction_content_container .transaction_card {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 5px 0px;
+}
+.transaction_card .transaction_avatar_div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--default-bg-4);
+  margin-left: 8px;
+  margin-top: 5px;
+}
+.transaction_card .transaction_avatar_div .avatar {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.transaction_card h6 {
+  margin: 0;
+  font-style: normal;
+  font-weight: 700;
+}
+.transaction_card p {
+  margin: 0;
+  font-weight: bold;
 }
