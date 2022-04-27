@@ -144,47 +144,46 @@
   text-align: center;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
+  padding-top: 1px;
 }
-.ongoing_card img {
+.ongoing_card .game_card_label {
   width: 90%;
 }
+.ongoing_card .game_card_play_btn {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 25%;
+  right: 10px;
+}
+.ongoing_card .game_card_play_btn.closed_game_btn {
+  opacity: 0.4; 
+}
+.ongoing_card h4 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
 .ongoing_card > div {
-  margin-bottom: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
-  width: 95%;
   justify-content: space-between;
+  background-color: rgba(196, 196, 196, 0.46);
+  width: 100%;
+  padding: 3px;
 }
-.ongoing_card > div .result_box_home {
-  padding-top: 10px;
-  width: 30%;
-  display: flex;
-  justify-content: flex-start;
-}
-.ongoing_card > div .result_box_home p {
-  background: var(--default-bg-2);
-  padding: 2px 0px;
-  border-radius: 5px;
-  font-size: 10px;
+.ongoing_card > div small {
   font-weight: bold;
+  font-size: 8px;
+  font-family: "Roboto";
 }
-.ongoing_card > div .result_box_home p > span {
-  background-color: var(--default-bg-3);
-  border-radius: 5px;
-  margin: 0px 1px;
-  padding: 1px 2px;
-  font-weight: bold;
+.ongoing_card.upcoming_card p {
+  font-size: 8px;
+  color: blue;
+  margin-top: 4px;
 }
-.ongoing_card > div img {
-  height: 35px;
-  width: 35px;
-}
-.ongoing_card > div .home_time_box {
-  font-size: 11px;
-  font-weight: 500;
-  width: 25%;
-  display: flex;
-  justify-content: flex-end;
-}
-.upcoming_combo {
-  padding-top: 5px;
+.ongoing_card.upcoming_card p img {
+  height: 10px;
 }
