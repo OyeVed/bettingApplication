@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Rate - Arena</title>
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body class="app sidebar-mini">
+    <!-- NOTE: START: -->
+    <!-- Alert -->
+    <div class="myAlert-top alert alert-success" id="alert_div">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Indicates a successful or positive action 123.
+    </div>
+    <!-- loader -->
+    <div class="overlay"></div>
+    <div class="spanner">
+        <div class="loader"></div>
+        <!-- <p>Uploading music file, please be patient.</p> -->
+    </div>
+    <!-- END: -->
+    <!-- Navbar-->
+    <header class="app-header"><a class="app-header__logo" href="home.html">Arena</a>
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+            aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+            <!--Notification Menu-->
+            <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
+                    aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+                <ul class="app-notification dropdown-menu dropdown-menu-right">
+                    <li class="app-notification__title">You have 4 new notifications.</li>
+                    <div class="app-notification__content">
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                            class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                            class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Lisa sent you a mail</p>
+                                    <p class="app-notification__meta">2 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                            class="fa fa-circle fa-stack-2x text-danger"></i><i
+                                            class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Mail server not working</p>
+                                    <p class="app-notification__meta">5 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                            class="fa fa-circle fa-stack-2x text-success"></i><i
+                                            class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Transaction complete</p>
+                                    <p class="app-notification__meta">2 days ago</p>
+                                </div>
+                            </a></li>
+                        <div class="app-notification__content">
+                            <li><a class="app-notification__item" href="javascript:;"><span
+                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                                class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                                class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                                    <div>
+                                        <p class="app-notification__message">Lisa sent you a mail</p>
+                                        <p class="app-notification__meta">2 min ago</p>
+                                    </div>
+                                </a></li>
+                            <li><a class="app-notification__item" href="javascript:;"><span
+                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                                class="fa fa-circle fa-stack-2x text-danger"></i><i
+                                                class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                                    <div>
+                                        <p class="app-notification__message">Mail server not working</p>
+                                        <p class="app-notification__meta">5 min ago</p>
+                                    </div>
+                                </a></li>
+                            <li><a class="app-notification__item" href="javascript:;"><span
+                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                                class="fa fa-circle fa-stack-2x text-success"></i><i
+                                                class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                                    <div>
+                                        <p class="app-notification__message">Transaction complete</p>
+                                        <p class="app-notification__meta">2 days ago</p>
+                                    </div>
+                                </a></li>
+                        </div>
+                    </div>
+                    <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+                </ul>
+            </li>
+            <!-- User Menu-->
+            <li><a class="app-nav__item" href="#"><i class="fa fa-cog fa-lg"></i></a>
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" src="https://avatars.githubusercontent.com/u/59704605?v=4"
+                alt="User Image">
+            <p class="app-sidebar__user-name">Sahoochinmay</p>
+            <p class="app-sidebar__user-designation">9937159477</p>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item " href="home.html"><i class="app-menu__icon fa fa-home"></i><span
+                        class="app-menu__label">Home</span></a>
+            </li>
+            <li><a class="app-menu__item active" href="game-rate.html"><i
+                        class="app-menu__icon fa fa-headphones"></i><span class="app-menu__label">Game Rate</span></a>
+            </li>
+            <li class="treeview"><a class="app-menu__item " href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-history"></i><span class="app-menu__label">History</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="bidding-history.html"><i class="icon fa fa-circle-o"></i>Bidding
+                            History</a></li>
+                    <li><a class="treeview-item " href="winning-history.html"><i class="icon fa fa-circle-o"></i>Winning
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="winning-history.html"><i class="icon fa fa-circle-o"></i>Deposit
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="winning-history.html"><i
+                                class="icon fa fa-circle-o"></i>Withdrawal
+                            History</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item " href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
+                        class="app-menu__label">Withdrawal</span></a></li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Help</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
+                            How to Play</a></li>
+                    <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
+                            Game Rate Card</a></li>
+                    <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
+                            Notice </a></li>
+                    <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
+                            Rules Board</a></li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item " href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
+                        class="app-menu__label">Contact Us</span></a>
+            </li>
+            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-share-alt"></i><span
+                        class="app-menu__label">Share with Friends</span></a></li>
+            <li><a class="app-menu__item" href="docs.html"><i class="app-menu__icon fa fa-sign-out"></i><span
+                        class="app-menu__label">Logout</span></a></li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div style="max-height: 200px;" class="text-center pt-1">
+            <img src="./assets/images/gamerate_banner.png" height="150px" alt="">
+        </div>
+        <div class="game_rate_main_container">
+            <div class="game_rate_card">
+                <p>SINGLE DIGIT</p>
+                <p>₹10 - ₹90</p>
+            </div>
+            <div class="game_rate_card">
+                <p>JODI DIGIT</p>
+                <p>₹10 - ₹950</p>
+            </div>
+            <div class="game_rate_card">
+                <p>SINGLE PANNA</p>
+                <p>₹10 - ₹1400</p>
+            </div>
+            <div class="game_rate_card">
+                <p>DOUBLE PANNA</p>
+                <p>₹10 - ₹2800</p>
+            </div>
+            <div class="game_rate_card">
+                <p>TRIPLE PANNA</p>
+                <p>₹10 - ₹8000</p>
+            </div>
+            <div class="game_rate_card">
+                <p>HALF SANGAM</p>
+                <p>₹10 - ₹5000</p>
+            </div>
+            <div class="game_rate_card">
+                <p>FULL SANGAM</p>
+                <p>₹10 - ₹10000</p>
+            </div>
+        </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript">
+        // onload
+        $(".myAlert-top").hide();
+        window.onload = function () {
+            startLoader()
+            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    showAlert('success', `status ${response.status}`)
+                } else {
+                    showAlert('danger', `status ${response.status}`)
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                showAlert('danger', 'Something went wrong! Please try again.')
+            })
+        }
+    </script>
+</body>
+
+</html>
