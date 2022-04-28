@@ -319,7 +319,7 @@
 /* /////////////////////////////////////////////////// */
 /*  ////////////////// Game rate //////////////////*/
 /* //////////////////////////////////////////////// */
-.game_rate_main_container{
+.game_rate_main_container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -347,4 +347,20 @@
   padding: 0px 10px;
   padding-top: 16.5px;
   font-weight: bold;
+}
+/* /////////////////////////////////////////////////// */
+/*  ////////////////// Game //////////////////*/
+/* //////////////////////////////////////////////// */
+.game_card {
+  width: 100%;
+  height: 83.16px;
+
+  background: rgba(0, 0, 0, 0.69);
+  border: 4px solid #b28529;
+  box-sizing: border-box;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
 }
