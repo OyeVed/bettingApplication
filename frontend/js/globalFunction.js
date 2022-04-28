@@ -1,6 +1,6 @@
 // show alert
 function showAlert(type, msg) {
-  console.log('alert',type,msg)
+  console.log("alert", type, msg);
   $(".myAlert-top").hide();
   let alertComponent = document.getElementById("alert_div");
   if (type === "success") {
@@ -23,4 +23,14 @@ function startLoader() {
 function endLoader() {
   $("div.spanner").removeClass("show");
   $("div.overlay").removeClass("show");
+}
+
+function copyDivToClipboard() {
+  var range = document.createRange();
+  range.selectNode(document.getElementById("copy_id_1"));
+  window.getSelection().removeAllRanges(); // clear current selection
+  window.getSelection().addRange(range); // to select text
+  document.execCommand("copy");
+  window.getSelection().removeAllRanges(); // to deselect
+  showAlert('success',"Copied!")
 }

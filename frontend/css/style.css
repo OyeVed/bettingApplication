@@ -272,3 +272,47 @@
 .contactus_main_container .sub_contact h6 {
   color: var(--default-text-3);
 }
+/* /////////////////////////////////////////////////// */
+/*  ////////////////// share //////////////////*/
+/* //////////////////////////////////////////////// */
+.share_main_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  height: calc(100vh - 280px);
+  margin-top: -10px;
+  margin-left: -13px;
+  margin-right: -13px;
+  background-color: var(--default-bg-3);
+  color: var(--default-text-3);
+}
+.share_main_container h5 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+}
+.share_quote {
+  margin-top: 20px;
+  width: 261px;
+  height: 55px;
+  background: rgba(196, 196, 196, 0.24);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 90px;
+  font-size: 12px;
+  text-align: center;
+  padding-top: 10px;
+}
+.share_main_container .refere_code_container {
+  background: rgba(196, 196, 196, 0.57);
+  border: 1px dashed #494343;
+  box-sizing: border-box;
+  width: 154px;
+  height: 42px;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 23px;
+}
