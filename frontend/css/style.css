@@ -478,7 +478,7 @@
   width: 91px;
   height: 91px;
   border-radius: 50%;
-  z-index: 99;
+  z-index: 1;
   border: 2px solid white;
   margin-top: 30px;
 }

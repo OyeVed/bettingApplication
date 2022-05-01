@@ -8,7 +8,7 @@ function showAlert(type, msg) {
   } else if (type === "danger") {
     alertComponent.className = "myAlert-top alert alert-danger";
   }
-  alertComponent.innerHTML = `<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>${msg}`;
+  alertComponent.innerHTML = `${msg}`;
   $(".myAlert-top").show();
   setTimeout(function () {
     $(".myAlert-top").hide();
