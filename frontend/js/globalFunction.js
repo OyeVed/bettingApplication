@@ -32,5 +32,9 @@ function copyDivToClipboard() {
   window.getSelection().addRange(range); // to select text
   document.execCommand("copy");
   window.getSelection().removeAllRanges(); // to deselect
-  showAlert('success',"Copied!")
+  showAlert("success", "Copied!");
+}
+
+function navigate(path) {
+  location.href = path;
 }
