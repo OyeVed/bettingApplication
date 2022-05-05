@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 // import db connection
 require("dbcon.php");
@@ -36,6 +36,8 @@ if($query->rowCount() === 0){
                 "phone" => $user->user_phone
             ]
         ];
+        $_SESSION["username"] = $user->user_username;
+        $_SESSION["password"] = $user->user_password;
     }else{
         $status = 203;
         $response = [
