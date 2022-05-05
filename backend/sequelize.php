@@ -1,5 +1,6 @@
 <?php
 
+
 $database_tables = array(
     "
     CREATE TABLE IF NOT EXISTS `user_table` (
@@ -11,7 +12,9 @@ $database_tables = array(
       `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
       `created_by` INT(11) NOT NULL,
       `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-      `updated_by` INT(11) NOT NULL
+      `updated_by` INT(11) NOT NULL,
+      `first_name` VARCHAR(255) NOT NULL,
+      `last_name` VARCHAR(255) NOT NULL
     );
     ",
 );
