@@ -31,8 +31,8 @@ if($query->rowCount() === 0){
         $response = [
             "msg" => "User authenticated successfully",
             "user" => [
-                'firstname' => $user->first_name,
-                'lastname' => $user->last_name,
+                "firstname" => $user->first_name,
+                "lastname" => $user->last_name,
                 "username" => $user->user_username,
                 "email" => $user->user_email,
                 "phone" => $user->user_phone
