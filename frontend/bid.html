@@ -201,65 +201,95 @@
         <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
             <div class="d-flex justify-content-between">
                 <span id="digit_input_field_id"></span>
-                <input type="number" placeholder="Enter Point">
+                <input type="number" placeholder="Enter Point" id="bid_point_input">
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <button>PROCEED</button>
+                <button onclick="handleProceedClick()">PROCEED</button>
             </div>
         </div>
         <script>
-            console.log(currentBidType)
             if (currentBidType == 'SD') {
                 document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="1"
-                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" />`
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
             }
+            var bidList = [];
         </script>
         <div class="bid_list_table_container mt-3">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center">Pana</th>
-                        <th class="text-center">Point</th>
-                        <th class="text-center">Game</th>
-                        <th class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">SD</td>
-                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">SD</td>
-                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">SD</td>
-                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr style="text-align: right;">
-                        <td colspan="4"><b>Total: ₹180</b></td>
-                    </tr>
-                </tfoot>
+            <table class="table" id="bidTable_id">
             </table>
+            <div
+                style="height: 30px;padding: 5px 10px;position: fixed;bottom: 86px;border-radius: 9px;width: 90vw;right: 15px;background-color: white;">
+                <p class="float-right" style="color: black;">
+                    <b>Total: ₹<span id="totalBidValue"></span></b>
+                </p>
+            </div>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <button style="width: 192px;
-            height: 40.87px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-            background: #D1A94A;
-            border-radius: 9px;border: none;">PLAY</button>
+            <button class="bid_play_btn" id="bid_play">PLAY</button>
         </div>
+        <script>
+            var bidTable = document.getElementById("bidTable_id");
+            createBidTable()
+            function createBidTable() {
+                let totalValue = 0
+                bidTable.innerHTML = `<tr>
+                    <th class="text-center">Pana</th>
+                    <th class="text-center">Point</th>
+                    <th class="text-center">Game</th>
+                    <th class="text-center">Action</th>
+                </tr>`
+                for (let i = 0; i < bidList.length; i++) {
+                    totalValue = totalValue + bidList[i].bidPoint
+                    var row = bidTable.insertRow(i + 1);
+                    row.innerHTML = `<td class="text-center">${bidList[i].bidDigit}</td>
+                        <td class="text-center">${bidList[i].bidPoint}</td>
+                        <td class="text-center">${currentBidType}</td>
+                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true" onclick="removeBidItem(${i})"></i></td>`
+                }
+                document.getElementById('totalBidValue').innerHTML = totalValue
+                if (bidList?.length == 0) {
+                    document.getElementById('bid_play').className = 'bid_play_btn_disable'
+                } else {
+                    document.getElementById('bid_play').className = 'bid_play_btn'
+                }
+            }
+            function handleProceedClick() {
+                let inputFieldDigit = document.getElementById('input_field_digit')
+                let bidPointInput = document.getElementById('bid_point_input')
+                if (inputFieldDigit.value == "") {
+                    $.notify({
+                        title: "",
+                        message: `Please enter digit`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
+                if (bidPointInput.value == "") {
+                    $.notify({
+                        title: "",
+                        message: `Please enter point`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
+                bidList.push({
+                    bidDigit: parseInt(inputFieldDigit.value),
+                    bidPoint: parseInt(bidPointInput.value)
+                })
+                inputFieldDigit.value = ''
+                bidPointInput.value = ''
+                createBidTable()
+            }
+            function removeBidItem(index) {
+                bidList.splice(index, 1)
+                createBidTable()
+            }
+
+        </script>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
