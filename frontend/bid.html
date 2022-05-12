@@ -272,6 +272,42 @@
                     });
                     return
                 }
+                if (currentBidType == 'JD') {
+                    if (inputFieldDigit.value.length != 2) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'SP') {
+                    if (inputFieldDigit.value.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'DP') {
+                    if (inputFieldDigit.value.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
                 if (bidPointInput.value == "") {
                     $.notify({
                         title: "",
