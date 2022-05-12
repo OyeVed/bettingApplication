@@ -175,37 +175,40 @@
         </div>
         <div class="row mt-4">
             <div class="col-6">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="
+                    sessionStorage.setItem('current_bid_type', 'SD');
+                    navigate('bid.html');
+                ">
                     <h5>SINGLE<br />DIGIT</h5>
                     <img src="./assets/images/single_digit_icon.png" height="40px" alt="">
                 </div>
             </div>
             <div class="col-6">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="sessionStorage.setItem('current_bid_type', 'JD');navigate('bid.html');">
                     <h5>JODI<br />DIGIT</h5>
                     <img src="./assets/images/jodi_digit_icon.png" height="40px" alt="">
                 </div>
             </div>
             <div class="col-6 mt-3">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="sessionStorage.setItem('current_bid_type', 'SP');navigate('bid.html')">
                     <h5>SINGLE<br />PANNA</h5>
                     <img src="./assets/images/single_panna_icon.png" height="40px" alt="">
                 </div>
             </div>
             <div class="col-6 mt-3">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="sessionStorage.setItem('current_bid_type', 'DP');navigate('bid.html')">
                     <h5>DOUBLE<br />PANNA</h5>
                     <img src="./assets/images/double_panna_icon.png" height="40px" alt="">
                 </div>
             </div>
             <div class="col-6 mt-3">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="sessionStorage.setItem('current_bid_type', 'TP');navigate('bid.html')">
                     <h5>TRIPLE<br />PANNA</h5>
                     <img src="./assets/images/triple_panna_icon.png" height="40px" alt="">
                 </div>
             </div>
             <div class="col-6 mt-3">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="sessionStorage.setItem('current_bid_type', 'HS');navigate('bid.html')">
                     <h5>HALF<br />SANGAM</h5>
                     <img src="./assets/images/half_sangam_icon.png" height="40px" alt="">
                 </div>
@@ -213,7 +216,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-6 mt-3">
-                <div class="game_card" onclick="navigate('bid.html')">
+                <div class="game_card" onclick="sessionStorage.setItem('current_bid_type', 'FS');navigate('bid.html')">
                     <h5>FULL<br />SANGAM</h5>
                     <img src="./assets/images/full_sangam_icon.png" height="40px" alt="">
                 </div>

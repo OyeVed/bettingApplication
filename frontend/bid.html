@@ -171,10 +171,18 @@
     </aside>
     <main class="app-content">
         <div class="bid_top_bar">
-            <p><i class="fa fa-chevron-left" onclick="navigate('game.html')"
-                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - SD</p>
+            <p><i class="fa fa-chevron-left"
+                    onclick=" sessionStorage.removeItem('current_bid_type'); navigate('game.html')"
+                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - <span id="current_bid_type_id"></span></p>
             <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;3h : 20m : 37s</p>
         </div>
+        <script>
+            var currentBidType = sessionStorage.getItem("current_bid_type");
+            if (currentBidType == null) {
+                location.href = 'game.html';
+            }
+            document.getElementById('current_bid_type_id').innerHTML = currentBidType
+        </script>
         <div class="d-flex justify-content-between mt-4">
             <div class="bid_open_close_btn">
                 <div class="form-check ">
@@ -197,13 +205,20 @@
         </div>
         <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
             <div class="d-flex justify-content-between">
-                <input type="number" placeholder="Enter Digit">
+                <span id="digit_input_field_id"></span>
                 <input type="number" placeholder="Enter Point">
             </div>
             <div class="d-flex justify-content-center mt-3">
                 <button>PROCEED</button>
             </div>
         </div>
+        <script>
+            console.log(currentBidType)
+            if (currentBidType == 'SD') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="1"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" />`
+            }
+        </script>
         <div class="bid_list_table_container mt-3">
             <table class="table">
                 <thead>
