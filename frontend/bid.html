@@ -20,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -272,6 +267,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         // onload
         $(".myAlert-top").hide();
@@ -281,34 +277,26 @@
                 endLoader()
                 if (response.status === 200) {
                 } else {
-                    showAlert('danger', `status ${response.status}`)
+                    $.notify({
+                        title: "",
+                        message: `status ${response.status}`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
                 }
                 console.log(response)
             }, (error) => {
                 console.log('error', error);
                 endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
-        }
-    </script>
-    <!-- control tab click -->
-    <script>
-        function updateTab(type) {
-            let ongoing_tab = document.getElementById('ongoing_tab')
-            let upcoming_tab = document.getElementById('upcoming_tab')
-            let ongoing_tab_content = document.getElementById('ongoing_tab_content');
-            let upcoming_tab_content = document.getElementById('upcoming_tab_content')
-            if (type == 'ongoing') {
-                ongoing_tab_content.className = 'd-flex justify-content-center flex-column'
-                upcoming_tab_content.className = 'd-none'
-                ongoing_tab.className = 'active_tab_dashboard'
-                upcoming_tab.className = ''
-            } else {
-                ongoing_tab_content.className = 'd-none'
-                upcoming_tab_content.className = 'd-flex justify-content-center flex-column'
-                ongoing_tab.className = ''
-                upcoming_tab.className = 'active_tab_dashboard'
-            }
         }
     </script>
 </body>
