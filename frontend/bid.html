@@ -211,6 +211,12 @@
             if (currentBidType == 'SD') {
                 document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="1"
                     oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            } else if (currentBidType == 'JD') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="2"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            } else if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == 'FS') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="3"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
             }
             var bidList = [];
         </script>
