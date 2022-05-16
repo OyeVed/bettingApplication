@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share - Arena</title>
+    <title>Home - Arena</title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -22,7 +22,6 @@
     <!-- NOTE: START: -->
     <!-- Alert -->
     <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Indicates a successful or positive action 123.
     </div>
     <!-- loader -->
@@ -39,7 +38,7 @@
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
             <!-- User Menu-->
-            <li><a class="app-nav__item" style="font-size: 15px;text-decoration: none;" href="passbook.html"><span
+            <li><a class="app-nav__item" style="font-size: 15px;" href="#"><span
                         style="border: 1px solid white;padding: 3px;border-radius: 5px;"><img height="17px"
                             style="margin-top:-3px;" src="./assets/shapes/et_wallet.svg" alt="">&nbsp;50</span></a>
             </li>
@@ -56,7 +55,7 @@
             <a href="profile.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a>
         </div>
         <ul class="app-menu">
-            <li><a class="app-menu__item" href="home.html"><i class="app-menu__icon fa fa-home"></i><span
+            <li><a class="app-menu__item active" href="home.html"><i class="app-menu__icon fa fa-home"></i><span
                         class="app-menu__label">Home</span></a>
             </li>
             <li><a class="app-menu__item" href="game-rate.html"><i class="app-menu__icon fa  fa-inr"></i><span
@@ -98,37 +97,85 @@
             </li>
             <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
                         class="app-menu__label">Contact Us</span></a></li>
-            <li><a class="app-menu__item active" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
+            <li><a class="app-menu__item" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
                         class="app-menu__label">Share with Friends</span></a></li>
             <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-sign-out"></i><span
                         class="app-menu__label">Logout</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
-        <div style="max-height: 200px;" class="text-center pt-3">
-            <h4>Invite your friend and<br />Earn Money</h4>
-            <img src="./assets/images/share_connect.png" height="150px" alt="">
+        <div class="d-flex justify-content-around ">
+            <div class="d-flex justify-content-end flex-column ">
+                <h6 id="ongoing_tab" class="active_tab_dashboard" onclick="updateTab('ongoing');">ONGOING</h6>
+            </div>
+            <div class="d-flex justify-content-end flex-column ">
+                <img src="assets/images/dashboard_coin.webp" style="height: 80px;width: 100px;" alt="">
+            </div>
+            <div class="d-flex justify-content-end flex-column ">
+                <h6 id="upcoming_tab" onclick="updateTab('upcoming');">UPCOMING</h6>
+            </div>
         </div>
-        <div class="share_main_container">
-            <div class="share_quote">
-                <p>Share this link with your friend and after they install, both of you will get 100 cash rewards.</p>
+        <div class="home_page_main_container">
+            <div id="ongoing_tab_content" class="d-flex justify-content-center flex-column">
+                <div class="ongoing_card">
+                    <img src="./assets/shapes/openRectangle.png" class="game_card_label" alt="Ongoing card">
+                    <img src="./assets/shapes/gameplaybtn.png" onclick="navigate('game.html')"
+                        class="game_card_play_btn" alt="Game play">
+                    <h4>Game Name</h4>
+                    <small><b>XXX - XX - XXX</b></small>
+                    <div>
+                        <small>Open time - 2:30 PM</small>
+                        <small class="text-danger">5 hrs 40 min left</small>
+                        <small>Close time- 3:00 PM</small>
+                    </div>
+                </div>
+                <div class="ongoing_card">
+                    <img src="./assets/shapes/openRectangle.png" class="game_card_label" alt="Ongoing card">
+                    <img src="./assets/shapes/gameplaybtn.png" onclick="navigate('game.html')"
+                        class="game_card_play_btn" alt="Game play">
+                    <h4>Game Name</h4>
+                    <small><b>XXX - XX - XXX</b></small>
+                    <div>
+                        <small>Open time - 2:30 PM</small>
+                        <small class="text-danger">5 hrs 40 min left</small>
+                        <small>Close time- 3:00 PM</small>
+                    </div>
+                </div>
+                <div class="ongoing_card">
+                    <img src="./assets/shapes/closeRectangle.png" class="game_card_label" alt="Ongoing card">
+                    <img src="./assets/shapes/gameplaybtn.png" class="game_card_play_btn closed_game_btn"
+                        alt="Game play">
+                    <h4>Game Name</h4>
+                    <small><b>123 - 45 - 123</b></small>
+                    <div>
+                        <small>Open time - 2:30 PM</small>
+                        <small>Close time- 3:00 PM</small>
+                    </div>
+                </div>
+                <div class="ongoing_card">
+                    <img src="./assets/shapes/closeRectangle.png" class="game_card_label" alt="Ongoing card">
+                    <img src="./assets/shapes/gameplaybtn.png" class="game_card_play_btn closed_game_btn"
+                        alt="Game play">
+                    <h4>Game Name</h4>
+                    <small><b>123 - 45 - 123</b></small>
+                    <div>
+                        <small>Open time - 2:30 PM</small>
+                        <small>Close time- 3:00 PM</small>
+                    </div>
+                </div>
+
             </div>
-            <img src="./assets/images/share_flow.svg" width="200px" class="mt-4" alt="">
-            <div style="width: 200px;font-size: 10px;color: #797373;
-            font-weight: 900;" class="d-flex justify-content-between text-center">
-                <small style="flex-basis: 22%;">Copy <br />
-                    Link</small>
-                <small>Friends registered<br />
-                    successfully</small>
-                <small>Earn cash<br />rewards</small>
+            <div id="upcoming_tab_content" class="d-none">
+                <div class="ongoing_card upcoming_card">
+                    <img src="./assets/shapes/upcomingRectangle.svg" class="game_card_label" alt="Ongoing card">
+                    <h4>Game Name</h4>
+                    <p><img src="./assets/shapes/setReminder.svg" />Set Reminder</p>
+                    <div>
+                        <small>Open time - 2:30 PM</small>
+                        <small>Close time- 3:00 PM</small>
+                    </div>
+                </div>
             </div>
-            <h5 class="mt-3">YOUR REFERRAL CODE</h5>
-            <button class="refere_code_container " onclick="copyDivToClipboard()"> <span id="copy_id_1">AB768TYJ</span>
-                <img src="./assets/shapes/copybutton.png" height="21px" alt=""></button>
-            <button class="btn btn-primary mt-4" style="border-radius: 98px;width: 153px;
-                height: 37px;font-size: 16px;"><i class="fa fa-share-alt" aria-hidden="true"></i>Share</button>
-            <a href="" style="color: 
-            #2396D7;font-size: 12px;font-weight: bold;" class="mt-2  ">T & C Applied</a>
         </div>
     </main>
     <!-- Essential javascripts for application to work-->
@@ -146,7 +193,7 @@
                 endLoader()
                 if (response.status === 200) {
                 } else {
-                    showAlert('danger', `status ${response.status}`)
+                    // showAlert('danger', `status ${response.status}`)
                 }
                 console.log(response)
             }, (error) => {
@@ -154,6 +201,26 @@
                 endLoader()
                 showAlert('danger', 'Something went wrong! Please try again.')
             })
+        }
+    </script>
+    <!-- control tab click -->
+    <script>
+        function updateTab(type) {
+            let ongoing_tab = document.getElementById('ongoing_tab')
+            let upcoming_tab = document.getElementById('upcoming_tab')
+            let ongoing_tab_content = document.getElementById('ongoing_tab_content');
+            let upcoming_tab_content = document.getElementById('upcoming_tab_content')
+            if (type == 'ongoing') {
+                ongoing_tab_content.className = 'd-flex justify-content-center flex-column'
+                upcoming_tab_content.className = 'd-none'
+                ongoing_tab.className = 'active_tab_dashboard'
+                upcoming_tab.className = ''
+            } else {
+                ongoing_tab_content.className = 'd-none'
+                upcoming_tab_content.className = 'd-flex justify-content-center flex-column'
+                ongoing_tab.className = ''
+                upcoming_tab.className = 'active_tab_dashboard'
+            }
         }
     </script>
 </body>

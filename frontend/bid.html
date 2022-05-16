@@ -20,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -33,80 +28,15 @@
     </div>
     <!-- END: -->
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="home.html">Arena</a>
+    <header class="app-header"><a class="app-header__logo" href="#">Arena</a>
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
             aria-label="Hide Sidebar"></a>
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
-            <!--Notification Menu-->
-            <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
-                    aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
-                <ul class="app-notification dropdown-menu dropdown-menu-right">
-                    <li class="app-notification__title">You have 4 new notifications.</li>
-                    <div class="app-notification__content">
-                        <li><a class="app-notification__item" href="javascript:;"><span
-                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
-                                            class="fa fa-circle fa-stack-2x text-primary"></i><i
-                                            class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                                <div>
-                                    <p class="app-notification__message">Lisa sent you a mail</p>
-                                    <p class="app-notification__meta">2 min ago</p>
-                                </div>
-                            </a></li>
-                        <li><a class="app-notification__item" href="javascript:;"><span
-                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
-                                            class="fa fa-circle fa-stack-2x text-danger"></i><i
-                                            class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                                <div>
-                                    <p class="app-notification__message">Mail server not working</p>
-                                    <p class="app-notification__meta">5 min ago</p>
-                                </div>
-                            </a></li>
-                        <li><a class="app-notification__item" href="javascript:;"><span
-                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
-                                            class="fa fa-circle fa-stack-2x text-success"></i><i
-                                            class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                                <div>
-                                    <p class="app-notification__message">Transaction complete</p>
-                                    <p class="app-notification__meta">2 days ago</p>
-                                </div>
-                            </a></li>
-                        <div class="app-notification__content">
-                            <li><a class="app-notification__item" href="javascript:;"><span
-                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
-                                                class="fa fa-circle fa-stack-2x text-primary"></i><i
-                                                class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
-                                    <div>
-                                        <p class="app-notification__message">Lisa sent you a mail</p>
-                                        <p class="app-notification__meta">2 min ago</p>
-                                    </div>
-                                </a></li>
-                            <li><a class="app-notification__item" href="javascript:;"><span
-                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
-                                                class="fa fa-circle fa-stack-2x text-danger"></i><i
-                                                class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
-                                    <div>
-                                        <p class="app-notification__message">Mail server not working</p>
-                                        <p class="app-notification__meta">5 min ago</p>
-                                    </div>
-                                </a></li>
-                            <li><a class="app-notification__item" href="javascript:;"><span
-                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
-                                                class="fa fa-circle fa-stack-2x text-success"></i><i
-                                                class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
-                                    <div>
-                                        <p class="app-notification__message">Transaction complete</p>
-                                        <p class="app-notification__meta">2 days ago</p>
-                                    </div>
-                                </a></li>
-                        </div>
-                    </div>
-                    <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
-                </ul>
-            </li>
             <!-- User Menu-->
-            <li><a class="app-nav__item" style="font-size: 15px;" href="#"><img height="17px" style="margin-top:-3px;"
-                        src="./assets/shapes/et_wallet.svg" alt="">&nbsp;50</a>
+            <li><a class="app-nav__item" style="font-size: 15px;text-decoration: none;" href="passbook.html"><span
+                        style="border: 1px solid white;padding: 3px;border-radius: 5px;"><img height="17px"
+                            style="margin-top:-3px;" src="./assets/shapes/et_wallet.svg" alt="">&nbsp;50</span></a>
             </li>
         </ul>
     </header>
@@ -171,10 +101,18 @@
     </aside>
     <main class="app-content">
         <div class="bid_top_bar">
-            <p><i class="fa fa-chevron-left" onclick="navigate('game.html')"
-                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - SD</p>
+            <p><i class="fa fa-chevron-left"
+                    onclick=" sessionStorage.removeItem('current_bid_type'); navigate('game.html')"
+                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - <span id="current_bid_type_id"></span></p>
             <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;3h : 20m : 37s</p>
         </div>
+        <script>
+            var currentBidType = sessionStorage.getItem("current_bid_type");
+            if (currentBidType == null) {
+                location.href = 'game.html';
+            }
+            document.getElementById('current_bid_type_id').innerHTML = currentBidType
+        </script>
         <div class="d-flex justify-content-between mt-4">
             <div class="bid_open_close_btn">
                 <div class="form-check ">
@@ -197,59 +135,138 @@
         </div>
         <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
             <div class="d-flex justify-content-between">
-                <input type="number" placeholder="Enter Digit">
-                <input type="number" placeholder="Enter Point">
+                <span id="digit_input_field_id"></span>
+                <input type="number" placeholder="Enter Point" id="bid_point_input">
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <button>PROCEED</button>
+                <button onclick="handleProceedClick()">PROCEED</button>
             </div>
         </div>
+        <script>
+            if (currentBidType == 'SD') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="1"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            } else if (currentBidType == 'JD') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="2"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            } else if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == 'FS') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="3"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            }
+            var bidList = [];
+        </script>
         <div class="bid_list_table_container mt-3">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center">Pana</th>
-                        <th class="text-center">Point</th>
-                        <th class="text-center">Game</th>
-                        <th class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">SD</td>
-                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">SD</td>
-                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">SD</td>
-                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr style="text-align: right;">
-                        <td colspan="4"><b>Total: ₹180</b></td>
-                    </tr>
-                </tfoot>
+            <table class="table" id="bidTable_id">
             </table>
+            <div
+                style="height: 30px;padding: 5px 10px;position: fixed;bottom: 86px;border-radius: 9px;width: 90vw;right: 15px;background-color: white;">
+                <p class="float-right" style="color: black;">
+                    <b>Total: ₹<span id="totalBidValue"></span></b>
+                </p>
+            </div>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <button style="width: 192px;
-            height: 40.87px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-            background: #D1A94A;
-            border-radius: 9px;border: none;">PLAY</button>
+            <button class="bid_play_btn" id="bid_play">PLAY</button>
         </div>
+        <script>
+            var bidTable = document.getElementById("bidTable_id");
+            createBidTable()
+            function createBidTable() {
+                let totalValue = 0
+                bidTable.innerHTML = `<tr>
+                    <th class="text-center">Pana</th>
+                    <th class="text-center">Point</th>
+                    <th class="text-center">Game</th>
+                    <th class="text-center">Action</th>
+                </tr>`
+                for (let i = 0; i < bidList.length; i++) {
+                    totalValue = totalValue + bidList[i].bidPoint
+                    var row = bidTable.insertRow(i + 1);
+                    row.innerHTML = `<td class="text-center">${bidList[i].bidDigit}</td>
+                        <td class="text-center">${bidList[i].bidPoint}</td>
+                        <td class="text-center">${currentBidType}</td>
+                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true" onclick="removeBidItem(${i})"></i></td>`
+                }
+                document.getElementById('totalBidValue').innerHTML = totalValue
+                if (bidList?.length == 0) {
+                    document.getElementById('bid_play').className = 'bid_play_btn_disable'
+                } else {
+                    document.getElementById('bid_play').className = 'bid_play_btn'
+                }
+            }
+            function handleProceedClick() {
+                let inputFieldDigit = document.getElementById('input_field_digit')
+                let bidPointInput = document.getElementById('bid_point_input')
+                if (inputFieldDigit.value == "") {
+                    $.notify({
+                        title: "",
+                        message: `Please enter digit`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
+                if (currentBidType == 'JD') {
+                    if (inputFieldDigit.value.length != 2) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'SP') {
+                    if (inputFieldDigit.value.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'DP') {
+                    if (inputFieldDigit.value.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (bidPointInput.value == "") {
+                    $.notify({
+                        title: "",
+                        message: `Please enter point`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
+                bidList.push({
+                    bidDigit: parseInt(inputFieldDigit.value),
+                    bidPoint: parseInt(bidPointInput.value)
+                })
+                inputFieldDigit.value = ''
+                bidPointInput.value = ''
+                createBidTable()
+            }
+            function removeBidItem(index) {
+                bidList.splice(index, 1)
+                createBidTable()
+            }
+
+        </script>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -257,6 +274,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         // onload
         $(".myAlert-top").hide();
@@ -266,34 +284,26 @@
                 endLoader()
                 if (response.status === 200) {
                 } else {
-                    showAlert('danger', `status ${response.status}`)
+                    $.notify({
+                        title: "",
+                        message: `status ${response.status}`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
                 }
                 console.log(response)
             }, (error) => {
                 console.log('error', error);
                 endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
-        }
-    </script>
-    <!-- control tab click -->
-    <script>
-        function updateTab(type) {
-            let ongoing_tab = document.getElementById('ongoing_tab')
-            let upcoming_tab = document.getElementById('upcoming_tab')
-            let ongoing_tab_content = document.getElementById('ongoing_tab_content');
-            let upcoming_tab_content = document.getElementById('upcoming_tab_content')
-            if (type == 'ongoing') {
-                ongoing_tab_content.className = 'd-flex justify-content-center flex-column'
-                upcoming_tab_content.className = 'd-none'
-                ongoing_tab.className = 'active_tab_dashboard'
-                upcoming_tab.className = ''
-            } else {
-                ongoing_tab_content.className = 'd-none'
-                upcoming_tab_content.className = 'd-flex justify-content-center flex-column'
-                ongoing_tab.className = ''
-                upcoming_tab.className = 'active_tab_dashboard'
-            }
         }
     </script>
 </body>

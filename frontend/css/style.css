@@ -464,6 +464,30 @@
 .bid_list_table_container {
   background-color: var(--default-bg-3);
   border-radius: 6px;
+  height: calc(100vh - 370px);
+  overflow: auto;
+  position: relative;
+  padding-bottom: 30px;
+}
+.bid_play_btn {
+  width: 192px;
+  height: 40.87px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background: #d1a94a;
+  border-radius: 9px;
+  border: none;
+}
+.bid_play_btn_disable {
+  width: 192px;
+  height: 40.87px;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(212, 198, 198);
+  background: #c7bb9f;
+  border-radius: 9px;
+  border: none;
 }
 /* //////////////////////////////////////////////////  */
 /*  ////////////////// Profile        //////////////////  */
