@@ -19,6 +19,7 @@ $database_tables = array(
         `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `updated_by` INT(11)
     )"
+    
 );
 
 require_once("dbcon.php");
