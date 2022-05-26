@@ -206,17 +206,24 @@
   border-radius: 6px;
   height: 73px;
   width: 199px;
+  color: black;
+  text-align: center;
 }
 .transaction_list_top_section div p {
-  font-weight: 500;
+  font-weight: 700;
   font-size: 14px;
-  line-height: 16px;
+  margin: 0;
+}
+.transaction_list_top_section div .money {
+  font-weight: 900;
+  font-size: 36px;
+  margin: 0;
 }
 .transaction_main_container {
   background-color: var(--default-bg-3);
   color: var(--default-text-3);
   border-radius: 6px;
-  margin-top: 4px;
+  margin-top: 20px;
 }
 .transaction_main_container h4 {
   background-color: var(--default-bg-4);
@@ -229,7 +236,7 @@
   border-radius: 6px 6px 0px 0px;
 }
 .transaction_main_container .transaction_content_container {
-  height: calc(100vh - 204px);
+  height: calc(100vh - 270px);
   overflow: auto;
 }
 .transaction_main_container .transaction_content_container .transaction_card {
@@ -241,9 +248,14 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--default-bg-4);
+  background: #FE8900;
   margin-left: 8px;
   margin-top: 5px;
+  color: wheat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .transaction_card .transaction_avatar_div .avatar {
   vertical-align: middle;
