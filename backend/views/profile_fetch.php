@@ -1,45 +1,50 @@
-<?php session_start();
+<?php
 
 require("dbcon.php");
+require('middleware.php');
 
 $_GET = json_decode(file_get_contents("php://input"), true);
 
-// retrieve required variables
-$username = $_GET['username'];
+// getting token from cookie
+$token = $_COOKIE["jwt"];
 
-$sql = "SELECT * FROM user_table WHERE user_table.user_username=:username";
-$query = $con -> prepare($sql);
-$query->bindParam(':username', $username, PDO::PARAM_STR);
-$query->execute();
+// checking is the user authorized 
+if(auth($token)){
+    // retrieve required variables
+    $phone_number = $_GET['phone_number'];
 
-if($query->rowCount() === 0){
+    $sql = "SELECT * FROM user_table WHERE user_table.user_phonenumber=:phone_number";
+    $query = $con -> prepare($sql);
+    $query->bindParam(':phone_number', $phone_number, PDO::PARAM_STR);
+    $query->execute();
 
-    $status = 203;
-    $response = [
-        "msg" => "Bad Request - User does not exist"
-    ];
+    if($query->rowCount() === 0){
 
-}else{
-
-    $user = $query->fetchAll(PDO::FETCH_OBJ)[0];
-
-    if($user){
-        $status = 200;
-        $response = [
-            "msg" => "User authenticated successfully",
-            "user" => [
-                'firstname' => $user->first_name,
-                'lastname' => $user->last_name,
-                "username" => $user->user_username,
-                "email" => $user->user_email,
-                "phone" => $user->user_phone
-            ]
-        ];
-    }else{
         $status = 203;
         $response = [
-            "msg" => "Unauthorized - Password does not match"
+            "msg" => "Bad Request - User does not exist"
         ];
-    }
 
+    }else{
+
+        $user = $query->fetchAll(PDO::FETCH_OBJ)[0];
+
+        if($user){
+            $status = 200;
+            $response = [
+                "msg" => "User authenticated successfully",
+                "user" => [
+                    'full_name' => $user->user_fullname,
+                    "phone_number" => $user->user_phonenumber,
+                    "email" => $user->user_email
+                ]
+            ];
+        }else{
+            $status = 203;
+            $response = [
+                "msg" => "Unauthorized - Password does not match"
+            ];
+        }
+
+    }
 }

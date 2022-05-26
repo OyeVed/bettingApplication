@@ -1,13 +1,14 @@
 <?php
 
 // assign endpoints to their respective file location and allowed methods
-$router->endpoint('login', './views/login', ['POST'], FALSE, ['username', 'password']);
-$router->endpoint('signup', './views/signup', ['POST'], FALSE, ['username', 'password', 'email', 'phone']);
+$router->endpoint('login', './views/login', ['POST'], FALSE, ['phone_number', 'password']);
+$router->endpoint('signup', './views/signup', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name', 'withdrawal_method']);
+$router->endpoint('logout', './views/logout', ['POST'], FALSE, ['phone_number']);
 
 $router->endpoint('home', './views/home', ['GET'], FALSE, []);
 
-$router->endpoint('profile_fetch', './views/profile_fetch', ['GET'], FALSE, ['username']);
-$router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['fname','lname','username', 'email']);
+$router->endpoint('profile_fetch', './views/profile_fetch', ['GET'], FALSE, ['phone_number']);
+$router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name', 'withdrawal_method']);
 
 $router->endpoint('single_digit', './views/games/single_digit', ['POST'], FALSE, ['pana', 'point', 'game']);
 $router->endpoint('double_digit', './views/games/double_digit', ['POST'], FALSE, ['pana', 'point', 'game']);
@@ -27,3 +28,6 @@ $router->endpoint('deposit_history', './views/history/deposit_history', ['GET'],
 $router->endpoint('winning_history', './views/history/winning_history', ['GET'], FALSE, []);
 $router->endpoint('withdrawal_history', './views/history/withdrawal_history', ['GET'], FALSE, []);
 $router->endpoint('statement', './views/history/statement', ['GET'], FALSE, []);
+
+
+$router->endpoint('middleware', './middleware.php', ['POST'], FALSE, []);
