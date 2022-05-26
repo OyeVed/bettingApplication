@@ -1,7 +1,7 @@
 <?php 
 
 // connect to database
-$DATABASE_HOSTNAME = "database-1.cd9ccwppzsm2.ap-south-1.rds.amazonaws.com";
+$DATABASE_HOSTNAME = "testdb.cm6ahp8bvbm1.ap-south-1.rds.amazonaws.com";
 $DATABASE_USERNAME = "admin";
 $DATABASE_PASSWORD = "admin1234";
 $DATABASE_DBNAME = "satta_app_db";
