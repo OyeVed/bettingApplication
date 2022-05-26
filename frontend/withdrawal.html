@@ -20,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -62,11 +57,12 @@
             <li><a class="app-menu__item" href="game-rate.html"><i class="app-menu__icon fa  fa-inr"></i><span
                         class="app-menu__label">Game Rate</span></a>
             </li>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            <li class="treeview"><a class="app-menu__item active" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-history"></i><span class="app-menu__label">History</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="bid-history.html"><i class="icon fa fa-circle-o"></i>Bidding
+                    <li><a class="treeview-item active" href="bid-history.html"><i
+                                class="icon fa fa-circle-o"></i>Bidding
                             History</a></li>
                     <li><a class="treeview-item" href="win-history.html"><i class="icon fa fa-circle-o"></i>Winning
                             History</a>
@@ -74,13 +70,13 @@
                     <li><a class="treeview-item" href="deposite-history.html"><i class="icon fa fa-circle-o"></i>Deposit
                             History</a>
                     </li>
-                    <li><a class="treeview-item " href="withdrawal-history.html"><i
+                    <li><a class="treeview-item" href="withdrawal-history.html"><i
                                 class="icon fa fa-circle-o"></i>Withdrawal
                             History</a>
                     </li>
                 </ul>
             </li>
-            <li><a class="app-menu__item active" href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
+            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
                         class="app-menu__label">Withdrawal</span></a></li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Help</span><i
@@ -105,13 +101,11 @@
         </ul>
     </aside>
     <main class="app-content">
-        <div class="d-flex justify-content-around ">
-            <div class="d-flex justify-content-end flex-column ">
-            </div>
-            <div class="d-flex justify-content-end flex-column ">
-                <img src="assets/images/dashboard_coin.webp" style="height: 80px;width: 100px;" alt="">
-            </div>
-            <div class="d-flex justify-content-end flex-column ">
+        <div class="transaction_list_top_section d-flex justify-content-around align-items-center ">
+            <img src="./assets/images/bid_history_top.png" alt="">
+            <div>
+                <p>Total Bidding Amount</p>
+                <p class="money">₹100</p>
             </div>
         </div>
         <div class="transaction_main_container">
@@ -119,7 +113,7 @@
             <div class="transaction_content_container">
                 <div class="transaction_card">
                     <div class="transaction_avatar_div">
-                        <!-- <img src="..." alt="Avatar" class="avatar"> -->
+                        <i class="fa fa-minus" aria-hidden="true"></i>
                     </div>
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
@@ -136,7 +130,7 @@
                 </div>
                 <div class="transaction_card">
                     <div class="transaction_avatar_div">
-                        <!-- <img src="..." alt="Avatar" class="avatar"> -->
+                        <i class="fa fa-minus" aria-hidden="true"></i>
                     </div>
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
@@ -153,7 +147,7 @@
                 </div>
                 <div class="transaction_card">
                     <div class="transaction_avatar_div">
-                        <!-- <img src="..." alt="Avatar" class="avatar"> -->
+                        <i class="fa fa-minus" aria-hidden="true"></i>
                     </div>
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
@@ -170,7 +164,7 @@
                 </div>
                 <div class="transaction_card">
                     <div class="transaction_avatar_div">
-                        <!-- <img src="..." alt="Avatar" class="avatar"> -->
+                        <i class="fa fa-minus" aria-hidden="true"></i>
                     </div>
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
@@ -187,7 +181,7 @@
                 </div>
                 <div class="transaction_card">
                     <div class="transaction_avatar_div">
-                        <!-- <img src="..." alt="Avatar" class="avatar"> -->
+                        <i class="fa fa-minus" aria-hidden="true"></i>
                     </div>
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
@@ -219,8 +213,9 @@
             axios.get('/matkaApplicaton/backend/home/').then((response) => {
                 endLoader()
                 if (response.status === 200) {
+                    // showAlert('success', `status ${response.status}`)
                 } else {
-                    showAlert('danger', `status ${response.status}`)
+                    // showAlert('danger', `status ${response.status}`)
                 }
                 console.log(response)
             }, (error) => {

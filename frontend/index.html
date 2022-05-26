@@ -111,15 +111,15 @@
             ).then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    showAlert('success', response.data?.msg)
+                    // showAlert('success', response.data?.msg)
                     location.href = "home.html";
                 } else {
-                    showAlert('danger', response.data?.msg)
+                    // showAlert('danger', response.data?.msg)
                 }
             }, (error) => {
                 endLoader()
                 console.log('error', error);
-                showAlert('danger', 'Something went wrong! Please try again.')
+                // showAlert('danger', 'Something went wrong! Please try again.')
             })
         }
     </script>
