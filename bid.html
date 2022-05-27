@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid - Arena</title>
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body class="app sidebar-mini">
+    <!-- NOTE: START: -->
+    <!-- Alert -->
+    <div class="myAlert-top alert alert-success" id="alert_div">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Indicates a successful or positive action 123.
+    </div>
+    <!-- loader -->
+    <div class="overlay"></div>
+    <div class="spanner">
+        <div class="loader"></div>
+        <!-- <p>Uploading music file, please be patient.</p> -->
+    </div>
+    <!-- END: -->
+    <!-- Navbar-->
+    <header class="app-header"><a class="app-header__logo" href="home.html">Arena</a>
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+            aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+            <!--Notification Menu-->
+            <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
+                    aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+                <ul class="app-notification dropdown-menu dropdown-menu-right">
+                    <li class="app-notification__title">You have 4 new notifications.</li>
+                    <div class="app-notification__content">
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                            class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                            class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Lisa sent you a mail</p>
+                                    <p class="app-notification__meta">2 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                            class="fa fa-circle fa-stack-2x text-danger"></i><i
+                                            class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Mail server not working</p>
+                                    <p class="app-notification__meta">5 min ago</p>
+                                </div>
+                            </a></li>
+                        <li><a class="app-notification__item" href="javascript:;"><span
+                                    class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                            class="fa fa-circle fa-stack-2x text-success"></i><i
+                                            class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                                <div>
+                                    <p class="app-notification__message">Transaction complete</p>
+                                    <p class="app-notification__meta">2 days ago</p>
+                                </div>
+                            </a></li>
+                        <div class="app-notification__content">
+                            <li><a class="app-notification__item" href="javascript:;"><span
+                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                                class="fa fa-circle fa-stack-2x text-primary"></i><i
+                                                class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                                    <div>
+                                        <p class="app-notification__message">Lisa sent you a mail</p>
+                                        <p class="app-notification__meta">2 min ago</p>
+                                    </div>
+                                </a></li>
+                            <li><a class="app-notification__item" href="javascript:;"><span
+                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                                class="fa fa-circle fa-stack-2x text-danger"></i><i
+                                                class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                                    <div>
+                                        <p class="app-notification__message">Mail server not working</p>
+                                        <p class="app-notification__meta">5 min ago</p>
+                                    </div>
+                                </a></li>
+                            <li><a class="app-notification__item" href="javascript:;"><span
+                                        class="app-notification__icon"><span class="fa-stack fa-lg"><i
+                                                class="fa fa-circle fa-stack-2x text-success"></i><i
+                                                class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                                    <div>
+                                        <p class="app-notification__message">Transaction complete</p>
+                                        <p class="app-notification__meta">2 days ago</p>
+                                    </div>
+                                </a></li>
+                        </div>
+                    </div>
+                    <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
+                </ul>
+            </li>
+            <!-- User Menu-->
+            <li><a class="app-nav__item" style="font-size: 15px;" href="#"><img height="17px" style="margin-top:-3px;"
+                        src="./assets/shapes/et_wallet.svg" alt="">&nbsp;50</a>
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" src="https://avatars.githubusercontent.com/u/59704605?v=4"
+                alt="User Image">
+            <p class="app-sidebar__user-name">Sahoochinmay</p>
+            <p class="app-sidebar__user-designation">9937159477</p>
+            <a href="profile.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item" href="home.html"><i class="app-menu__icon fa fa-home"></i><span
+                        class="app-menu__label">Home</span></a>
+            </li>
+            <li><a class="app-menu__item" href="game-rate.html"><i class="app-menu__icon fa  fa-inr"></i><span
+                        class="app-menu__label">Game Rate</span></a>
+            </li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-history"></i><span class="app-menu__label">History</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="bid-history.html"><i class="icon fa fa-circle-o"></i>Bidding
+                            History</a></li>
+                    <li><a class="treeview-item" href="win-history.html"><i class="icon fa fa-circle-o"></i>Winning
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="deposite-history.html"><i class="icon fa fa-circle-o"></i>Deposit
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="withdrawal-history.html"><i
+                                class="icon fa fa-circle-o"></i>Withdrawal
+                            History</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
+                        class="app-menu__label">Withdrawal</span></a></li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Help</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
+                            How to Play</a></li>
+                    <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
+                            Game Rate Card</a></li>
+                    <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
+                            Notice </a></li>
+                    <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
+                            Rules Board</a></li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
+                        class="app-menu__label">Contact Us</span></a></li>
+            <li><a class="app-menu__item" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
+                        class="app-menu__label">Share with Friends</span></a></li>
+            <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-sign-out"></i><span
+                        class="app-menu__label">Logout</span></a></li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div class="bid_top_bar">
+            <p><i class="fa fa-chevron-left" onclick="navigate('game.html')"
+                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - SD</p>
+            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;3h : 20m : 37s</p>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <div class="bid_open_close_btn">
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        OPEN
+                    </label>
+                </div>
+            </div>
+            <div class="bid_open_close_btn">
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        CLOSE
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
+            <div class="d-flex justify-content-between">
+                <input type="number" placeholder="Enter Digit">
+                <input type="number" placeholder="Enter Point">
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button>PROCEED</button>
+            </div>
+        </div>
+        <div class="bid_list_table_container mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">Pana</th>
+                        <th class="text-center">Point</th>
+                        <th class="text-center">Game</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">10</td>
+                        <td class="text-center">SD</td>
+                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">10</td>
+                        <td class="text-center">SD</td>
+                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">10</td>
+                        <td class="text-center">SD</td>
+                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true"></i></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="text-align: right;">
+                        <td colspan="4"><b>Total: ₹180</b></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <button style="width: 192px;
+            height: 40.87px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            background: #D1A94A;
+            border-radius: 9px;border: none;">PLAY</button>
+        </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript">
+        // onload
+        $(".myAlert-top").hide();
+        window.onload = function () {
+            startLoader()
+            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                } else {
+                    showAlert('danger', `status ${response.status}`)
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                showAlert('danger', 'Something went wrong! Please try again.')
+            })
+        }
+    </script>
+    <!-- control tab click -->
+    <script>
+        function updateTab(type) {
+            let ongoing_tab = document.getElementById('ongoing_tab')
+            let upcoming_tab = document.getElementById('upcoming_tab')
+            let ongoing_tab_content = document.getElementById('ongoing_tab_content');
+            let upcoming_tab_content = document.getElementById('upcoming_tab_content')
+            if (type == 'ongoing') {
+                ongoing_tab_content.className = 'd-flex justify-content-center flex-column'
+                upcoming_tab_content.className = 'd-none'
+                ongoing_tab.className = 'active_tab_dashboard'
+                upcoming_tab.className = ''
+            } else {
+                ongoing_tab_content.className = 'd-none'
+                upcoming_tab_content.className = 'd-flex justify-content-center flex-column'
+                ongoing_tab.className = ''
+                upcoming_tab.className = 'active_tab_dashboard'
+            }
+        }
+    </script>
+</body>
+
+</html>

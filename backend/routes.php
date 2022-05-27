@@ -10,14 +10,7 @@ $router->endpoint('home', './views/home', ['GET'], FALSE, []);
 $router->endpoint('profile_fetch', './views/profile_fetch', ['GET'], FALSE, ['phone_number']);
 $router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name', 'withdrawal_method']);
 
-$router->endpoint('single_digit', './views/games/single_digit', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('double_digit', './views/games/double_digit', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('triple_digit', './views/games/triple_digit', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('single_panna', './views/games/single_panna', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('double_panna', './views/games/double_panna', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('triple_panna', './views/games/triple_panna', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('half_sangam', './views/games/half_sangam', ['POST'], FALSE, ['pana', 'point', 'game']);
-$router->endpoint('full_sangam', './views/games/full_sangam', ['POST'], FALSE, ['pana', 'point', 'game']);
+$router->endpoint('save_bid', './views/save_bid', ['POST'], FALSE, ['game_name', 'market_id', 'user_id', 'bid_lists']);
 
 $router->endpoint('game_rate', './views/game_rate', ['GET'], FALSE, []);
 $router->endpoint('reset_password', './views/reset_password', ['POST'], FALSE, ['old_password', 'new_password', 'confirm_password']);
@@ -31,3 +24,6 @@ $router->endpoint('statement', './views/history/statement', ['GET'], FALSE, []);
 
 
 $router->endpoint('middleware', './middleware.php', ['POST'], FALSE, []);
+
+$router->endpoint('add_money', './views/add_money.php', ['POST'], FALSE, ['user_id']);
+$router->endpoint('withdraw_money', './views/withdraw_money.php', ['POST'], FALSE, ['user_id']);

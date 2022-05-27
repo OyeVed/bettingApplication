@@ -2,7 +2,6 @@
 
 // import db connection
 require("dbcon.php");
-require(".env");
 require_once('../vendor/autoload.php');
 use Firebase\JWT\JWT;
 
@@ -11,7 +10,7 @@ use Firebase\JWT\JWT;
 // $dotenv->load();
 
 // Retrive env variable
-$SECRET_KEY = $_ENV["SECRET_KEY"];
+// $SECRET_KEY = $_ENV["SECRET_KEY"];
 
 // retrieve request data
 $_POST = json_decode(file_get_contents("php://input"), true);
@@ -42,9 +41,9 @@ if($query->rowCount() === 0){
     if($user->user_password === $password){
 
         // if user is authenticated then generate a token with JWT
-        // $secretKey  = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
+        $secretKey  = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
         $issuedAt   = new DateTimeImmutable();
-        $expire     = $issuedAt->modify('+6 minutes')->getTimestamp();      // Add 60 seconds
+        $expire     = $issuedAt->modify('+60 minutes')->getTimestamp();      // Add 60 seconds
         $serverName = "http://localhost/matkaApplicaton/backend/login";     // Retrieved from filtered POST data
 
         $data = [
@@ -59,7 +58,7 @@ if($query->rowCount() === 0){
 
         $jwt =  JWT::encode(
             $data,
-            $SECRET_KEY,
+            $secretKey,
             'HS512'
         );
         // sending jwt token to frontend with cookies

@@ -1,10 +1,16 @@
 <?php 
 
 // connect to database
-$DATABASE_HOSTNAME = "database-1.cd9ccwppzsm2.ap-south-1.rds.amazonaws.com";
+$DATABASE_HOSTNAME = "testdb.cm6ahp8bvbm1.ap-south-1.rds.amazonaws.com";
 $DATABASE_USERNAME = "admin";
 $DATABASE_PASSWORD = "admin1234";
-$DATABASE_DBNAME = "satta_app_db";
+$DATABASE_DBNAME = "betting_application";
+
+//code to connect with local php myadmin
+// $DATABASE_HOSTNAME = "localhost";
+// $DATABASE_USERNAME = "root";
+// $DATABASE_PASSWORD = "";
+// $DATABASE_DBNAME = "satta_app_db";
 
 try {
     $con = new PDO("mysql:host=$DATABASE_HOSTNAME;dbname=$DATABASE_DBNAME", $DATABASE_USERNAME, $DATABASE_PASSWORD);
