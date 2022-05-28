@@ -150,9 +150,10 @@
         $(".myAlert-top").hide();
         window.onload = function () {
             startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+            axios.get('/bettingApplication/backend/game_rate').then((response) => {
                 endLoader()
                 if (response.status === 200) {
+                    console.log(response)
                     // showAlert('success', `status ${response.status}`)
                 } else {
                     showAlert('danger', `status ${response.status}`)
