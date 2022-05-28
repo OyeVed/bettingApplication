@@ -210,12 +210,12 @@
   text-align: center;
 }
 .transaction_list_top_section div p {
-  font-weight: 700;
+  font-weight: 800;
   font-size: 14px;
   margin: 0;
 }
 .transaction_list_top_section div .money {
-  font-weight: 900;
+  font-weight: bold;
   font-size: 36px;
   margin: 0;
 }
@@ -248,14 +248,23 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #FE8900;
+  background: #fe8900;
   margin-left: 8px;
   margin-top: 5px;
-  color: wheat;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.transaction_card .transaction_avatar_div.withdrawal_avatar {
+  background-color: #ffb61b;
+}
+.transaction_card .transaction_avatar_div.deposite_avatar {
+  background-color: #b261bf;
+}
+.transaction_card .transaction_avatar_div.winning_avatar {
+  background-color: #0fd16b;
 }
 .transaction_card .transaction_avatar_div .avatar {
   vertical-align: middle;

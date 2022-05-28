@@ -189,7 +189,7 @@
         $(".myAlert-top").hide();
         window.onload = function () {
             startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+            axios.get('/bettingApplication/backend/home/').then((response) => {
                 endLoader()
                 if (response.status === 200) {
                 } else {

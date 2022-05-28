@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share - Arena</title>
+    <title>Deposits - Arena</title>
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -20,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -56,13 +51,13 @@
             <a href="profile.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a>
         </div>
         <ul class="app-menu">
-            <li><a class="app-menu__item" href="home.html"><i class="app-menu__icon fa fa-home"></i><span
+            <li><a class="app-menu__item " href="home.html"><i class="app-menu__icon fa fa-home"></i><span
                         class="app-menu__label">Home</span></a>
             </li>
             <li><a class="app-menu__item" href="game-rate.html"><i class="app-menu__icon fa  fa-inr"></i><span
                         class="app-menu__label">Game Rate</span></a>
             </li>
-            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            <li class="treeview"><a class="app-menu__item active" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-history"></i><span class="app-menu__label">History</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
@@ -71,7 +66,7 @@
                     <li><a class="treeview-item" href="win-history.html"><i class="icon fa fa-circle-o"></i>Winning
                             History</a>
                     </li>
-                    <li><a class="treeview-item" href="deposite-history.html"><i class="icon fa fa-circle-o"></i>Deposit
+                    <li><a class="treeview-item active" href="deposite-history.html"><i class="icon fa fa-circle-o"></i>Deposit
                             History</a>
                     </li>
                     <li><a class="treeview-item" href="withdrawal-history.html"><i
@@ -80,7 +75,7 @@
                     </li>
                 </ul>
             </li>
-            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
+            <li><a class="app-menu__item " href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
                         class="app-menu__label">Withdrawal</span></a></li>
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Help</span><i
@@ -98,37 +93,109 @@
             </li>
             <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
                         class="app-menu__label">Contact Us</span></a></li>
-            <li><a class="app-menu__item active" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
+            <li><a class="app-menu__item" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
                         class="app-menu__label">Share with Friends</span></a></li>
             <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-sign-out"></i><span
                         class="app-menu__label">Logout</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
-        <div style="max-height: 200px;" class="text-center pt-3">
-            <h4>Invite your friend and<br />Earn Money</h4>
-            <img src="./assets/images/share_connect.png" height="150px" alt="">
+        <div class="transaction_list_top_section d-flex justify-content-around align-items-center ">
+            <div>
+                <p>Total Bidding Amount</p>
+                <p class="money">₹100</p>
+            </div>
+            <img src="./assets/images/deposit_top.png" alt="">
         </div>
-        <div class="share_main_container">
-            <div class="share_quote">
-                <p>Share this link with your friend and after they install, both of you will get 100 cash rewards.</p>
+        <div class="transaction_main_container">
+            <h4>Transaction Details</h4>
+            <div class="transaction_content_container">
+                <div class="transaction_card">
+                    <div class="transaction_avatar_div deposite_avatar">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                        <div>
+                            <h6>Money sent to raj</h6>
+                            <small>20 Apr, 12:39 PM</small>
+                        </div>
+                        <div>
+                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                    class="ml-1" height="14px" alt=""></p>
+                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction_card">
+                    <div class="transaction_avatar_div deposite_avatar">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                        <div>
+                            <h6>Money sent to raj</h6>
+                            <small>20 Apr, 12:39 PM</small>
+                        </div>
+                        <div>
+                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                    class="ml-1" height="14px" alt=""></p>
+                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction_card">
+                    <div class="transaction_avatar_div deposite_avatar">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                        <div>
+                            <h6>Money sent to raj</h6>
+                            <small>20 Apr, 12:39 PM</small>
+                        </div>
+                        <div>
+                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                    class="ml-1" height="14px" alt=""></p>
+                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction_card">
+                    <div class="transaction_avatar_div deposite_avatar">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                        <div>
+                            <h6>Money sent to raj</h6>
+                            <small>20 Apr, 12:39 PM</small>
+                        </div>
+                        <div>
+                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                    class="ml-1" height="14px" alt=""></p>
+                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction_card">
+                    <div class="transaction_avatar_div deposite_avatar">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                        <div>
+                            <h6>Money sent to raj</h6>
+                            <small>20 Apr, 12:39 PM</small>
+                        </div>
+                        <div>
+                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                    class="ml-1" height="14px" alt=""></p>
+                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <img src="./assets/images/share_flow.svg" width="200px" class="mt-4" alt="">
-            <div style="width: 200px;font-size: 10px;color: #797373;
-            font-weight: 900;" class="d-flex justify-content-between text-center">
-                <small style="flex-basis: 22%;">Copy <br />
-                    Link</small>
-                <small>Friends registered<br />
-                    successfully</small>
-                <small>Earn cash<br />rewards</small>
-            </div>
-            <h5 class="mt-3">YOUR REFERRAL CODE</h5>
-            <button class="refere_code_container " onclick="copyDivToClipboard()"> <span id="copy_id_1">AB768TYJ</span>
-                <img src="./assets/shapes/copybutton.png" height="21px" alt=""></button>
-            <button class="btn btn-primary mt-4" style="border-radius: 98px;width: 153px;
-                height: 37px;font-size: 16px;"><i class="fa fa-share-alt" aria-hidden="true"></i>Share</button>
-            <a href="" style="color: 
-            #2396D7;font-size: 12px;font-weight: bold;" class="mt-2  ">T & C Applied</a>
         </div>
     </main>
     <!-- Essential javascripts for application to work-->
@@ -145,8 +212,9 @@
             axios.get('/matkaApplicaton/backend/home/').then((response) => {
                 endLoader()
                 if (response.status === 200) {
+                    // showAlert('success', `status ${response.status}`)
                 } else {
-                    showAlert('danger', `status ${response.status}`)
+                    // showAlert('danger', `status ${response.status}`)
                 }
                 console.log(response)
             }, (error) => {
