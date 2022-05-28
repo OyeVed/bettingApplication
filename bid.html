@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid - Arena</title>
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body class="app sidebar-mini">
+    <!-- NOTE: START: -->
+    <!-- loader -->
+    <div class="overlay"></div>
+    <div class="spanner">
+        <div class="loader"></div>
+        <!-- <p>Uploading music file, please be patient.</p> -->
+    </div>
+    <!-- END: -->
+    <!-- Navbar-->
+    <header class="app-header"><a class="app-header__logo" href="#">Arena</a>
+        <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+            aria-label="Hide Sidebar"></a>
+        <!-- Navbar Right Menu-->
+        <ul class="app-nav">
+            <!-- User Menu-->
+            <li><a class="app-nav__item" style="font-size: 15px;text-decoration: none;" href="passbook.html"><span
+                        style="border: 1px solid white;padding: 3px;border-radius: 5px;"><img height="17px"
+                            style="margin-top:-3px;" src="./assets/shapes/et_wallet.svg" alt="">&nbsp;50</span></a>
+            </li>
+        </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" src="https://avatars.githubusercontent.com/u/59704605?v=4"
+                alt="User Image">
+            <p class="app-sidebar__user-name">Sahoochinmay</p>
+            <p class="app-sidebar__user-designation">9937159477</p>
+            <a href="profile.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Profile</a>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item" href="home.html"><i class="app-menu__icon fa fa-home"></i><span
+                        class="app-menu__label">Home</span></a>
+            </li>
+            <li><a class="app-menu__item" href="game-rate.html"><i class="app-menu__icon fa  fa-inr"></i><span
+                        class="app-menu__label">Game Rate</span></a>
+            </li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-history"></i><span class="app-menu__label">History</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="bid-history.html"><i class="icon fa fa-circle-o"></i>Bidding
+                            History</a></li>
+                    <li><a class="treeview-item" href="win-history.html"><i class="icon fa fa-circle-o"></i>Winning
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="deposite-history.html"><i class="icon fa fa-circle-o"></i>Deposit
+                            History</a>
+                    </li>
+                    <li><a class="treeview-item" href="withdrawal-history.html"><i
+                                class="icon fa fa-circle-o"></i>Withdrawal
+                            History</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
+                        class="app-menu__label">Withdrawal</span></a></li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Help</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
+                            How to Play</a></li>
+                    <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
+                            Game Rate Card</a></li>
+                    <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
+                            Notice </a></li>
+                    <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
+                            Rules Board</a></li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
+                        class="app-menu__label">Contact Us</span></a></li>
+            <li><a class="app-menu__item" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
+                        class="app-menu__label">Share with Friends</span></a></li>
+            <li><a class="app-menu__item" href="index.html"><i class="app-menu__icon fa fa-sign-out"></i><span
+                        class="app-menu__label">Logout</span></a></li>
+        </ul>
+    </aside>
+    <main class="app-content">
+        <div class="bid_top_bar">
+            <p><i class="fa fa-chevron-left"
+                    onclick=" sessionStorage.removeItem('current_bid_type'); navigate('game.html')"
+                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - <span id="current_bid_type_id"></span></p>
+            <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;3h : 20m : 37s</p>
+        </div>
+        <script>
+            var currentBidType = sessionStorage.getItem("current_bid_type");
+            if (currentBidType == null) {
+                location.href = 'game.html';
+            }
+            document.getElementById('current_bid_type_id').innerHTML = currentBidType
+        </script>
+        <div class="d-flex justify-content-between mt-4">
+            <div class="bid_open_close_btn">
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        OPEN
+                    </label>
+                </div>
+            </div>
+            <div class="bid_open_close_btn">
+                <div class="form-check ">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <span class="checkmark"></span>&nbsp;&nbsp;
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        CLOSE
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
+            <div class="d-flex justify-content-between">
+                <span id="digit_input_field_id"></span>
+                <input type="number" placeholder="Enter Point" id="bid_point_input">
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button onclick="handleProceedClick()">PROCEED</button>
+            </div>
+        </div>
+        <script>
+            if (currentBidType == 'SD') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="1"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            } else if (currentBidType == 'JD') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="2"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            } else if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == 'FS') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="3"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+            }
+            var bidList = [];
+        </script>
+        <div class="bid_list_table_container mt-3">
+            <table class="table" id="bidTable_id">
+            </table>
+            <div
+                style="height: 30px;padding: 5px 10px;position: fixed;bottom: 86px;border-radius: 9px;width: 90vw;right: 15px;background-color: white;">
+                <p class="float-right" style="color: black;">
+                    <b>Total: ₹<span id="totalBidValue"></span></b>
+                </p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <button class="bid_play_btn" id="bid_play">PLAY</button>
+        </div>
+        <script>
+            var bidTable = document.getElementById("bidTable_id");
+            createBidTable()
+            function createBidTable() {
+                let totalValue = 0
+                bidTable.innerHTML = `<tr>
+                    <th class="text-center">Pana</th>
+                    <th class="text-center">Point</th>
+                    <th class="text-center">Game</th>
+                    <th class="text-center">Action</th>
+                </tr>`
+                for (let i = 0; i < bidList.length; i++) {
+                    totalValue = totalValue + bidList[i].bidPoint
+                    var row = bidTable.insertRow(i + 1);
+                    row.innerHTML = `<td class="text-center">${bidList[i].bidDigit}</td>
+                        <td class="text-center">${bidList[i].bidPoint}</td>
+                        <td class="text-center">${currentBidType}</td>
+                        <td class="text-center"><i class="fa fa-trash text-danger" aria-hidden="true" onclick="removeBidItem(${i})"></i></td>`
+                }
+                document.getElementById('totalBidValue').innerHTML = totalValue
+                if (bidList?.length == 0) {
+                    document.getElementById('bid_play').className = 'bid_play_btn_disable'
+                } else {
+                    document.getElementById('bid_play').className = 'bid_play_btn'
+                }
+            }
+            function handleProceedClick() {
+                let inputFieldDigit = document.getElementById('input_field_digit')
+                let bidPointInput = document.getElementById('bid_point_input')
+                if (inputFieldDigit.value == "") {
+                    $.notify({
+                        title: "",
+                        message: `Please enter digit`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
+                if (currentBidType == 'JD') {
+                    if (inputFieldDigit.value.length != 2) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'SP') {
+                    if (inputFieldDigit.value.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'DP') {
+                    if (inputFieldDigit.value.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter proper digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (bidPointInput.value == "") {
+                    $.notify({
+                        title: "",
+                        message: `Please enter point`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
+                bidList.push({
+                    bidDigit: parseInt(inputFieldDigit.value),
+                    bidPoint: parseInt(bidPointInput.value)
+                })
+                inputFieldDigit.value = ''
+                bidPointInput.value = ''
+                createBidTable()
+            }
+            function removeBidItem(index) {
+                bidList.splice(index, 1)
+                createBidTable()
+            }
+
+        </script>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript">
+        // onload
+        $(".myAlert-top").hide();
+        window.onload = function () {
+            startLoader()
+            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                } else {
+                    $.notify({
+                        title: "",
+                        message: `status ${response.status}`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
+        }
+    </script>
+</body>
+
+</html>
