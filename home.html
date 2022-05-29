@@ -20,15 +20,10 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
         <div class="loader"></div>
-        <!-- <p>Uploading music file, please be patient.</p> -->
     </div>
     <!-- END: -->
     <!-- Navbar-->
@@ -104,12 +99,16 @@
         </ul>
     </aside>
     <main class="app-content">
-        <div class="d-flex justify-content-around ">
+        <div style="background-color: white;height: 125px;  margin-left: -13px;
+        margin-right: -13px;" class="d-flex justify-content-center align-items-center">
+            <img src="./assets/images/google-ads.png" alt="">
+        </div>
+        <div class="d-flex justify-content-around mt-2">
             <div class="d-flex justify-content-end flex-column ">
                 <h6 id="ongoing_tab" class="active_tab_dashboard" onclick="updateTab('ongoing');">ONGOING</h6>
             </div>
             <div class="d-flex justify-content-end flex-column ">
-                <img src="assets/images/dashboard_coin.webp" style="height: 80px;width: 100px;" alt="">
+                <img src="assets/images/dashboard_coin.webp" style="height: 60px;width: 80px;" alt="">
             </div>
             <div class="d-flex justify-content-end flex-column ">
                 <h6 id="upcoming_tab" onclick="updateTab('upcoming');">UPCOMING</h6>
@@ -126,29 +125,6 @@
                     <div>
                         <small>Open time - 2:30 PM</small>
                         <small class="text-danger">5 hrs 40 min left</small>
-                        <small>Close time- 3:00 PM</small>
-                    </div>
-                </div>
-                <div class="ongoing_card">
-                    <img src="./assets/shapes/openRectangle.png" class="game_card_label" alt="Ongoing card">
-                    <img src="./assets/shapes/gameplaybtn.png" onclick="navigate('game.html')"
-                        class="game_card_play_btn" alt="Game play">
-                    <h4>Game Name</h4>
-                    <small><b>XXX - XX - XXX</b></small>
-                    <div>
-                        <small>Open time - 2:30 PM</small>
-                        <small class="text-danger">5 hrs 40 min left</small>
-                        <small>Close time- 3:00 PM</small>
-                    </div>
-                </div>
-                <div class="ongoing_card">
-                    <img src="./assets/shapes/closeRectangle.png" class="game_card_label" alt="Ongoing card">
-                    <img src="./assets/shapes/gameplaybtn.png" class="game_card_play_btn closed_game_btn"
-                        alt="Game play">
-                    <h4>Game Name</h4>
-                    <small><b>123 - 45 - 123</b></small>
-                    <div>
-                        <small>Open time - 2:30 PM</small>
                         <small>Close time- 3:00 PM</small>
                     </div>
                 </div>
@@ -184,22 +160,35 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         // onload
         $(".myAlert-top").hide();
         window.onload = function () {
             startLoader()
-            axios.get('/bettingApplication/backend/home/').then((response) => {
+            axiosInstance.get('home').then((response) => {
                 endLoader()
                 if (response.status === 200) {
                 } else {
-                    // showAlert('danger', `status ${response.status}`)
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
                 }
                 console.log(response)
             }, (error) => {
                 console.log('error', error);
                 endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
         }
     </script>
