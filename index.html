@@ -58,7 +58,7 @@
                     <button type="button" onclick="handleUserLogin()" class="btn btn-primary btn-block"><i
                             class="fa fa-sign-in fa-lg fa-fw"></i>LOG IN</button>
                 </div>
-                <p class="semibold-text mt-4 text-center"><a href="signup.html" style="color: gray;">Register Now </a></p>
+                <p class="semibold-text mt-4 text-center"><a href="signup.html" style="color:  #666;">Register Now </a></p>
             </form>
             <form class="forget-form" action="dashboard.html">
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
@@ -86,8 +86,6 @@
     <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
-        // onload
-        $(".myAlert-top").hide();
         // Login Page Flipbox control
         $('.login-content [data-toggle="flip"]').click(function () {
             $('.login-box').toggleClass('flipped');
@@ -98,8 +96,7 @@
             startLoader()
             let username = document.getElementById('login_username').value
             let password = document.getElementById('login_password').value
-            // TODO: remove gameApplication
-            axios.post('/bettingApplication/backend/login/',
+            axiosInstance.post('login',
                 {
                     "phone_number": username,
                     "password": password

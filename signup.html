@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sign U[] - Arena</title>
+    <title>Sign Up - Arena</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- jquery -->
@@ -20,16 +20,10 @@
 
 <body>
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
         <div class="loader"></div>
-        <!-- <p>Uploading music file, please be patient.</p> -->
     </div>
     <!-- END: -->
     <section class="material-half-bg">
@@ -39,43 +33,31 @@
         <div class="logo">
             <h1>Arena</h1>
         </div>
-        <div class="login-box">
-            <form class="login-form">
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+        <div class="login-box" style="min-height: 450px;">
+            <form class="login-form" style="padding-top: 20px;">
                 <div class="form-group">
-                    <label class="control-label">USERNAME</label>
-                    <input class="form-control" id="login_username" type="text" placeholder="username" autofocus>
+                    <label class="control-label">Name</label>
+                    <input class="form-control" id="signup_name" type="text" placeholder="Name" autofocus>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">PASSWORD</label>
-                    <input class="form-control" id="login_password" type="password" placeholder="Password">
+                    <label class="control-label">Phone</label>
+                    <input class="form-control" maxlength="10" id="signup_phone" type="text" placeholder="Phone"
+                        autofocus oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                 </div>
                 <div class="form-group">
-                    <div class="utility">
-                        <div class="animated-checkbox">
-                            <label>
-                                <input type="checkbox"><span class="label-text">Stay Signed in</span>
-                            </label>
-                        </div>
-                        <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
-                    </div>
+                    <label class="control-label">Password</label>
+                    <input class="form-control" id="signup_password" type="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Confirm Password</label>
+                    <input class="form-control" id="signup_c_password" type="password" placeholder="Confirm Password">
                 </div>
                 <div class="form-group btn-container">
                     <button type="button" onclick="handleUserLogin()" class="btn btn-primary btn-block"><i
-                            class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
-                </div>
-            </form>
-            <form class="forget-form" action="dashboard.html">
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
-                <div class="form-group">
-                    <label class="control-label">EMAIL</label>
-                    <input class="form-control" type="text" placeholder="Email">
-                </div>
-                <div class="form-group btn-container">
-                    <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+                            class="fa fa-sign-in fa-lg fa-fw"></i>SIGN UP</button>
                 </div>
                 <div class="form-group mt-3">
-                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i>
+                    <p class="semibold-text mb-0"><a href="index.html"><i class="fa fa-angle-left fa-fw"></i>
                             Back to Login</a></p>
                 </div>
             </form>
@@ -88,10 +70,9 @@
     <script src="js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
     <script src="js/plugins/pace.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
-        // onload
-        $(".myAlert-top").hide();
         // Login Page Flipbox control
         $('.login-content [data-toggle="flip"]').click(function () {
             $('.login-box').toggleClass('flipped');
@@ -100,26 +81,60 @@
         // login request
         function handleUserLogin() {
             startLoader()
-            let username = document.getElementById('login_username').value
-            let password = document.getElementById('login_password').value
-            // TODO: remove gameApplication
-            axios.post('/matkaApplicaton/backend/login/',
+            let name = document.getElementById('signup_name').value
+            let phone = document.getElementById('signup_phone').value
+            let password = document.getElementById('signup_password').value
+            let c_password = document.getElementById('signup_c_password').value
+            if (password !== c_password || password === "") {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Password didn't match.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            } else if (phone?.length < 10) {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Invalid phone number.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            }
+            axiosInstance.post('signup',
                 {
-                    "username": username,
+                    "full_name": name,
+                    "phone_number": phone,
                     "password": password
                 }
             ).then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    showAlert('success', response.data?.msg)
-                    location.href = "home.html";
+                    location.href = "index.html";
                 } else {
-                    showAlert('danger', response.data?.msg)
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
                 }
             }, (error) => {
                 endLoader()
                 console.log('error', error);
-                showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
         }
     </script>
