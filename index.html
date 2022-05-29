@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- jquery -->
@@ -20,16 +20,10 @@
 
 <body>
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
         <div class="loader"></div>
-        <!-- <p>Uploading music file, please be patient.</p> -->
     </div>
     <!-- END: -->
     <section class="material-half-bg">
@@ -41,29 +35,30 @@
         </div>
         <div class="login-box">
             <form class="login-form">
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
                 <div class="form-group">
-                    <label class="control-label">USERNAME</label>
-                    <input class="form-control" id="login_username" type="text" placeholder="username" autofocus>
+                    <label class="control-label">PHONE</label>
+                    <input class="form-control" maxlength="10" id="login_username" type="text" placeholder="Phone"
+                        autofocus oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                 </div>
                 <div class="form-group">
                     <label class="control-label">PASSWORD</label>
                     <input class="form-control" id="login_password" type="password" placeholder="Password">
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-4">
                     <div class="utility">
                         <div class="animated-checkbox">
                             <label>
-                                <input type="checkbox"><span class="label-text">Stay Signed in</span>
                             </label>
                         </div>
+                        <!-- <p class="semibold-text mb-2"><a href="signup.html">Register Now</a></p> -->
                         <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
                     </div>
                 </div>
                 <div class="form-group btn-container">
                     <button type="button" onclick="handleUserLogin()" class="btn btn-primary btn-block"><i
-                            class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+                            class="fa fa-sign-in fa-lg fa-fw"></i>LOG IN</button>
                 </div>
+                <p class="semibold-text mt-4 text-center"><a href="signup.html" style="color: gray;">Register Now </a></p>
             </form>
             <form class="forget-form" action="dashboard.html">
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
@@ -88,6 +83,7 @@
     <script src="js/main.js"></script>
     <!-- The javascript plugin to display page loading on top-->
     <script src="js/plugins/pace.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
         // onload
@@ -111,15 +107,26 @@
             ).then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    // showAlert('success', response.data?.msg)
                     location.href = "home.html";
                 } else {
-                    // showAlert('danger', response.data?.msg)
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
                 }
             }, (error) => {
                 endLoader()
                 console.log('error', error);
-                // showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
         }
     </script>
