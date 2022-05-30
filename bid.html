@@ -95,15 +95,15 @@
                         class="app-menu__label">Contact Us</span></a></li>
             <li><a class="app-menu__item" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
                         class="app-menu__label">Share with Friends</span></a></li>
-            <li><a class="app-menu__item" href="#" onclick="signOut()"><i class="app-menu__icon fa fa-sign-out"></i><span
-                        class="app-menu__label">Logout</span></a></li>
+            <li><a class="app-menu__item" href="#" onclick="signOut()"><i
+                        class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Logout</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
         <div class="bid_top_bar">
             <p><i class="fa fa-chevron-left"
                     onclick=" sessionStorage.removeItem('current_bid_type'); navigate('game.html')"
-                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Game Name - <span id="current_bid_type_id"></span></p>
+                    aria-hidden="true"></i><span id="current_bid_type_id"></span></p>
             <p><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;3h : 20m : 37s</p>
         </div>
         <script>
@@ -111,7 +111,11 @@
             if (currentBidType == null) {
                 location.href = 'game.html';
             }
-            document.getElementById('current_bid_type_id').innerHTML = currentBidType
+            var gameDetails = JSON.parse(sessionStorage.getItem('gameDetails'))
+            if (gameDetails == null) {
+                location.href = 'home.html'
+            }
+            document.getElementById('current_bid_type_id').innerHTML = `&nbsp;&nbsp;&nbsp;${gameDetails.market_fullname} - ` + currentBidType
         </script>
         <div class="d-flex justify-content-between mt-4">
             <div class="bid_open_close_btn">
@@ -166,7 +170,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-4">
-            <button class="bid_play_btn" id="bid_play">PLAY</button>
+            <button class="bid_play_btn" id="bid_play" onclick="handlePlay()">PLAY</button>
         </div>
         <script>
             var bidTable = document.getElementById("bidTable_id");
@@ -189,9 +193,11 @@
                 }
                 document.getElementById('totalBidValue').innerHTML = totalValue
                 if (bidList?.length == 0) {
-                    document.getElementById('bid_play').className = 'bid_play_btn_disable'
+                    // document.getElementById('bid_play').className = 'bid_play_btn_disable'
+                    document.getElementById('bid_play').disabled  = true
                 } else {
-                    document.getElementById('bid_play').className = 'bid_play_btn'
+                    // document.getElementById('bid_play').className = 'bid_play_btn'
+                     document.getElementById('bid_play').disabled  = false
                 }
             }
             function handleProceedClick() {
@@ -265,7 +271,9 @@
                 bidList.splice(index, 1)
                 createBidTable()
             }
-
+            function handlePlay() {
+                console.log('handlePlay')
+            }
         </script>
     </main>
     <!-- Essential javascripts for application to work-->

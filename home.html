@@ -135,7 +135,10 @@
                                 ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
                                     `<div class="ongoing_card">` +
                                     `<img src="./assets/shapes/openRectangle.png" class="game_card_label" alt="Ongoing card">` +
-                                    `<img src="./assets/shapes/gameplaybtn.png" onclick="navigate('game.html')" class="game_card_play_btn" alt="Game play">` +
+                                    `<img src="./assets/shapes/gameplaybtn.png" onclick="
+                                        ${sessionStorage.setItem('gameDetails', JSON.stringify(gameList[i]))}
+                                        navigate('game.html')
+                                    " class="game_card_play_btn" alt="Game play">` +
                                     `<h4>${gameList[i]?.market_fullname}</h4>` +
                                     `<small><b>${gameList[i]?.result}</b></small><div>` +
                                     ` <small>Open time - ${convertTime(gameList[i]?.market_opentime)}</small>` +

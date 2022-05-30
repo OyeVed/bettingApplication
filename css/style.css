@@ -519,7 +519,8 @@
   border-radius: 9px;
   border: none;
 }
-.bid_play_btn_disable {
+.bid_play_btn:disabled,
+.bid_play_btn[disabled]{
   width: 192px;
   height: 40.87px;
   font-size: 20px;
