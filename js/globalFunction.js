@@ -106,3 +106,11 @@ function convertTime(time) {
     minute: "numeric",
   });
 }
+
+function calculateTimeRemain(time) {
+  var hourDiff =
+    new Date("01/01/2007 " + time).getHours() - new Date().getHours();
+  var minDiff =
+    new Date("01/01/2007 " + time).getMinutes() - new Date().getMinutes();
+  return `${hourDiff} hrs ${minDiff} min`;
+}

@@ -120,7 +120,6 @@
             axiosInstance.get('game_rate').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    console.log(response)
                     let gameRateList = response?.data?.game_rate
                     var game_rate_main_container = document.getElementById('game_rate_main_container_id');
 
