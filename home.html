@@ -147,13 +147,16 @@
                                 break;
                             case 'close':
                                 ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
-                                    `<div class="ongoing_card">` +
-                                    `<img src="./assets/shapes/closeRectangle.png" class="game_card_label" alt="Ongoing card">` +
-                                    `<img src="./assets/shapes/gameplaybtn.png" class="game_card_play_btn closed_game_btn" alt="Game play">` +
-                                    `<h4>${gameList[i]?.market_fullname}</h4>` +
-                                    ` <small><b>${gameList[i]?.result}</small><div>` +
-                                    ` <small>Open time - ${convertTime(gameList[i]?.market_opentime)}</small>` +
-                                    ` <small>Close time- ${convertTime(gameList[i]?.market_closetime)}</small></div>  </div>`
+                                    `<div class="ongoing_card">
+                                        <img src="./assets/shapes/closeRectangle.png" class="game_card_label" alt="Ongoing card">
+                                        <img src="./assets/shapes/gameplaybtn.png" class="game_card_play_btn closed_game_btn"  alt="Game play">
+                                         <h4>${gameList[i]?.market_fullname}</h4>
+                                        <small><b>${gameList[i]?.result}</b></small>
+                                        <div>
+                                            <small>Open time - ${convertTime(gameList[i]?.market_opentime)}</small>
+                                            <small>Close time- ${convertTime(gameList[i]?.market_closetime)}</small>
+                                        </div>
+                                    </div>`
                                 break;
                             case 'upcoming':
                                 ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
