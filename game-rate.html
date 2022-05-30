@@ -20,16 +20,10 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
         <div class="loader"></div>
-        <!-- <p>Uploading music file, please be patient.</p> -->
     </div>
     <!-- END: -->
     <!-- Navbar-->
@@ -100,43 +94,15 @@
                         class="app-menu__label">Contact Us</span></a></li>
             <li><a class="app-menu__item" href="share.html"><i class="app-menu__icon fa fa-share-alt"></i><span
                         class="app-menu__label">Share with Friends</span></a></li>
-            <li><a class="app-menu__item" href="#" onclick="signOut()"><i class="app-menu__icon fa fa-sign-out"></i><span
-                        class="app-menu__label">Logout</span></a></li>
+            <li><a class="app-menu__item" href="#" onclick="signOut()"><i
+                        class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Logout</span></a></li>
         </ul>
     </aside>
     <main class="app-content">
         <div style="max-height: 200px;" class="text-center pt-1">
             <img src="./assets/images/gamerate_banner.png" height="150px" alt="">
         </div>
-        <div class="game_rate_main_container">
-            <div class="game_rate_card">
-                <p>SINGLE DIGIT</p>
-                <p>₹10 - ₹90</p>
-            </div>
-            <div class="game_rate_card">
-                <p>JODI DIGIT</p>
-                <p>₹10 - ₹950</p>
-            </div>
-            <div class="game_rate_card">
-                <p>SINGLE PANNA</p>
-                <p>₹10 - ₹1400</p>
-            </div>
-            <div class="game_rate_card">
-                <p>DOUBLE PANNA</p>
-                <p>₹10 - ₹2800</p>
-            </div>
-            <div class="game_rate_card">
-                <p>TRIPLE PANNA</p>
-                <p>₹10 - ₹8000</p>
-            </div>
-            <div class="game_rate_card">
-                <p>HALF SANGAM</p>
-                <p>₹10 - ₹5000</p>
-            </div>
-            <div class="game_rate_card">
-                <p>FULL SANGAM</p>
-                <p>₹10 - ₹10000</p>
-            </div>
+        <div class="game_rate_main_container" id="game_rate_main_container_id">
         </div>
     </main>
     <!-- Essential javascripts for application to work-->
@@ -145,24 +111,43 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         // onload
         $(".myAlert-top").hide();
         window.onload = function () {
             startLoader()
-            axios.get('/bettingApplication/backend/game_rate').then((response) => {
+            axiosInstance.get('game_rate').then((response) => {
                 endLoader()
                 if (response.status === 200) {
                     console.log(response)
-                    // showAlert('success', `status ${response.status}`)
+                    let gameRateList = response?.data?.game_rate
+                    var game_rate_main_container = document.getElementById('game_rate_main_container_id');
+
+                    for (var i = 0; i < gameRateList.length; i++) {
+                        // POPULATE SELECT ELEMENT WITH JSON.
+                        game_rate_main_container.innerHTML = game_rate_main_container.innerHTML +
+                            `<div class="game_rate_card"><p>${gameRateList[i].game_name.toUpperCase()}</p><p>₹${gameRateList[i].game_rate}</p></div>`;
+                    }
                 } else {
-                    showAlert('danger', `status ${response.status}`)
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
                 }
-                console.log(response)
             }, (error) => {
                 console.log('error', error);
                 endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
         }
     </script>
