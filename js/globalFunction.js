@@ -114,3 +114,8 @@ function calculateTimeRemain(time) {
     new Date("01/01/2007 " + time).getMinutes() - new Date().getMinutes();
   return `${hourDiff} hrs ${minDiff} min`;
 }
+
+const validateEmail = (email) => {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};

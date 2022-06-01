@@ -1,6 +1,3 @@
-<?php 
-    session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -116,14 +108,12 @@
         </div>
         <div class="formdata">
             <form action="">
-                <div class="name">
-                    <input type="text" name="fname" id="fname" placeholder="First Name">
-                    <input type="text" name="lname" id="lname" placeholder="Last Name">
+                <input type="text" name="name" id="name_id" placeholder="Name">
+                <input type="number" name="phone_number" id="phone_number_id" placeholder="Phone Number">
+                <input type="email" name="email" id="email_id" placeholder="Email">
+                <div class="btnWrapper">
+                    <button type="button">Save</button>
                 </div>
-
-                <input type="text" name="username" id="" placeholder="Username">
-                <input type="number" name="account_no" id="" placeholder="69287386238729">
-                <input type="email" name="email" id="" placeholder="Email">
             </form>
         </div>
         <div class="accordion-item">
@@ -198,28 +188,47 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
-        let cookieData = getCookie("jwt");
-        let username = document.getElementById('side_bar_username_id')
-        let usernumber = document.getElementById('side_bar_usernumber_id')
-        if (cookieData) {
-            username.innerText = cookieData?.name
-            usernumber.innerText = cookieData?.userName
-        }
         window.onload = function () {
+            let cookieData = getCookie("jwt");
+            let username = document.getElementById('side_bar_username_id')
+            let usernumber = document.getElementById('side_bar_usernumber_id')
+            if (cookieData) {
+                username.innerText = cookieData?.name
+                usernumber.innerText = cookieData?.userName
+            }
             startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
-                endLoader()
-                if (response.status === 200) {
-                } else {
-                    showAlert('danger', `status ${response.status}`)
-                }
-                console.log(response)
-            }, (error) => {
-                console.log('error', error);
-                endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
-            })
+            if (cookieData) {
+                console.log(cookieData)
+                axiosInstance.get('profile_fetch', {
+                    'phone_number': cookieData?.userName
+                }).then((response) => {
+                    endLoader()
+                    if (response.status === 200) {
+
+                    } else {
+                        $.notify({
+                            title: "",
+                            message: response.data?.msg,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger",
+                        });
+                    }
+                    console.log(response)
+                }, (error) => {
+                    console.log('error', error);
+                    endLoader()
+                    $.notify({
+                        title: "",
+                        message: `Something went wrong! Please try again.`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                })
+            }
         }
     </script>
     <!-- control tab click -->
