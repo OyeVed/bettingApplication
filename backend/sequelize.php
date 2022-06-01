@@ -47,8 +47,12 @@ $database_tables = array(
         `game_type` VARCHAR(255), 
         `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (market_id) REFERENCES market_table(market_id),
-        FOREIGN KEY (user_id) REFERENCES user_table(user_id)
+        FOREIGN KEY (market_id) 
+    		REFERENCES market_table(market_id) 
+    		ON DELETE CASCADE,
+        FOREIGN KEY (user_id) 
+    		REFERENCES user_table(user_id) 
+    		ON DELETE CASCADE
     )",
     "
     CREATE TABLE IF NOT EXISTS `transaction_details` (
@@ -60,9 +64,10 @@ $database_tables = array(
         `amount_in_wallet` INT(255) NOT NULL,
         `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES user_table(user_id)
+        FOREIGN KEY (user_id) 
+            REFERENCES user_table(user_id)
+            ON DELETE CASCADE
     )"
- 
 );
 
 require_once("dbcon.php");

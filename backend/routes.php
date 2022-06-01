@@ -2,13 +2,13 @@
 
 // assign endpoints to their respective file location and allowed methods
 $router->endpoint('login', './views/login', ['POST'], FALSE, ['phone_number', 'password']);
-$router->endpoint('signup', './views/signup', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name', 'withdrawal_method']);
+$router->endpoint('signup', './views/signup', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name']);
 $router->endpoint('logout', './views/logout', ['POST'], FALSE, ['phone_number']);
 
 $router->endpoint('home', './views/home', ['GET'], FALSE, []);
 
 $router->endpoint('profile_fetch', './views/profile_fetch', ['GET'], FALSE, ['phone_number']);
-$router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name', 'withdrawal_method']);
+$router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name']);
 
 $router->endpoint('save_bid', './views/save_bid', ['POST'], FALSE, ['game_name', 'market_id', 'user_id', 'bid_lists']);
 

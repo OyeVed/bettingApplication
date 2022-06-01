@@ -51,8 +51,8 @@ if($query->rowCount() === 0){
             'iss'  => $serverName,                       // Issuer
             'nbf'  => $issuedAt->getTimestamp(),         // Not before
             'exp'  => $expire,                           // Expire
-            'userName' => $user->user_phonenumber,       //User name
-            'userid' =>  $user->user_id,                 // User id
+            'user_phonenumber' => $user->user_phonenumber,       //User name
+            'user_id' =>  $user->user_id,                 // User id
             'name' => $user->user_fullname               // User name             
         ];
 

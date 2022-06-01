@@ -25,7 +25,8 @@ function auth($token){
         http_response_code(203);
 
         echo json_encode(array(
-            "message" => "Could not create the token for this API. Please contact your administrator.",
+            "msg" => "Could not create the token for this API. Please contact your administrator.",
+            "is_logged_out" => true,
             "error" => $e->getMessage()
         ));
 

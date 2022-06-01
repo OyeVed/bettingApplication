@@ -61,7 +61,7 @@ function signOut() {
   let cookieData = getCookie("jwt");
   axiosInstance
     .post("logout", {
-      phone_number: cookieData?.userName,
+      phone_number: cookieData?.user_phonenumber,
     })
     .then(
       (response) => {

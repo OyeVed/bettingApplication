@@ -12,6 +12,7 @@ $token = $_COOKIE["jwt"];
 
 // checking is the user authorized 
 if(auth($token)){
+    $available_amount = 0;
     $user_id = $_POST['user_id'];
     $query = $con->prepare("
     SELECT
@@ -27,6 +28,7 @@ if(auth($token)){
     foreach((new RecursiveArrayIterator($query->fetchAll())) as $k=>$v) {
         $available_amount = $v['amount_in_wallet'];
     }
+
     //updating the transaction_details table
     $transaction_type = "deposit";
     $transaction_name = "money added to wallet";
