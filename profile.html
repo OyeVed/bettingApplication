@@ -112,7 +112,7 @@
                 <input type="number" name="phone_number" id="phone_number_id" placeholder="Phone Number">
                 <input type="email" name="email" id="email_id" placeholder="Email">
                 <div class="btnWrapper">
-                    <button type="button">Save</button>
+                    <button type="button" onclick="saveProfile()">Save</button>
                 </div>
             </form>
         </div>
@@ -168,15 +168,15 @@
             <div class="item-content">
                 <div class="formdata">
                     <label for="cpw">Current Password</label>
-                    <input type="password" name="" id="" placeholder="*********">
+                    <input type="password" name="" id="c_password_id" placeholder="">
 
                     <label for="npw">New Password</label>
-                    <input type="password" name="" id="" placeholder="*********">
+                    <input type="password" name="" id="n_password_id" placeholder="">
 
                     <label for="rpw">Re-enter Password</label>
-                    <input type="password" name="" id="" placeholder="*********">
+                    <input type="password" name="" id="re_password_id" placeholder="">
                     <div class="btnWrapper">
-                        <button>Done</button>
+                        <button onclick="resetPassword()">Done</button>
                     </div>
                 </div>
             </div>
@@ -191,6 +191,7 @@
     <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         window.onload = function () {
+            startLoader()
             let cookieData = getCookie("jwt");
             let username = document.getElementById('side_bar_username_id')
             let usernumber = document.getElementById('side_bar_usernumber_id')
@@ -198,11 +199,9 @@
                 username.innerText = cookieData?.name
                 usernumber.innerText = cookieData?.user_phonenumber
             }
-            startLoader()
             if (cookieData) {
-                console.log(cookieData)
-                axiosInstance.get('profile_fetch', {
-                    'phone_number': cookieData?.user_phonenumber
+                axiosInstance.post('profile_fetch', {
+                    "phone_number": cookieData?.user_phonenumber
                 }).then((response) => {
                     endLoader()
                     if (response.status === 200) {
@@ -229,6 +228,120 @@
                     });
                 })
             }
+        }
+        function saveProfile() {
+            startLoader()
+            let name = document.getElementById('name_id').value;
+            let phone_number = document.getElementById('phone_number_id').value
+            let email = document.getElementById('email').value
+            if (phone_number?.length < 10) {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Invalid phone number.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            } else if (!validateEmail(email)) {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Invalid email format.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            }
+            axiosInstance.post('profile_save', {
+                "phone_number": phone_number,
+                "email": email,
+                "full_name": name
+            }).then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success",
+                    });
+                } else {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
+        }
+        function resetPassword() {
+            startLoader()
+            let c_password = document.getElementById('c_password_id').value;
+            let n_password = document.getElementById('n_password_id').value
+            let re_password = document.getElementById('re_password_id').value
+            if (n_password !== re_password || n_password === "") {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `New Password didn't match.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            }
+            axiosInstance.post('reset_password', {
+                "old_password": c_password,
+                "new_password": n_password,
+                "confirm_password": re_password
+            }).then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success",
+                    });
+                } else {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
         }
     </script>
     <!-- control tab click -->
