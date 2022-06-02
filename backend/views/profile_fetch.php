@@ -3,7 +3,7 @@
 require("dbcon.php");
 require('middleware.php');
 
-$_GET = json_decode(file_get_contents("php://input"), true);
+$_POST = json_decode(file_get_contents("php://input"), true);
 
 // getting token from cookie
 $token = $_COOKIE["jwt"];
@@ -11,7 +11,7 @@ $token = $_COOKIE["jwt"];
 // checking is the user authorized 
 if(auth($token)){
     // retrieve required variables
-    $phone_number = $_GET['phone_number'];
+    $phone_number = $_POST['phone_number'];
 
     $sql = "SELECT * FROM user_table WHERE user_table.user_phonenumber=:phone_number";
     $query = $con -> prepare($sql);

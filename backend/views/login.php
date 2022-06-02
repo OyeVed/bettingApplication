@@ -5,7 +5,7 @@ require("dbcon.php");
 require_once('../vendor/autoload.php');
 use Firebase\JWT\JWT;
 
-// // Looing for .env at the root directory
+// Looing for .env at the root directory
 // $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 // $dotenv->load();
 
@@ -20,9 +20,8 @@ $phone_number = $_POST['phone_number'];
 $password = md5($_POST['password']);
 
 // looking for the user in database
-$sql = "SELECT * FROM user_table WHERE user_table.user_email=:email OR user_table.user_phonenumber=:phone_number";
+$sql = "SELECT * FROM user_table WHERE user_table.user_phonenumber=:phone_number";
 $query = $con -> prepare($sql);
-$query->bindParam(':email', $email, PDO::PARAM_STR);
 $query->bindParam(':phone_number', $phone_number, PDO::PARAM_STR);
 $query->execute();
 
