@@ -20,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -172,21 +167,6 @@
         if (cookieData) {
             username.innerText = cookieData?.name
             usernumber.innerText = cookieData?.user_phonenumber
-        }
-        window.onload = function () {
-            startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
-                endLoader()
-                if (response.status === 200) {
-                } else {
-                    showAlert('danger', `status ${response.status}`)
-                }
-                console.log(response)
-            }, (error) => {
-                console.log('error', error);
-                endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
-            })
         }
     </script>
     <!-- control tab click -->
