@@ -30,7 +30,6 @@
   $("[data-toggle='tooltip']").tooltip();
 
   // check device
-  console.log("Device checking start");
   let deviceNow;
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent

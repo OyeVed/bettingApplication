@@ -8,6 +8,13 @@ function endLoader() {
   $("div.overlay").removeClass("show");
 }
 
+function authenticate() {
+  let isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (isLoggedIn === "false" || isLoggedIn === null) {
+    location.href = "index.html";
+  }
+}
+
 function copyDivToClipboard() {
   var range = document.createRange();
   range.selectNode(document.getElementById("copy_id_1"));
@@ -55,7 +62,9 @@ function getCookie(name) {
   }
   return cookieData;
 }
-
+function deleteCookie(name) {
+  document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}
 function signOut() {
   startLoader();
   let cookieData = getCookie("jwt");
@@ -67,6 +76,7 @@ function signOut() {
       (response) => {
         endLoader();
         if (response.status === 200) {
+          localStorage.setItem("isLoggedIn", "false");
           location.href = "index.html";
         } else {
           $.notify(

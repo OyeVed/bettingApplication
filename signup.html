@@ -77,6 +77,10 @@
     <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
+        let isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (isLoggedIn === "true") {
+            location.href = "home.html";
+        }
         // Login Page Flipbox control
         $('.login-content [data-toggle="flip"]').click(function () {
             $('.login-box').toggleClass('flipped');

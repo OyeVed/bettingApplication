@@ -20,11 +20,6 @@
 
 <body class="app sidebar-mini">
     <!-- NOTE: START: -->
-    <!-- Alert -->
-    <div class="myAlert-top alert alert-success" id="alert_div">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Indicates a successful or positive action 123.
-    </div>
     <!-- loader -->
     <div class="overlay"></div>
     <div class="spanner">
@@ -139,6 +134,7 @@
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
+        authenticate()
         let cookieData = getCookie("jwt");
         let username = document.getElementById('side_bar_username_id')
         let usernumber = document.getElementById('side_bar_usernumber_id')
