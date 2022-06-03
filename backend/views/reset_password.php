@@ -17,7 +17,6 @@ if(auth($token)){
     $payload = JWT::decode($token, new Key($secret_key, 'HS512'));
     $old_password = md5($_POST['old_password']);
     $new_password = md5($_POST['new_password']);
-    echo $payload->user_id;
     
     $sql = "SELECT * FROM user_table WHERE user_table.user_id=:user_id";
     $query = $con -> prepare($sql);

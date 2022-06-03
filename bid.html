@@ -185,7 +185,7 @@
                     <th class="text-center">Action</th>
                 </tr>`
                 for (let i = 0; i < bidList.length; i++) {
-                    totalValue = totalValue + bidList[i].bidPoint
+                    totalValue = totalValue + bidList[i].points
                     var row = bidTable.insertRow(i + 1);
                     row.innerHTML = `<td class="text-center">${bidList[i].number}</td>
                         <td class="text-center">${bidList[i].points}</td>
