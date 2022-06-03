@@ -206,7 +206,10 @@
                 }).then((response) => {
                     endLoader()
                     if (response.status === 200) {
-
+                        let dataSet = response?.data?.user
+                        document.getElementById('name_id').value = dataSet?.full_name
+                        document.getElementById('phone_number_id').value = dataSet?.phone_number
+                        document.getElementById('email_id').value = dataSet?.email
                     } else {
                         $.notify({
                             title: "",
@@ -216,7 +219,6 @@
                             type: "danger",
                         });
                     }
-                    console.log(response)
                 }, (error) => {
                     console.log('error', error);
                     endLoader()
@@ -234,7 +236,7 @@
             startLoader()
             let name = document.getElementById('name_id').value;
             let phone_number = document.getElementById('phone_number_id').value
-            let email = document.getElementById('email').value
+            let email = document.getElementById('email_id').value
             if (phone_number?.length < 10) {
                 endLoader()
                 $.notify({

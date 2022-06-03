@@ -299,7 +299,7 @@
         }
         var todayDate = new Date();
         let todayDay = todayDate.getDate();
-        let todayMonth = getDateInWord(todayDate.getMonth()+1)
+        let todayMonth = getDateInWord(todayDate.getMonth() + 1)
         let todayYear = todayDate.getFullYear()
         var countDownDate = new Date(`${todayMonth} ${todayDay},${todayYear} ${gameDetails?.market_closetime}`).getTime();
 
@@ -331,10 +331,20 @@
             }).then((response) => {
                 endLoader()
                 if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success"
+                    });
+                    setTimeout(() => {
+                        location.href = "home.html"
+                    }, 1500);
                 } else {
                     $.notify({
                         title: "",
-                        message: `status ${response.status}`,
+                        message: response.data?.msg,
                         icon: 'fa fa-times'
                     }, {
                         type: "danger"
