@@ -8,7 +8,7 @@ $router->endpoint('logout', './views/logout', ['POST'], FALSE, ['phone_number'])
 $router->endpoint('home', './views/home', ['GET'], FALSE, []);
 
 $router->endpoint('profile_fetch', './views/profile_fetch', ['POST'], FALSE, ['phone_number']);
-$router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name']);
+$router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'email', 'full_name']);
 
 $router->endpoint('save_bid', './views/save_bid', ['POST'], FALSE, ['game_name', 'market_id', 'user_id', 'bid_lists']);
 
