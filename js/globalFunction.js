@@ -34,9 +34,9 @@ function copyDivToClipboard() {
 function navigate(path) {
   location.href = path;
 }
-
+// baseURL: `/bettingApplication/backend/`,
 const axiosInstance = axios.create({
-  baseURL: `/bettingApplication/backend/`,
+  baseURL: `/backend/`,
   credentials: "include",
   withCredentials: true,
 });
