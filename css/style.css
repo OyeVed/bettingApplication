@@ -159,6 +159,22 @@
   top: 25%;
   right: 10px;
 }
+.ongoing_card .game_card_play_btn.open_game_button {
+  animation: jump 2s linear infinite;
+}
+/*// KEYFRAMES //*/
+
+@keyframes jump{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0.9);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
 .ongoing_card .game_card_play_btn.closed_game_btn {
   opacity: 0.4;
 }
@@ -189,7 +205,17 @@
 .ongoing_card.upcoming_card p img {
   height: 10px;
 }
-
+.home_page_whatsApp{
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
+.home_page_whatsApp span{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: gray;
+}
 /* /////////////////////////////////////////////////// */
 /*  ////////////////// withdrawal //////////////////*/
 /* //////////////////////////////////////////////// */

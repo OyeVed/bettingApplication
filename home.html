@@ -111,6 +111,9 @@
                  -->
             </div>
         </div>
+        <div class="home_page_whatsApp" id="home_page_whatsApp_id"><img src="./assets/shapes/whatasapp_icon.png"
+                alt=""><span><i onclick="document.getElementById('home_page_whatsApp_id').innerHTML=''"
+                    class="fa fa-times"></i></span></div>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -145,7 +148,7 @@
                                     `<img src="./assets/shapes/gameplaybtn.png" onclick="
                                         ${sessionStorage.setItem('gameDetails', JSON.stringify(gameList[i]))}
                                         navigate('game.html')
-                                    " class="game_card_play_btn" alt="Game play">` +
+                                    " class="game_card_play_btn open_game_button" alt="Game play">` +
                                     `<h4>${gameList[i]?.market_fullname}</h4>` +
                                     `<small><b>${gameList[i]?.result}</b></small><div>` +
                                     ` <small>Open time - ${convertTime(gameList[i]?.market_opentime)}</small>` +

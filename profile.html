@@ -116,7 +116,7 @@
                 </div>
             </form>
         </div>
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <header class="item-header">
                 <h2 class="item-question">
                     Bank Details
@@ -155,7 +155,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="accordion-item">
             <header class="item-header">
                 <h2 class="item-question">
@@ -319,7 +319,7 @@
                 if (response.status === 200) {
                     $.notify({
                         title: "",
-                        message: response.data?.msg,
+                        message: response?.data?.msg,
                         icon: 'fa fa-check'
                     }, {
                         type: "success",
