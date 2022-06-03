@@ -6,6 +6,13 @@ require_once('../vendor/autoload.php');
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
+// // Looing for .env at the root directory
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__. '/..');
+// $dotenv->load();
+
+// //Retrive env variable
+// $SECRET_KEY = $_ENV['SECRET_KEY'];
+
 $_POST = json_decode(file_get_contents("php://input"), true);
 
 // getting token from cookie
@@ -17,7 +24,6 @@ if(auth($token)){
     $payload = JWT::decode($token, new Key($secret_key, 'HS512'));
     $old_password = md5($_POST['old_password']);
     $new_password = md5($_POST['new_password']);
-    echo $payload->user_id;
     
     $sql = "SELECT * FROM user_table WHERE user_table.user_id=:user_id";
     $query = $con -> prepare($sql);
@@ -34,17 +40,26 @@ if(auth($token)){
     }else{
     
         $user = $query->fetchAll(PDO::FETCH_OBJ)[0];
+        echo $user->user_id; 
     
         if($user->user_password === $old_password){
-            $sql = "UPDATE user_table SET user_password=:new_password WHERE user_id=:user_id";
+            $sql = "UPDATE user_table SET user_password=:user_password WHERE user_id=:user_id";
             $query = $con -> prepare($sql);
-            $query->bindParam(':new_password', $new_password, PDO::PARAM_STR);
+            $query->bindParam(':user_password', $new_password, PDO::PARAM_STR);
             $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
-            $status = 200;
-            $response = [
-                "msg" => "Password updated successfully",
-                "payload" => $payload->user_phonenumber
-            ];
+            if($query->execute()){
+                $status = 200;
+                $response = [
+                    "msg" => "Password updated successfully",
+                    "payload" => $payload->user_phonenumber
+                ];
+            }else{
+                $status = 203;
+                $response = [
+                    "msg" => "Password not updated"
+                ];
+            }
+           
         }else{
             $status = 203;
             $response = [

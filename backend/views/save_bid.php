@@ -1,8 +1,10 @@
 <?php
 
-// import db connection
 require("dbcon.php");
 require('middleware.php');
+require_once('../vendor/autoload.php');
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 // retrieve request data
 $_POST = json_decode(file_get_contents("php://input"), true);
@@ -12,6 +14,10 @@ $token = $_COOKIE["jwt"];
 
 // checking is the user authorized 
 if(auth($token)){
+    //Total deposit on a particular day
+    $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
+    $payload = JWT::decode($token, new Key($secret_key, 'HS512'));
+
     //taking parameters from post request
     $game_name = $_POST['game_name'];
     $user_id = $_POST['user_id'];
@@ -29,15 +35,15 @@ if(auth($token)){
         SELECT
         amount_in_wallet
         FROM transaction_details
-        WHERE user_id=1
+        WHERE user_id=:user_id
         ORDER BY transaction_id DESC
         LIMIT 1
     ");
+    $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
     if($query->execute()){
-        $result = $query->setFetchMode(PDO::FETCH_ASSOC);
-        // echo "the result is ".$query->fetchAll()."\n";
-        foreach((new RecursiveArrayIterator($query->fetchAll())) as $k=>$v) {
-            $available_amount = $v['amount_in_wallet'];
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        while($row = $query->fetch()) {
+            $available_amount = $row['amount_in_wallet'];
         }
         if(!isset($available_amount)){
             $status = 203;
@@ -45,22 +51,21 @@ if(auth($token)){
                 "msg" => "No transactions found."
             ];
         }else{
-            //updating the transaction_details table
-            $available_amount -= $total_amount;
-            $transaction_type = "withdrawal";
-            $transaction_name = "bets placed";
-            $sql = "INSERT INTO transaction_details ( user_id, transaction_type, transaction_name, transaction_amount, amount_in_wallet) VALUES
-            (:user_id, :transaction_type, :transaction_name, :transaction_amount, :amount_in_wallet)";
-            $query = $con->prepare($sql);
-            $query->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-            $query->bindParam(':transaction_amount', $total_amount, PDO::PARAM_STR);
-            $query->bindParam(':amount_in_wallet', $available_amount, PDO::PARAM_STR);
-            $query->bindParam(':transaction_type', $transaction_type, PDO::PARAM_STR);
-            $query->bindParam(':transaction_name', $transaction_name, PDO::PARAM_STR);
-            $query->execute();
-        
             //checking are funds available to place bet
             if($available_amount >= $total_amount){
+                //updating the transaction_details table
+                $available_amount -= $total_amount;
+                $transaction_type = "withdrawal";
+                $transaction_name = "bets placed";
+                $sql = "INSERT INTO transaction_details ( user_id, transaction_type, transaction_name, transaction_amount, amount_in_wallet) VALUES
+                (:user_id, :transaction_type, :transaction_name, :transaction_amount, :amount_in_wallet)";
+                $query = $con->prepare($sql);
+                $query->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+                $query->bindParam(':transaction_amount', $total_amount, PDO::PARAM_STR);
+                $query->bindParam(':amount_in_wallet', $available_amount, PDO::PARAM_STR);
+                $query->bindParam(':transaction_type', $transaction_type, PDO::PARAM_STR);
+                $query->bindParam(':transaction_name', $transaction_name, PDO::PARAM_STR);
+                $query->execute();
                 foreach($bid_lists as $bid_list){
                     //Updating to betting_history table
                     $number = $bid_list['number']; 
@@ -88,7 +93,7 @@ if(auth($token)){
                     }
                 }
             }else{
-                $status = 200;
+                $status = 203;
                 $response = [
                     "msg" => "Insufficient funds."
                 ];
@@ -96,7 +101,7 @@ if(auth($token)){
         }
         
     }else{
-        $status = 200;
+        $status = 203;
         $response = [
             "msg" => "No user transactions found."
         ];

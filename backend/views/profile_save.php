@@ -28,7 +28,7 @@ if(auth($token)){
     if($query->rowCount() != 0){
 
         $sql = "UPDATE user_table SET 
-            user_phonenumber=:user_phonenumber, 
+            user_phonenumber=:user_phonenumber,
             user_password=:user_password, 
             user_email=:user_email, 
             user_fullname=:user_fullname

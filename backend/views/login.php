@@ -5,12 +5,12 @@ require("dbcon.php");
 require_once('../vendor/autoload.php');
 use Firebase\JWT\JWT;
 
-// Looing for .env at the root directory
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+// // Looing for .env at the root directory
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__. '/..');
 // $dotenv->load();
 
-// Retrive env variable
-// $SECRET_KEY = $_ENV["SECRET_KEY"];
+// //Retrive env variable
+// $SECRET_KEY = $_ENV['SECRET_KEY'];
 
 // retrieve request data
 $_POST = json_decode(file_get_contents("php://input"), true);
