@@ -36,7 +36,7 @@ function navigate(path) {
 }
 // baseURL: `/bettingApplication/backend/`,
 const axiosInstance = axios.create({
-  baseURL: `/backend/`,
+  baseURL: `/bettingApplication/backend/`,
   credentials: "include",
   withCredentials: true,
 });
