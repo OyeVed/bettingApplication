@@ -4,12 +4,15 @@ require_once('../vendor/autoload.php');
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
-// // Looing for .env at the root directory
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-// $dotenv->load();
+use Dotenv\Dotenv;
 
-// //Retrive env variable
-// $SECRET_KEY = $_ENV['SECRET_KEY'];
+// Looing for .env at the root directory
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+//Retrive env variable
+$SECRET_KEY = $_ENV['SECRET_KEY'];
+
 
 function auth($token){
     try {

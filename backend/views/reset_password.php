@@ -40,7 +40,6 @@ if(auth($token)){
     }else{
     
         $user = $query->fetchAll(PDO::FETCH_OBJ)[0];
-        echo $user->user_id; 
     
         if($user->user_password === $old_password){
             $sql = "UPDATE user_table SET user_password=:user_password WHERE user_id=:user_id";

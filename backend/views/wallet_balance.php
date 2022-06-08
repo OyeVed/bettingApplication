@@ -6,6 +6,15 @@ require_once('../vendor/autoload.php');
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
+use Dotenv\Dotenv;
+
+// Looing for .env at the root directory
+$dotenv = Dotenv::createImmutable('./');
+$dotenv->load();
+
+//Retrive env variable
+$SECRET_KEY = $_ENV['SECRET_KEY'];
+
 // getting token from cookie
 $token = $_COOKIE["jwt"];
 
@@ -13,8 +22,8 @@ $token = $_COOKIE["jwt"];
 if(auth($token)){
     $available_amount = 0;
     //Total deposit on a particular day
-    $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
-    $payload = JWT::decode($token, new Key($secret_key, 'HS512'));
+    // $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
+    $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     //calculating funds available
     $query = $con->prepare("
