@@ -14,6 +14,7 @@ $database_tables = array(
         `bank_name` VARCHAR(255),
         `account_number` VARCHAR(255),
         `ifsc_code` VARCHAR(255),
+        `profile_image` BLOB,
         `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `created_by` INT(11),
         `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -32,7 +33,7 @@ $database_tables = array(
     CREATE TABLE IF NOT EXISTS `game_rate_table` (
         `rate_id` INT(255) PRIMARY KEY AUTO_INCREMENT,
         `game_name` VARCHAR(255) NOT NULL,
-        `game_rate` varchar(255) NOT NULL,
+        `game_rate` varchar(255) NOT NULL DEFAULT 1,
         `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
         `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP
     )",
