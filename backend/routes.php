@@ -15,7 +15,7 @@ $router->endpoint('image_upload', './views/image_upload', ['POST'], FALSE, []);
 $router->endpoint('home', './views/home', ['GET'], FALSE, []);
 
 //profile saving and fetching route
-$router->endpoint('profile_fetch', './views/profile_fetch', ['POST'], FALSE, ['phone_number']);
+$router->endpoint('profile_fetch', './views/profile_fetch', ['GET'], FALSE, []);
 $router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'email', 'full_name']);
 
 
