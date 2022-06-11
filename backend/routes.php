@@ -2,19 +2,20 @@
 
 // assign endpoints to their respective file location and allowed methods
 
-//login, logout, reset_password, middleware and signup routes
+//login, logout, reset_password, middleware, image_upload and signup routes
 $router->endpoint('login', './views/login', ['POST'], FALSE, ['phone_number', 'password']);
 $router->endpoint('signup', './views/signup', ['POST'], FALSE, ['phone_number', 'password', 'email', 'full_name']);
 $router->endpoint('logout', './views/logout', ['POST'], FALSE, ['phone_number']);
 $router->endpoint('reset_password', './views/reset_password', ['POST'], FALSE, ['old_password', 'new_password']);
 $router->endpoint('middleware', './middleware.php', ['POST'], FALSE, []);
+$router->endpoint('image_upload', './views/image_upload', ['POST'], FALSE, []);
 
 
 //home route
 $router->endpoint('home', './views/home', ['GET'], FALSE, []);
 
 //profile saving and fetching route
-$router->endpoint('profile_fetch', './views/profile_fetch', ['POST'], FALSE, ['phone_number']);
+$router->endpoint('profile_fetch', './views/profile_fetch', ['GET'], FALSE, []);
 $router->endpoint('profile_save', './views/profile_save', ['POST'], FALSE, ['phone_number', 'email', 'full_name']);
 
 
