@@ -322,8 +322,31 @@
         }, 1000);
         function handlePlay() {
             startLoader()
+            let formatedBidType = 'Single Digit'
+            switch (currentBidType) {
+                case 'JD':
+                    formatedBidType = "Jodi Digit"
+                    break;
+                case 'SP':
+                    formatedBidType = "Single Panna"
+                    break;
+                case 'DP':
+                    formatedBidType = "Double Panna"
+                    break;
+                case 'TP':
+                    formatedBidType = "Triple Panna"
+                    break;
+                case 'HS':
+                    formatedBidType = "Half Sangam"
+                    break;
+                case 'FS':
+                    formatedBidType = "Full Sangam"
+                    break;
+                default:
+                    break;
+            }
             axiosInstance.post('save_bid', {
-                "game_name": currentBidType,
+                "game_name": formatedBidType,
                 "market_id": gameDetails?.market_id,
                 "user_id": cookieData?.user_id,
                 "bid_lists": bidList
