@@ -111,92 +111,8 @@
         </div>
         <div class="transaction_main_container">
             <h4>Transaction Details</h4>
-            <div class="transaction_content_container">
-                <div class="transaction_card">
-                    <div class="transaction_avatar_div">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                    </div>
-                    <div
-                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
-                        <div>
-                            <h6>Money sent to raj</h6>
-                            <small>20 Apr, 12:39 PM</small>
-                        </div>
-                        <div>
-                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
-                                    class="ml-1" height="14px" alt=""></p>
-                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="transaction_card">
-                    <div class="transaction_avatar_div">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                    </div>
-                    <div
-                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
-                        <div>
-                            <h6>Money sent to raj</h6>
-                            <small>20 Apr, 12:39 PM</small>
-                        </div>
-                        <div>
-                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
-                                    class="ml-1" height="14px" alt=""></p>
-                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="transaction_card">
-                    <div class="transaction_avatar_div">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                    </div>
-                    <div
-                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
-                        <div>
-                            <h6>Money sent to raj</h6>
-                            <small>20 Apr, 12:39 PM</small>
-                        </div>
-                        <div>
-                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
-                                    class="ml-1" height="14px" alt=""></p>
-                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="transaction_card">
-                    <div class="transaction_avatar_div">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                    </div>
-                    <div
-                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
-                        <div>
-                            <h6>Money sent to raj</h6>
-                            <small>20 Apr, 12:39 PM</small>
-                        </div>
-                        <div>
-                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
-                                    class="ml-1" height="14px" alt=""></p>
-                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="transaction_card">
-                    <div class="transaction_avatar_div">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                    </div>
-                    <div
-                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
-                        <div>
-                            <h6>Money sent to raj</h6>
-                            <small>20 Apr, 12:39 PM</small>
-                        </div>
-                        <div>
-                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
-                                    class="ml-1" height="14px" alt=""></p>
-                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="transaction_content_container" id="transaction_container">
+
             </div>
         </div>
     </main>
@@ -206,6 +122,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         authenticate()
         let cookieData = getCookie("jwt");
@@ -217,18 +134,53 @@
         }
         window.onload = function () {
             startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+            axiosInstance.get('bid_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    // showAlert('success', `status ${response.status}`)
+                    let transactionList = response.data.msg
+                    let transaction_container = document.getElementById('transaction_container')
+                    transaction_container.innerHTML = ''
+                    for (let i = 0; i < transactionList.length; i++) {
+                        transaction_container.innerHTML =  transaction_container.innerHTML   + 
+                        `
+                        <div class="transaction_card">
+                    <div class="transaction_avatar_div">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </div>
+                    <div
+                        style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                        <div>
+                            <h6>${transactionList[i]?.number} - ₹${transactionList[i]?.number}</h6>
+                            <small>${transactionList[i]?.game_name}-${transactionList[i]?.game_type}</small>
+                        </div>
+                        <div>
+                            <p class="float-right"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                    class="ml-1" height="14px" alt=""></p>
+                            <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                        </div>
+                    </div>
+                </div>`
+                    }
                 } else {
-                    // showAlert('danger', `status ${response.status}`)
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
                 }
                 console.log(response)
             }, (error) => {
                 console.log('error', error);
                 endLoader()
-                // showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
         }
     </script>
