@@ -71,26 +71,21 @@
                     <li><a class="treeview-item" href="deposite-history.html"><i class="icon fa fa-circle-o"></i>Deposit
                             History</a>
                     </li>
-                    <li><a class="treeview-item" href="withdrawal-history.html"><i
-                                class="icon fa fa-circle-o"></i>Withdrawal
+                    <li><a class="treeview-item" href="withdrawal.html"><i class="icon fa fa-circle-o"></i>Withdrawal
                             History</a>
                     </li>
                 </ul>
             </li>
-            <li><a class="app-menu__item" href="withdrawal.html"><i class="app-menu__icon fa fa-money"></i><span
-                        class="app-menu__label">Withdrawal</span></a></li>
+
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-handshake-o"></i><span class="app-menu__label">Help</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form
-                            How to Play</a></li>
-                    <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom
-                            Game Rate Card</a></li>
-                    <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form
-                            Notice </a></li>
-                    <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form
-                            Rules Board</a></li>
+                    <li><a class="treeview-item" href="how-to-play.html"><i class="icon fa fa-circle-o"></i>How to
+                            Play</a></li>
+
+                    <li><a class="treeview-item" href="rules.html"><i class="icon fa fa-circle-o"></i>Notice board /
+                            Rules</a></li>
                 </ul>
             </li>
             <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
@@ -141,8 +136,8 @@
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {
-                        transaction_container.innerHTML =  transaction_container.innerHTML   + 
-                        `
+                        transaction_container.innerHTML = transaction_container.innerHTML +
+                            `
                         <div class="transaction_card">
                     <div class="transaction_avatar_div">
                         <i class="fa fa-minus" aria-hidden="true"></i>
