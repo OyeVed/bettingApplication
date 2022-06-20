@@ -35,6 +35,7 @@ $router->endpoint('bid_history', './views/history/bid_history', ['GET'], FALSE, 
 $router->endpoint('deposit_history', './views/history/deposit_history', ['GET'], FALSE, []);
 $router->endpoint('winning_history', './views/history/winning_history', ['GET'], FALSE, []);
 $router->endpoint('withdrawal_history', './views/history/withdrawal_history', ['GET'], FALSE, []);
+$router->endpoint('statement', './views/history/statement', ['GET'], FALSE, []);
 
 
 //payment routes add_money, withdraw_money and wallet_balance
