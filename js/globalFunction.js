@@ -13,7 +13,7 @@ function authenticate() {
   if (isLoggedIn === "false" || isLoggedIn === null) {
     location.href = "index.html";
   }
-  let cookieData = getCookie("jwt");
+  let cookieData = getCookie("user_jwt");
   if (!cookieData?.user_phonenumber) {
     localStorage.setItem("isLoggedIn", "false");
     location.href = "index.html";
@@ -72,7 +72,7 @@ function deleteCookie(name) {
 }
 function signOut() {
   startLoader();
-  let cookieData = getCookie("jwt");
+  let cookieData = getCookie("user_jwt");
   if (cookieData?.user_phonenumber) {
     axiosInstance
       .post("logout", {
@@ -188,6 +188,7 @@ const updateWallet = () => {
   }
   axiosInstance.get("wallet_balance").then(
     (response) => {
+      console.log(response);
       if (response?.status === 200) {
         localStorage.setItem("vcds", response.data?.msg);
         document.getElementById("wallet_amount").innerHTML = response.data?.msg;

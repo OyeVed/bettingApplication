@@ -190,7 +190,7 @@
         authenticate()
         window.onload = function () {
             startLoader()
-            let cookieData = getCookie("jwt");
+            let cookieData = getCookie("user_jwt");
             let username = document.getElementById('side_bar_username_id')
             let usernumber = document.getElementById('side_bar_usernumber_id')
             if (cookieData) {
@@ -201,6 +201,7 @@
                 updateWallet()
                 axiosInstance.get('profile_fetch').then((response) => {
                     endLoader()
+                    console.log(response)
                     if (response.status === 200) {
                         let dataSet = response?.data?.user
                         document.getElementById('name_id').value = dataSet?.full_name
