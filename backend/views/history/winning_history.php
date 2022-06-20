@@ -26,20 +26,20 @@ if(auth($token)){
 
     //query
     $sql = "SELECT transaction_type, transaction_name, transaction_amount, created_at FROM transaction_details 
-    WHERE transaction_type =:transaction_type AND user_id=:user_id ORDER BY transaction_id desc";
+    WHERE user_id=:user_id ORDER BY transaction_id desc ";
     $query = $con -> prepare($sql);
-    $query->bindParam(':transaction_type', $transaction_type, PDO::PARAM_STR);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
     if($query->execute()){
-        $win_history = $query->fetchAll(PDO::FETCH_OBJ);
+        $statement = $query->fetchAll(PDO::FETCH_OBJ);
         $status = 200;
         $response = [
-            "msg" => $win_history
+            "msg" => "Statement fetched successfully",
+            "statement" => $statement
         ];
     }else{
         $status = 203;
         $response = [
-            "msg" => "Can't fetch win history."
+            "msg" => "Can't fetch user statement."
         ];
     }
 }
