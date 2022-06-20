@@ -24,15 +24,17 @@ if(auth($token)){
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     //query
-    $sql = "SELECT transaction_type, transaction_name, transaction_amount, created_at FROM transaction_details 
+    $sql = "SELECT transaction_type, transaction_name, transaction_amount, amount_in_wallet, created_at FROM transaction_details 
     WHERE user_id=:user_id ORDER BY transaction_id desc";
     $query = $con -> prepare($sql);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
     if($query->execute()){
-        $win_history = $query->fetchAll(PDO::FETCH_OBJ);
+        $statement = $query->fetchAll(PDO::FETCH_OBJ);
         $status = 200;
         $response = [
-            "msg" => $win_history
+            "msg" => "Statement fetched succefully",
+            "amount_in_wallet" => $statement[0]->amount_in_wallet,
+            "statement" => $statement
         ];
     }else{
         $status = 203;

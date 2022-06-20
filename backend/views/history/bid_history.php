@@ -21,17 +21,25 @@ $token = $_COOKIE["user_jwt"];
 // checking is the user authorized 
 if(auth($token)){
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
+    $total_bid_amount = 0;
 
     //query
-    $sql = "SELECT game_name, game_type, number, points, created_at FROM betting_history 
-    WHERE user_id=:user_id ORDER BY bet_id desc";
+    $sql = "SELECT bh.game_name, mt.market_fullname, bh.game_type, bh.number, bh.points, bh.created_at
+    FROM betting_history as bh JOIN market_table as mt
+    ON bh.market_id = mt.market_id 
+    WHERE bh.user_id=:user_id ORDER BY bh.bet_id desc";
     $query = $con -> prepare($sql);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
     if($query->execute()){
         $bid_history = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach($bid_history as $bet){
+            $total_bid_amount =+ $bet->points;
+        }
         $status = 200;
         $response = [
-            "msg" => $bid_history
+            "msg" => "Bid history fetched successfully",
+            "total_bid_amount" => $total_bid_amount,
+            "bid_history" => $bid_history
         ];
     }else{
         $status = 203;

@@ -25,7 +25,7 @@ if(auth($token)){
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     //query
-    $sql = "SELECT transaction_type, transaction_name, transaction_amount, amount_in_wallet, created_at FROM transaction_details 
+    $sql = "SELECT transaction_type, transaction_name, transaction_amount, amount_in_wallet, amount_in_wallet, created_at FROM transaction_details 
     WHERE transaction_type =:transaction_type AND user_id=:user_id ORDER BY transaction_id desc";
     $query = $con -> prepare($sql);
     $query->bindParam(':transaction_type', $transaction_type, PDO::PARAM_STR);
