@@ -101,8 +101,8 @@
     <main class="app-content">
         <div class="transaction_list_top_section d-flex justify-content-around align-items-center ">
             <div>
-                <p>Winning Amount</p>
-                <p class="money">₹100</p>
+                <p>Total Winning Amount</p>
+                <p class="money" id="total_winning_amount">₹0</p>
             </div>
             <img src="./assets/images/winning_top.png" alt="">
         </div>
@@ -134,7 +134,8 @@
             axiosInstance.get('winning_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    let transactionList = response.data.statement
+                    document.getElementById('total_winning_amount').innerHTML = response?.data?.total_winning_amount
+                    let transactionList = response.data.winning_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {
@@ -151,8 +152,9 @@
                             <small>${convertDateAndTime(element?.created_at)}</small>
                         </div>
                         <div>
-                            <p class="float-right mt-2"><b>+ ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                            <p class="float-right"><b>+ ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
                                     class="ml-1" height="14px" alt=""></p>
+                                    <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : ${element?.amount_in_wallet}</p>
                         </div>
                     </div>
                 </div>`
