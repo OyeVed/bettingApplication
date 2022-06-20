@@ -2130,8 +2130,8 @@ pre code {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+  color: white;
+  background-color: var(--default-bg-2);
   background-clip: padding-box;
   border: 2px solid #ced4da;
   border-radius: 4px;
@@ -2144,7 +2144,6 @@ pre code {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
 }
-
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     -webkit-transition: none;
@@ -2159,50 +2158,61 @@ pre code {
 }
 
 .form-control:focus {
-  color: #495057;
-  background-color: #fff;
-  border-color: var(--default-text-1);
+  color: white;
+  background-color: var(--default-bg-2);
+  border-color: white;
   outline: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #6c757d;
+  color: #d0d6db;
   opacity: 1;
 }
 
 .form-control::-moz-placeholder {
-  color: #6c757d;
+  color: #d0d6db;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #6c757d;
+  color: #d0d6db;
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-  color: #6c757d;
+  color: #d0d6db;
   opacity: 1;
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: #d0d6db;
   opacity: 1;
 }
 
 .form-control:disabled,
 .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: var(--default-bg-2);
   opacity: 1;
 }
 
 select.form-control:focus::-ms-value {
-  color: #495057;
+  color: #d0d6db;
+  background-color: var(--default-bg-2);
+}
+.form-control.login_form{
+  color:  #495057;
   background-color: #fff;
 }
-
+.form-control.login_form:focus{
+  color:  #495057;
+  background-color: #fff;
+  border-color: var(--default-text-1);
+}
+.form-control.login_form::placeholder{
+  color:  #6c757d;
+}
 .form-control-file,
 .form-control-range {
   display: block;
@@ -6673,6 +6683,7 @@ a.close.disabled {
   border-bottom: 1px solid #dee2e6;
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem;
+  background: var(--default-bg-2);
 }
 
 .modal-header .close {
@@ -6691,6 +6702,7 @@ a.close.disabled {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1rem;
+  background: var(--default-bg-2);
 }
 
 .modal-footer {
@@ -6728,7 +6740,7 @@ a.close.disabled {
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 500px;
-    margin: 1.75rem auto;
+    margin: 1.75rem 20px;
   }
   .modal-dialog-scrollable {
     max-height: calc(100% - 3.5rem);
