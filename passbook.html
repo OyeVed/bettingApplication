@@ -36,7 +36,8 @@
             <!-- User Menu-->
             <li><a class="app-nav__item" style="font-size: 15px;" href="#"><span
                         style="border: 1px solid white;padding: 3px;border-radius: 5px;"><img height="17px"
-                            style="margin-top:-3px;" src="./assets/shapes/et_wallet.svg" alt="">&nbsp;50</span></a>
+                            style="margin-top:-3px;" src="./assets/shapes/et_wallet.svg" alt="">&nbsp;<span
+                            id="wallet_amount">0</span></span></a>
             </li>
         </ul>
     </header>
@@ -145,6 +146,7 @@
             usernumber.innerText = cookieData?.user_phonenumber
         }
         window.onload = function () {
+            updateWallet()
             startLoader()
             axios.get('/matkaApplicaton/backend/home/').then((response) => {
                 endLoader()

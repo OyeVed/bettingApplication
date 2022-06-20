@@ -14,8 +14,7 @@ function authenticate() {
     location.href = "index.html";
   }
   let cookieData = getCookie("jwt");
-  if(!cookieData?.user_phonenumber)
-  {
+  if (!cookieData?.user_phonenumber) {
     localStorage.setItem("isLoggedIn", "false");
     location.href = "index.html";
   }
@@ -36,7 +35,7 @@ function navigate(path) {
 }
 // baseURL: `/bettingApplication/backend/`,
 const axiosInstance = axios.create({
-  baseURL: `/backend/`,
+  baseURL: `/bettingApplication/backend/`,
   credentials: "include",
   withCredentials: true,
 });
@@ -180,4 +179,44 @@ const getDateInWord = (month) => {
     default:
       break;
   }
+};
+
+const updateWallet = () => {
+  let wallet_price = localStorage.getItem("vcds");
+  if (wallet_price) {
+    document.getElementById("wallet_amount").innerHTML = wallet_price;
+  }
+  axiosInstance.get("wallet_balance").then(
+    (response) => {
+      console.log(response);
+      if (response?.status === 200) {
+        localStorage.setItem("vcds", response.data?.msg);
+        document.getElementById("wallet_amount").innerHTML = response.data?.msg;
+      } else {
+        $.notify(
+          {
+            title: "",
+            message: response.data?.msg,
+            icon: "fa fa-times",
+          },
+          {
+            type: "danger",
+          }
+        );
+      }
+    },
+    (error) => {
+      console.log("error", error);
+      $.notify(
+        {
+          title: "",
+          message: `Something went wrong! Please try again.`,
+          icon: "fa fa-times",
+        },
+        {
+          type: "danger",
+        }
+      );
+    }
+  );
 };
