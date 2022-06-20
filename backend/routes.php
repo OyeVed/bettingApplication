@@ -10,6 +10,9 @@ $router->endpoint('reset_password', './views/reset_password', ['POST'], FALSE, [
 $router->endpoint('middleware', './middleware.php', ['POST'], FALSE, []);
 $router->endpoint('image_upload', './views/image_upload', ['POST'], FALSE, []);
 
+//add upi_id
+
+$router->endpoint('save_upi_id', './views/save_upi_id', ['POST'], FALSE, ['upi_id']);
 
 //home route
 $router->endpoint('home', './views/home', ['GET'], FALSE, []);
