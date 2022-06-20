@@ -33,7 +33,7 @@ if(auth($token)){
     if($query->execute()){
         $bid_history = $query->fetchAll(PDO::FETCH_OBJ);
         foreach($bid_history as $bet){
-            $total_bid_amount =+ $bet->points;
+            $total_bid_amount = $total_bid_amount+ $bet->points;
         }
         $status = 200;
         $response = [

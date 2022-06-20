@@ -21,6 +21,7 @@ $token = $_COOKIE["user_jwt"];
 // checking is the user authorized 
 if(auth($token)){
     //Total deposit on a particular day
+    $total_deposit_amount = 0;
     $transaction_type = "deposit";
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
@@ -32,9 +33,14 @@ if(auth($token)){
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
     if($query->execute()){
         $deposit_history = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach($deposit_history as $deposit){
+            $total_deposit_amount = $total_deposit_amount + $deposit->transaction_amount;
+        }
         $status = 200;
         $response = [
-            "msg" => $deposit_history
+            "msg" => "Deposit history fetched successfully",
+            "total_deposit_amount" => $total_deposit_amount,
+            "deposit_history" => $deposit_history
         ];
     }else{
         $status = 203;

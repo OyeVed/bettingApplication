@@ -34,7 +34,7 @@ if(auth($token)){
     if($query->execute()){
         $withdrawal_history = $query->fetchAll(PDO::FETCH_OBJ);
         foreach($withdrawal_history as $withdraw){
-            $total_withdrawal_amount =+ $withdraw->transaction_amount;
+            $total_withdrawal_amount = $total_withdrawal_amount + $withdraw->transaction_amount;
         }
         $status = 200;
         $response = [
