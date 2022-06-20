@@ -127,6 +127,19 @@ function convertTime(time) {
   });
 }
 
+function convertDateAndTime(stamp) {
+  let day_now = new Date(stamp).getDate();
+  let month_now = new Date(stamp).getMonth();
+  let month_in_word = getDateInWord(month_now+1);
+  let time_now = new Date(stamp).toLocaleTimeString("en-US", {
+    timeZone: "UTC",
+    hour12: true,
+    hour: "numeric",
+    minute: "numeric",
+  });
+  return `${day_now} ${month_in_word}, ${time_now}`;
+}
+
 function calculateTimeRemain(time) {
   var hourDiff =
     new Date("01/01/2007 " + time).getHours() - new Date().getHours();
@@ -188,10 +201,10 @@ const updateWallet = () => {
   }
   axiosInstance.get("wallet_balance").then(
     (response) => {
-      console.log(response);
       if (response?.status === 200) {
-        localStorage.setItem("vcds", response.data?.msg);
-        document.getElementById("wallet_amount").innerHTML = response.data?.msg;
+        localStorage.setItem("vcds", response.data?.wallet_balance);
+        document.getElementById("wallet_amount").innerHTML =
+          response.data?.wallet_balance;
       } else {
         $.notify(
           {

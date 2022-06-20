@@ -210,7 +210,7 @@
                             style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
                             <div>
                                 <h6>${element?.transaction_name}</h6>
-                                <small>20 Apr, 12:39 PM</small>
+                                <small>${convertDateAndTime(element?.created_at)}</small>
                             </div>
                             <div>
                                 <p class="float-right"><b>+ ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
@@ -231,7 +231,7 @@
                             style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
                             <div>
                                 <h6>${element?.transaction_name}</h6>
-                                <small>20 Apr, 12:39 PM</small>
+                                <small>${convertDateAndTime(element?.created_at)}</small>
                             </div>
                             <div>
                                 <p class="float-right"><b>- ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
