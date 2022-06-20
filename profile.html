@@ -107,52 +107,32 @@
                 <input type="text" name="name" id="name_id" placeholder="Name">
                 <input type="number" name="phone_number" id="phone_number_id" placeholder="Phone Number">
                 <input type="email" name="email" id="email_id" placeholder="Email">
-                <input type="text" name="upi" id="upi_id" placeholder="UPI Id">
                 <div class="btnWrapper">
                     <button type="button" onclick="saveProfile()">Save</button>
                 </div>
             </form>
         </div>
-        <!-- <div class="accordion-item">
+        <div class="accordion-item">
             <header class="item-header">
                 <h2 class="item-question">
-                    Bank Details
+                    UPI Details
                 </h2>
                 <div class="item-icon">
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </div>
             </header>
             <div class="item-content">
-                <p class="text-center">Bank Account <sup class="text-danger">*</sup> </p>
-                <div class="formdata">
-                    <label for="ano">Account Number</label>
-                    <input type="password" name="" id="">
-
-                    <label for="reano">Re-enter Account Number</label>
-                    <input type="password" name="" id="">
-
-                    <label for="ifsc">IFSC Code</label>
-                    <input type="password" name="" id="">
-
-                    <label for="rname">Recepient's Name</label>
-                    <input type="text" name="" id="">
-
-                    <div class="btnWrapper">
-                        <button>Continue</button>
-                    </div>
-
-                </div>
                 <p class="text-center">UPI</p>
                 <div class="formdata">
-                    <input type="password" name="" id="" placeholder="Enter UPI Id">
+                    <input type="text" name="" id="upi_id" placeholder="Enter UPI Id">
 
                     <div class="btnWrapper">
-                        <button>Continue</button>
+                        <button onclick="saveUPI()">Save</button>
                     </div>
 
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="accordion-item">
             <header class="item-header">
                 <h2 class="item-question">
@@ -204,9 +184,12 @@
                     console.log(response)
                     if (response.status === 200) {
                         let dataSet = response?.data?.user
-                        document.getElementById('name_id').value = dataSet?.full_name
-                        document.getElementById('phone_number_id').value = dataSet?.phone_number
-                        document.getElementById('email_id').value = dataSet?.email
+                        document.getElementById('name_id').value = dataSet?.user_fullname
+                        document.getElementById('phone_number_id').value = dataSet?.user_phonenumber
+                        document.getElementById('email_id').value = dataSet?.user_email
+                        if (dataSet?.upi_id) {
+                            document.getElementById('upi_id').value = dataSet?.upi_id
+                        }
                     } else {
                         $.notify({
                             title: "",
@@ -228,6 +211,64 @@
                     });
                 })
             }
+        }
+        function saveUPI(){
+            startLoader()
+            let upi_id = document.getElementById('upi_id').value;
+            if (upi_id === "") {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Please enter an upi id.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            } else if (!(/^[\w.-]+@[\w.-]+$/.test(upi_id))) {
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Invalid UPI id.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                return
+            }
+            axiosInstance.post('save_upi_id', {
+                "upi_id": upi_id,
+            }).then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success",
+                    });
+                } else {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
         }
         function saveProfile() {
             startLoader()
