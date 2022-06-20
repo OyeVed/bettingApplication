@@ -102,12 +102,18 @@
             <img src="./assets/images/passbook.png" alt="">
             <div style="border-color: white;">
                 <p>Total Balance</p>
-                <p class="money">₹100</p>
+                <p class="money">₹<span id="passbook_id">0</span></p>
+                <script>
+                    let wallet_balanceN = localStorage.getItem('vcds')
+                    if (wallet_balanceN) {
+                        document.getElementById('passbook_id').innerHTML = wallet_balanceN
+                    }
+                </script>
             </div>
         </div>
         <div class="row d-flex justify-content-around">
             <div class="col-5 d-flex align-items-center p-0"
-                style="border-radius: 6px; height: 50px;color:black;background:white">
+                style="border-radius: 6px; height: 50px;color:black;background:white" data-toggle="modal" data-target="#add_money_modal">
                 <div class="d-flex justify-content-center align-items-center "
                     style="background:#1AC16A;height: 100%;width: 42px;border-radius: 6px 0px 0px 6px;">
                     <img src="./assets/images/passbook-add.png" alt="">
@@ -129,6 +135,41 @@
                 </div>
             </div>
         </div>
+        <div class="transaction_main_container">
+            <h4>Transaction Details</h4>
+            <div class="transaction_content_container" style="height: calc(100vh - 310px);" id="transaction_container">
+
+            </div>
+        </div>
+        <!-- add money modal modal -->
+        <div class="modal fade" id="add_money_modal" role="dialog">
+            <div class="modal-dialog  modal-dialog-centered ">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Money<br />
+                            <p style="text-align:left; font-size:13px;font-weight:500;">
+                            <p>
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="uploadPreAssessmentId">
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Amount</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" placeholder="-" id="add_game_name" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                </div>
+                            </div>
+                            <div class="modal-footer " style="justify-content: center;margin-top:20px;">
+                                <button class="btn btn-success" type="button" onclick="addMoney()">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -148,17 +189,80 @@
         window.onload = function () {
             updateWallet()
             startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
+            axiosInstance.get('statement').then((response) => {
                 endLoader()
                 if (response.status === 200) {
+                    let transactionList = response.data.msg
+                    let transaction_container = document.getElementById('transaction_container')
+                    transaction_container.innerHTML = ''
+                    for (let i = 0; i < transactionList.length; i++) {
+                        const element = transactionList[i];
+                        if (element?.transaction_type === "deposit") {
+                            transaction_container.innerHTML = transaction_container.innerHTML +
+                                `
+                        <div class="transaction_card">
+                        <div class="transaction_avatar_div withdrawal_avatar" style="background-color: #0FD16B;">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </div>
+                        <div
+                            style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                            <div>
+                                <h6>${element?.transaction_name}</h6>
+                                <small>20 Apr, 12:39 PM</small>
+                            </div>
+                            <div>
+                                <p class="float-right"><b>+ ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                        class="ml-1" height="14px" alt=""></p>
+                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                            </div>
+                        </div>
+                        </div>
+                        `
+                        } else {
+                            transaction_container.innerHTML = transaction_container.innerHTML +
+                                `
+                        <div class="transaction_card">
+                        <div class="transaction_avatar_div withdrawal_avatar">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </div>
+                        <div
+                            style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                            <div>
+                                <h6>${element?.transaction_name}</h6>
+                                <small>20 Apr, 12:39 PM</small>
+                            </div>
+                            <div>
+                                <p class="float-right"><b>- ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                        class="ml-1" height="14px" alt=""></p>
+                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                            </div>
+                        </div>
+                        </div>
+                        `
+                        }
+                    }
+
+
                 } else {
-                    // showAlert('danger', `status ${response.status}`)
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
                 }
                 console.log(response)
             }, (error) => {
                 console.log('error', error);
                 endLoader()
-                showAlert('danger', 'Something went wrong! Please try again.')
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
             })
         }
     </script>
