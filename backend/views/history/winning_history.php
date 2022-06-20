@@ -21,25 +21,31 @@ $token = $_COOKIE["user_jwt"];
 // checking is the user authorized 
 if(auth($token)){
     //Total deposit on a particular day
+    $total_winning_amount = 0;
     $transaction_type = "won";
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     //query
-    $sql = "SELECT transaction_type, transaction_name, transaction_amount, created_at FROM transaction_details 
-    WHERE user_id=:user_id ORDER BY transaction_id desc ";
+    $sql = "SELECT transaction_type, transaction_name, transaction_amount, amount_in_wallet, created_at FROM transaction_details 
+    WHERE transaction_type = :transaction_type AND user_id=:user_id ORDER BY transaction_id desc ";
     $query = $con -> prepare($sql);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
+    $query->bindParam(':transaction_type', $transaction_type, PDO::PARAM_STR);
     if($query->execute()){
-        $statement = $query->fetchAll(PDO::FETCH_OBJ);
+        $winning_history = $query->fetchAll(PDO::FETCH_OBJ);
+        foreach($winning_history as $win){
+            $total_winning_amount = $total_winning_amount + $win->transaction_amount;
+        }
         $status = 200;
         $response = [
-            "msg" => "Statement fetched successfully",
-            "statement" => $statement
+            "msg" => "Winning history fetched successfully",
+            "total_winning_amount" => $total_winning_amount,
+            "winning_history" => $winning_history
         ];
     }else{
         $status = 203;
         $response = [
-            "msg" => "Can't fetch user statement."
+            "msg" => "Can't fetch user winning history."
         ];
     }
 }
