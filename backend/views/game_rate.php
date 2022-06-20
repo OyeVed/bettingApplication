@@ -4,7 +4,7 @@ require("dbcon.php");
 require("middleware.php");
 
 // getting token from cookie
-$token = $_COOKIE["jwt"];
+$token = $_COOKIE["user_jwt"];
 
 // checking is the user authorized 
 if(auth($token)){

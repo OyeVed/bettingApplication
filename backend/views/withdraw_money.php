@@ -8,7 +8,7 @@ require('middleware.php');
 $_POST = json_decode(file_get_contents("php://input"), true);
 
 // getting token from cookie
-$token = $_COOKIE["jwt"];
+$token = $_COOKIE["user_jwt"];
 
 // checking is the user authorized 
 if(auth($token)){

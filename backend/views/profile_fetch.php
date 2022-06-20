@@ -16,13 +16,12 @@ $dotenv->load();
 $SECRET_KEY = $_ENV['SECRET_KEY'];
 
 // getting token from cookie
-$token = $_COOKIE["jwt"];
+$token = $_COOKIE["user_jwt"];
 
 // checking is the user authorized 
 if(auth($token)){
 
     //extracting payload from jwt
-    // $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     $sql = "SELECT user_phonenumber, user_email, user_fullname, upi_id, profile_image FROM user_table WHERE user_id=:user_id";

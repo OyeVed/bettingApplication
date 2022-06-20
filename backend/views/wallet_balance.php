@@ -16,12 +16,11 @@ $dotenv->load();
 $SECRET_KEY = $_ENV['SECRET_KEY'];
 
 // getting token from cookie
-$token = $_COOKIE["jwt"];
+$token = $_COOKIE["user_jwt"];
 
 // checking is the user authorized 
 if(auth($token)){
     //Total deposit on a particular day
-    // $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
     
     try{
