@@ -102,7 +102,7 @@
             <img src="./assets/images/bid_history_top.png" alt="">
             <div>
                 <p>Total Bidding Amount</p>
-                <p class="money">₹100</p>
+                <p class="money" id="total_bid_amount">₹0</p>
             </div>
         </div>
         <div class="transaction_main_container">
@@ -134,7 +134,8 @@
             axiosInstance.get('bid_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    let transactionList = response.data.msg
+                    document.getElementById('total_bid_amount').innerHTML = response?.data?.total_bid_amount
+                    let transactionList = response.data.bid_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {
@@ -147,8 +148,8 @@
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
                         <div>
-                            <h6>${transactionList[i]?.number} - ₹${transactionList[i]?.number}</h6>
-                            <small>${transactionList[i]?.game_name}-${transactionList[i]?.game_type}</small>
+                            <h6>${transactionList[i]?.game_name} - ${transactionList[i]?.game_type} - ${transactionList[i]?.number} - ₹${transactionList[i]?.number}</h6>
+                            <small>${transactionList[i]?.market_fullname} - ${convertDateAndTime(transactionList[i]?.created_at)}</small>
                         </div>
                         <div>
                             <p class="float-right mt-2"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
