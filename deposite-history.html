@@ -101,8 +101,8 @@
     <main class="app-content">
         <div class="transaction_list_top_section d-flex justify-content-around align-items-center ">
             <div>
-                <p>Total Bidding Amount</p>
-                <p class="money">₹100</p>
+                <p>Total Deposite Amount</p>
+                <p class="money" id="total_deposite_amount">₹0</p>
             </div>
             <img src="./assets/images/deposit_top.png" alt="">
         </div>
@@ -135,7 +135,8 @@
             axiosInstance.get('deposit_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    let transactionList = response.data.msg
+                    document.getElementById('total_deposite_amount').innerHTML = response?.data?.total_deposit_amount
+                    let transactionList = response.data.deposit_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {

@@ -101,7 +101,7 @@
         <div class="transaction_list_top_section d-flex justify-content-around align-items-center ">
             <div>
                 <p>Total Withdrawal Amount</p>
-                <p class="money">₹100</p>
+                <p class="money" id="total_withdrawal_amount">₹0</p>
             </div>
             <img src="./assets/images/withdrawal_top.png" alt="">
         </div>
@@ -133,7 +133,8 @@
             axiosInstance.get('withdrawal_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    let transactionList = response.data.msg
+                    document.getElementById('total_withdrawal_amount').innerHTML = response?.data?.total_withdrawal_amount
+                    let transactionList = response.data.withdrawal_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {

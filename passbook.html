@@ -194,7 +194,7 @@
             axiosInstance.get('statement').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    let transactionList = response.data.msg
+                    let transactionList = response.data.statement
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {
@@ -203,7 +203,7 @@
                             transaction_container.innerHTML = transaction_container.innerHTML +
                                 `
                         <div class="transaction_card">
-                        <div class="transaction_avatar_div withdrawal_avatar" style="background-color: #0FD16B;">
+                        <div class="transaction_avatar_div deposite_avatar">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                         </div>
                         <div
@@ -215,12 +215,12 @@
                             <div>
                                 <p class="float-right"><b>+ ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
                                         class="ml-1" height="14px" alt=""></p>
-                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : ${element?.amount_in_wallet}</p>
                             </div>
                         </div>
                         </div>
                         `
-                        } else {
+                        } else if (element?.transaction_type === "withdrawal") {
                             transaction_container.innerHTML = transaction_container.innerHTML +
                                 `
                         <div class="transaction_card">
@@ -236,7 +236,28 @@
                             <div>
                                 <p class="float-right"><b>- ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
                                         class="ml-1" height="14px" alt=""></p>
-                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : 654</p>
+                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : ${element?.amount_in_wallet}</p>
+                            </div>
+                        </div>
+                        </div>
+                        `
+                        } else if (element?.transaction_type === "won") {
+                            transaction_container.innerHTML = transaction_container.innerHTML +
+                                `
+                        <div class="transaction_card">
+                        <div class="transaction_avatar_div winning_avatar">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </div>
+                        <div
+                            style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
+                            <div>
+                                <h6>${element?.transaction_name}</h6>
+                                <small>${convertDateAndTime(element?.created_at)}</small>
+                            </div>
+                            <div>
+                                <p class="float-right"><b>- ₹${element?.transaction_amount}</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                                        class="ml-1" height="14px" alt=""></p>
+                                <p style="margin-top: -8px;font-size: 11px;font-weight: 500;">Balance : ${element?.amount_in_wallet}</p>
                             </div>
                         </div>
                         </div>
