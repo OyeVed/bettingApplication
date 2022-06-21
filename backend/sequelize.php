@@ -15,10 +15,10 @@ $database_tables = array(
         `account_number` VARCHAR(255),
         `ifsc_code` VARCHAR(255),
         `profile_image` BLOB,
+        `referral_code` VARCHAR(255) UNIQUE,
+        `referral_by` VARCHAR(255) ,
         `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        `created_by` INT(11),
-        `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-        `updated_by` INT(11)
+        `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP
     )",
     "
     CREATE TABLE IF NOT EXISTS `market_table` (

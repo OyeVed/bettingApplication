@@ -47,10 +47,10 @@ if($query->rowCount() === 0){
         $serverName = "http://localhost/matkaApplicaton/backend/login";     // Retrieved from filtered POST data
 
         $data = [
-            'iat'  => $issuedAt->getTimestamp(),         // Issued at: time when the token was generated
-            'iss'  => $serverName,                       // Issuer
-            'nbf'  => $issuedAt->getTimestamp(),         // Not before
-            'exp'  => $expire,                           // Expire
+            'iat'  => $issuedAt->getTimestamp(),         
+            'iss'  => $serverName,                      
+            'nbf'  => $issuedAt->getTimestamp(),         
+            'exp'  => $expire,                           
             'user_phonenumber' => $user->user_phonenumber,       //User name
             'user_id' =>  $user->user_id,                 // User id
             'name' => $user->user_fullname               // User name             
@@ -66,7 +66,8 @@ if($query->rowCount() === 0){
 
         $status = 200;
         $response = [
-            "msg" => "User authenticated successfully"
+            "msg" => "User authenticated successfully",
+            "referral_code" => $user->referral_code
         ];
 
     }else{
