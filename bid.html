@@ -26,6 +26,11 @@
         <div class="loader"></div>
         <!-- <p>Uploading music file, please be patient.</p> -->
     </div>
+    <script>
+        let spList = [120, 123, 124, 125, 126, 127, 128, 129, 130, 134, 135, 136, 137, 138, 139, 140, 145, 146, 147, 148, 149, 150, 156, 157, 158, 159, 160, 167, 168, 169, 170, 178, 179, 180, 189, 190, 230, 234, 235, 236, 237, 238, 239, 240, 245, 246, 247, 248, 249, 250, 256, 257, 258, 259, 260, 267, 268, 269, 270, 278, 279, 280, 289, 290, 340, 345, 346, 347, 348, 349, 350, 356, 357, 358, 359, 360, 367, 368, 369, 370, 378, 379, 380, 389, 390, 450, 456, 457, 458, 459, 460, 467, 468, 469, 470, 478, 479, 480, 489, 490, 560, 567, 568, 569, 570, 578, 579, 580, 589, 590, 670, 678, 679, 680, 689, 690, 780, 789, 790, 890]
+        let dpList = [100, 110, 112, 113, 114, 115, 116, 117, 118, 119, 122, 133, 144, 155, 166, 177, 188, 199, 200, 220, 223, 224, 225, 226, 227, 228, 229, 233, 244, 255, 266, 277, 288, 299, 300, 330, 334, 335, 336, 337, 338, 339, 344, 355, 366, 377, 388, 399, 400, 440, 445, 446, 447, 448, 449, 455, 466, 477, 488, 499, 500, 550, 555, 556, 557, 558, 559, 566, 577, 588, 599, 600, 660, 667, 668, 669, 677, 688, 699, 700, 770, 778, 779, 788, 799, 800, 880, 889, 899, 900, 990]
+        let tpList = [000, 111, 333, 222, 444, 555, 666, 777, 888, 999]
+    </script>
     <!-- END: -->
     <!-- Navbar-->
     <header class="app-header"><a class="app-header__logo" href="#">Arena</a>
@@ -135,9 +140,11 @@
             </div>
         </div>
         <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between position-relative">
                 <span id="digit_input_field_id"></span>
                 <input type="number" placeholder="Enter Point" id="bid_point_input">
+                <div class="bid_dropdown" id="bid_dropdown_id">
+                </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
                 <button onclick="handleProceedClick()">PROCEED</button>
@@ -152,7 +159,7 @@
                     oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
             } else if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == 'FS') {
                 document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="3"
-                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');updateDropDown(this.value)" onfocusout="handleCloseDropdown()"  id="input_field_digit" />`
             }
             var bidList = [];
         </script>
@@ -170,6 +177,29 @@
             <button class="bid_play_btn" id="bid_play" onclick="handlePlay()">PLAY</button>
         </div>
         <script>
+            function updateDropDown(value) {
+                let bid_dropdown_id = document.getElementById('bid_dropdown_id')
+                bid_dropdown_id.style.display = 'flex'
+                let filteredArray = []
+                if (currentBidType === 'SP') {
+                    filteredArray = spList?.filter(v => `${v}`?.includes(value))
+                } else if (currentBidType === 'DP') {
+                    filteredArray = dpList?.filter(v => `${v}`?.includes(value))
+                } else if (currentBidType === "TP") {
+                    filteredArray = tpList?.filter(v => `${v}`?.includes(value))
+                }
+                bid_dropdown_id.innerHTML = ''
+                for (let i = 0; i < filteredArray.length; i++) {
+                    const element = filteredArray[i];
+                    bid_dropdown_id.innerHTML = bid_dropdown_id.innerHTML +
+                        `<small onclick="document.getElementById('input_field_digit').value=${element};" >${element}</small>`
+                }
+            }
+            function handleCloseDropdown() {
+                setTimeout(() => {
+                    document.getElementById('bid_dropdown_id').style.display = 'none'
+                }, 200);
+            }
             var bidTable = document.getElementById("bidTable_id");
             createBidTable()
             function createBidTable() {
@@ -318,6 +348,8 @@
             }
         }, 1000);
         function handlePlay() {
+            console.log(document.getElementById('totalBidValue').innerHTML)
+            return
             startLoader()
             let formatedBidType = 'Single Digit'
             switch (currentBidType) {
@@ -362,13 +394,18 @@
                         location.href = "home.html"
                     }, 1500);
                 } else {
-                    $.notify({
-                        title: "",
-                        message: response.data?.msg,
-                        icon: 'fa fa-times'
-                    }, {
-                        type: "danger"
-                    });
+                    if (response?.data?.is_logged_out) {
+                        localStorage.setItem("isLoggedIn", "false");
+                        location.href = "index.html";
+                    } else {
+                        $.notify({
+                            title: "",
+                            message: response.data?.msg,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger",
+                        });
+                    }
                 }
                 console.log(response)
             }, (error) => {

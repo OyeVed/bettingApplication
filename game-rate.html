@@ -133,13 +133,18 @@
                             `<div class="game_rate_card"><p>${gameRateList[i].game_name.toUpperCase()}</p><p>₹${gameRateList[i].game_rate}</p></div>`;
                     }
                 } else {
-                    $.notify({
-                        title: "",
-                        message: response.data?.msg,
-                        icon: 'fa fa-times'
-                    }, {
-                        type: "danger",
-                    });
+                    if (response?.data?.is_logged_out) {
+                        localStorage.setItem("isLoggedIn", "false");
+                        location.href = "index.html";
+                    } else {
+                        $.notify({
+                            title: "",
+                            message: response.data?.msg,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger",
+                        });
+                    }
                 }
             }, (error) => {
                 console.log('error', error);

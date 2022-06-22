@@ -37,8 +37,8 @@
             <form class="login-form">
                 <div class="form-group">
                     <label class="control-label">PHONE</label>
-                    <input class="form-control login_form" maxlength="10" id="login_username" type="text" placeholder="Phone"
-                        autofocus oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                    <input class="form-control login_form" maxlength="10" id="login_username" type="text"
+                        placeholder="Phone" autofocus oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                 </div>
                 <div class="form-group">
                     <label class="control-label">PASSWORD</label>
@@ -109,7 +109,7 @@
             ).then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    localStorage.setItem('referral_code',response?.data?.referral_code)
+                    localStorage.setItem('referral_code', response?.data?.referral_code)
                     localStorage.setItem('isLoggedIn', 'true')
                     location.href = "home.html";
                 } else {

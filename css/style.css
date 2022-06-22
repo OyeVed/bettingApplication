@@ -587,6 +587,24 @@
   font-weight: bold;
   filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.4));
 }
+.bid_dropdown{
+  position: absolute;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  max-height: 70px;
+  overflow: auto;
+  left: 0;
+  top: 40px;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+.bid_dropdown small{
+  padding: 6px 6px 6px 9px;
+  font-size: 14px;
+}
 .bid_list_table_container {
   background-color: var(--default-bg-3);
   border-radius: 6px;

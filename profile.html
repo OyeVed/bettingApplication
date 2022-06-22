@@ -191,13 +191,18 @@
                             document.getElementById('upi_id').value = dataSet?.upi_id
                         }
                     } else {
-                        $.notify({
-                            title: "",
-                            message: response.data?.msg,
-                            icon: 'fa fa-times'
-                        }, {
-                            type: "danger",
-                        });
+                        if (response?.data?.is_logged_out) {
+                            localStorage.setItem("isLoggedIn", "false");
+                            location.href = "index.html";
+                        } else {
+                            $.notify({
+                                title: "",
+                                message: response.data?.msg,
+                                icon: 'fa fa-times'
+                            }, {
+                                type: "danger",
+                            });
+                        }
                     }
                 }, (error) => {
                     console.log('error', error);
@@ -212,7 +217,7 @@
                 })
             }
         }
-        function saveUPI(){
+        function saveUPI() {
             startLoader()
             let upi_id = document.getElementById('upi_id').value;
             if (upi_id === "") {
@@ -249,13 +254,23 @@
                         type: "success",
                     });
                 } else {
-                    $.notify({
-                        title: "",
-                        message: response.data?.msg,
-                        icon: 'fa fa-times'
-                    }, {
-                        type: "danger",
-                    });
+                    if (response?.data?.is_logged_out) {
+                        localStorage.setItem("isLoggedIn", "false");
+                        location.href = "index.html";
+                    } else {
+                        if (response?.data?.is_logged_out) {
+                            localStorage.setItem("isLoggedIn", "false");
+                            location.href = "index.html";
+                        } else {
+                            $.notify({
+                                title: "",
+                                message: response.data?.msg,
+                                icon: 'fa fa-times'
+                            }, {
+                                type: "danger",
+                            });
+                        }
+                    }
                 }
                 console.log(response)
             }, (error) => {
@@ -311,13 +326,23 @@
                         type: "success",
                     });
                 } else {
-                    $.notify({
-                        title: "",
-                        message: response.data?.msg,
-                        icon: 'fa fa-times'
-                    }, {
-                        type: "danger",
-                    });
+                    if (response?.data?.is_logged_out) {
+                        localStorage.setItem("isLoggedIn", "false");
+                        location.href = "index.html";
+                    } else {
+                        if (response?.data?.is_logged_out) {
+                            localStorage.setItem("isLoggedIn", "false");
+                            location.href = "index.html";
+                        } else {
+                            $.notify({
+                                title: "",
+                                message: response.data?.msg,
+                                icon: 'fa fa-times'
+                            }, {
+                                type: "danger",
+                            });
+                        }
+                    }
                 }
                 console.log(response)
             }, (error) => {
@@ -363,13 +388,23 @@
                         type: "success",
                     });
                 } else {
-                    $.notify({
-                        title: "",
-                        message: response.data?.msg,
-                        icon: 'fa fa-times'
-                    }, {
-                        type: "danger",
-                    });
+                    if (response?.data?.is_logged_out) {
+                        localStorage.setItem("isLoggedIn", "false");
+                        location.href = "index.html";
+                    } else {
+                        if (response?.data?.is_logged_out) {
+                            localStorage.setItem("isLoggedIn", "false");
+                            location.href = "index.html";
+                        } else {
+                            $.notify({
+                                title: "",
+                                message: response.data?.msg,
+                                icon: 'fa fa-times'
+                            }, {
+                                type: "danger",
+                            });
+                        }
+                    }
                 }
                 console.log(response)
             }, (error) => {
