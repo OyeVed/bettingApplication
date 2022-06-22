@@ -189,7 +189,10 @@
                                 <input class="form-control login_form" id="amount" type="text" placeholder="amount"
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                             </div>
-                            <button class="btn_primary">Submit</button>
+                            <div class="modal-footer " style="justify-content: center;margin-top:20px;">
+                                <button class="btn btn-success" type="button" onclick="submitWithdrawal()"
+                                    data-dismiss="modal">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -203,6 +206,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <script src="./js/globalFunction.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript">
         authenticate()
         let cookieData = getCookie("user_jwt");
@@ -218,7 +222,7 @@
             axiosInstance.get('statement').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    let transactionList = response.data.statement
+                    let transactionList = response.data.statement?.statement
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
                     for (let i = 0; i < transactionList.length; i++) {
@@ -289,7 +293,61 @@
                         }
                     }
 
-
+                    document.getElementById('upi_id').value = response?.data?.statement?.upi_id[0]?.upi_id
+                } else {
+                    if (response?.data?.is_logged_out) {
+                        localStorage.setItem("isLoggedIn", "false");
+                        location.href = "index.html";
+                    } else {
+                        $.notify({
+                            title: "",
+                            message: response.data?.msg,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger",
+                        });
+                    }
+                }
+                console.log(response)
+            }, (error) => {
+                console.log('error', error);
+                endLoader()
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
+        }
+        function submitWithdrawal() {
+            let withdrawal_amount = document.getElementById('amount').value
+            let upi_id = document.getElementById('upi_id').value
+            if (parseInt(withdrawal_amount) < 100) {
+                $.notify({
+                    title: "",
+                    message: 'Minimun withdrawal amount Rs.100',
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger",
+                });
+                return
+            }
+            startLoader()
+            axiosInstance.post('withdraw_money', {
+                "withdrawal_amount": parseInt(withdrawal_amount),
+                "upi_id": upi_id
+            }).then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success",
+                    });
                 } else {
                     if (response?.data?.is_logged_out) {
                         localStorage.setItem("isLoggedIn", "false");

@@ -210,7 +210,6 @@ const updateWallet = () => {
   }
   axiosInstance.get("wallet_balance").then(
     (response) => {
-      console.log(response)
       if (response?.status === 200) {
         localStorage.setItem("vcds", response.data?.wallet_balance);
         document.getElementById("wallet_amount").innerHTML =
