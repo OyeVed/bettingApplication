@@ -40,5 +40,5 @@ $router->endpoint('statement', './views/history/statement', ['GET'], FALSE, []);
 
 //payment routes add_money, withdraw_money and wallet_balance
 $router->endpoint('add_money', './views/add_money.php', ['POST'], FALSE, ['user_id']);
-$router->endpoint('withdraw_money', './views/withdraw_money.php', ['POST'], FALSE, ['user_id']);
+$router->endpoint('withdraw_money', './views/withdraw_money.php', ['POST'], FALSE, ['withdrawal_amount', 'upi_id']);
 $router->endpoint('wallet_balance', './views/wallet_balance', ['GET'], FALSE, []);
