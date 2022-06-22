@@ -22,6 +22,7 @@ $token = $_COOKIE["user_jwt"];
 if(auth($token)){
     //Total deposit on a particular day
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
+    $available_amount = 0;
 
     //calculating funds available
     $query = $con->prepare(" SELECT amount_in_wallet FROM transaction_details
@@ -32,12 +33,19 @@ if(auth($token)){
         while($row = $query->fetch()) {
             $available_amount = $row['amount_in_wallet'];
         }
-        $wallet_balance = $available_amount;
-        $status = 200;
-        $response = [
-            "msg" => "Wallet balance fetched successfully",
-            "wallet_balance" => $wallet_balance
-        ];
+        if($available_amount){
+            $status = 200;
+            $response = [
+                "msg" => "Wallet balance fetched successfully",
+                "wallet_balance" => $available_amount
+            ];
+        }else{
+            $status = 200;
+            $response = [
+                "msg" => "No transactions found for user"
+            ];
+        }
+        
     }else{
         $status = 203;
         $response = [
