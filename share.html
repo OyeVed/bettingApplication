@@ -115,10 +115,11 @@
                 <small>Earn cash<br />rewards</small>
             </div>
             <h5 class="mt-3">YOUR REFERRAL CODE</h5>
-            <button class="refere_code_container " onclick="copyDivToClipboard()"> <span id="copy_id_1">AB768TYJ</span>
+            <button class="refere_code_container " onclick="copyDivToClipboard()"> <span id="copy_id_1"></span>
                 <img src="./assets/shapes/copybutton.png" height="21px" alt=""></button>
             <button class="btn btn-primary mt-4" style="border-radius: 98px;width: 153px;
-                height: 37px;font-size: 16px;"><i class="fa fa-share-alt" aria-hidden="true"></i>Share</button>
+                height: 37px;font-size: 16px;" onclick="shareLink()"><i class="fa fa-share-alt"
+                    aria-hidden="true"></i>Share</button>
             <a href="" style="color: 
             #2396D7;font-size: 12px;font-weight: bold;" class="mt-2  ">T & C Applied</a>
         </div>
@@ -140,18 +141,27 @@
         }
         window.onload = function () {
             updateWallet()
-            startLoader()
-            axios.get('/matkaApplicaton/backend/home/').then((response) => {
-                endLoader()
-                if (response.status === 200) {
-                } else {
-                    showAlert('danger', `status ${response.status}`)
-                }
-                console.log(response)
-            }, (error) => {
-                console.log('error', error);
-                endLoader()
-            })
+        }
+    </script>
+    <script>
+        document.getElementById('copy_id_1').innerHTML = localStorage.getItem('referral_code')
+        const shareData = {
+            title: 'Arena',
+            text: 'Earn with us.',
+            url: `${window?.location?.origin}/signup.html?a=${localStorage.getItem('referral_code')}`
+        }
+        async function shareLink() {
+            try {
+                await navigator.share(shareData)
+            } catch (err) {
+                $.notify({
+                    title: "",
+                    message: `Unable to generate link!`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            }
         }
     </script>
 </body>

@@ -109,6 +109,7 @@
             ).then((response) => {
                 endLoader()
                 if (response.status === 200) {
+                    localStorage.setItem('referral_code',response?.data?.referral_code)
                     localStorage.setItem('isLoggedIn', 'true')
                     location.href = "home.html";
                 } else {

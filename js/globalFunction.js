@@ -27,7 +27,16 @@ function copyDivToClipboard() {
   window.getSelection().addRange(range); // to select text
   document.execCommand("copy");
   window.getSelection().removeAllRanges(); // to deselect
-  showAlert("success", "Copied!");
+  $.notify(
+    {
+      title: "",
+      message: "Copied!",
+      icon: "fa fa-check",
+    },
+    {
+      type: "success",
+    }
+  );
 }
 
 function navigate(path) {
@@ -130,7 +139,7 @@ function convertTime(time) {
 function convertDateAndTime(stamp) {
   let day_now = new Date(stamp).getDate();
   let month_now = new Date(stamp).getMonth();
-  let month_in_word = getDateInWord(month_now+1);
+  let month_in_word = getDateInWord(month_now + 1);
   let time_now = new Date(stamp).toLocaleTimeString("en-US", {
     timeZone: "UTC",
     hour12: true,
@@ -201,6 +210,7 @@ const updateWallet = () => {
   }
   axiosInstance.get("wallet_balance").then(
     (response) => {
+      console.log(response)
       if (response?.status === 200) {
         localStorage.setItem("vcds", response.data?.wallet_balance);
         document.getElementById("wallet_amount").innerHTML =

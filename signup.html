@@ -94,6 +94,7 @@
             let email = document.getElementById('signup_email').value
             let password = document.getElementById('signup_password').value
             let c_password = document.getElementById('signup_c_password').value
+            let referred_by =  new URL(location.href).searchParams.get("a");
             if (phone?.length < 10) {
                 endLoader()
                 $.notify({
@@ -130,7 +131,8 @@
                         "full_name": name,
                         "phone_number": phone,
                         "password": password,
-                        "email": email
+                        "email": email,
+                        "referred_by": referred_by
                     }
                 ).then((response) => {
                     endLoader()
