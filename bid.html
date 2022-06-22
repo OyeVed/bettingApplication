@@ -234,6 +234,17 @@
             function handleProceedClick() {
                 let inputFieldDigit = document.getElementById('input_field_digit')
                 let bidPointInput = document.getElementById('bid_point_input')
+                let checkDuplication = bidList?.filter(bn => bn?.number == parseInt(inputFieldDigit.value))
+                if (checkDuplication?.length > 0) {
+                    $.notify({
+                        title: "",
+                        message: `Digit already used.`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
                 if (inputFieldDigit.value == "") {
                     $.notify({
                         title: "",
@@ -301,7 +312,6 @@
                     points: parseInt(bidPointInput.value),
                     game_type: game_type
                 })
-                console.log(bidList)
                 inputFieldDigit.value = ''
                 bidPointInput.value = ''
                 createBidTable()
