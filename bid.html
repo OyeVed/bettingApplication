@@ -28,7 +28,7 @@
     </div>
     <script>
         let spList = [120, 123, 124, 125, 126, 127, 128, 129, 130, 134, 135, 136, 137, 138, 139, 140, 145, 146, 147, 148, 149, 150, 156, 157, 158, 159, 160, 167, 168, 169, 170, 178, 179, 180, 189, 190, 230, 234, 235, 236, 237, 238, 239, 240, 245, 246, 247, 248, 249, 250, 256, 257, 258, 259, 260, 267, 268, 269, 270, 278, 279, 280, 289, 290, 340, 345, 346, 347, 348, 349, 350, 356, 357, 358, 359, 360, 367, 368, 369, 370, 378, 379, 380, 389, 390, 450, 456, 457, 458, 459, 460, 467, 468, 469, 470, 478, 479, 480, 489, 490, 560, 567, 568, 569, 570, 578, 579, 580, 589, 590, 670, 678, 679, 680, 689, 690, 780, 789, 790, 890]
-        let dpList = [100, 110, 112, 113, 114, 115, 116, 117, 118, 119, 122, 133, 144, 155, 166, 177, 188, 199, 200, 220, 223, 224, 225, 226, 227, 228, 229, 233, 244, 255, 266, 277, 288, 299, 300, 330, 334, 335, 336, 337, 338, 339, 344, 355, 366, 377, 388, 399, 400, 440, 445, 446, 447, 448, 449, 455, 466, 477, 488, 499, 500, 550, 555, 556, 557, 558, 559, 566, 577, 588, 599, 600, 660, 667, 668, 669, 677, 688, 699, 700, 770, 778, 779, 788, 799, 800, 880, 889, 899, 900, 990]
+        let dpList = [100, 110, 112, 113, 114, 115, 116, 117, 118, 119, 122, 133, 144, 155, 166, 177, 188, 199, 200, 220, 223, 224, 225, 226, 227, 228, 229, 233, 244, 255, 266, 277, 288, 299, 300, 330, 334, 335, 336, 337, 338, 339, 344, 355, 366, 377, 388, 399, 400, 440, 445, 446, 447, 448, 449, 455, 466, 477, 488, 499, 500, 550, 556, 557, 558, 559, 566, 577, 588, 599, 600, 660, 667, 668, 669, 677, 688, 699, 700, 770, 778, 779, 788, 799, 800, 880, 889, 899, 900, 990]
         let tpList = [000, 111, 333, 222, 444, 555, 666, 777, 888, 999]
     </script>
     <!-- END: -->
@@ -119,7 +119,7 @@
             }
             document.getElementById('current_bid_type_id').innerHTML = `&nbsp;&nbsp;&nbsp;${gameDetails.market_fullname} - ` + currentBidType
         </script>
-        <div class="d-flex justify-content-between mt-4">
+        <div class="mt-4" style="display: flex;justify-content: space-between;" id="open_close_id">
             <div class="bid_open_close_btn">
                 <div class="form-check ">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
@@ -139,26 +139,85 @@
                 </div>
             </div>
         </div>
-        <div class="bid_input_box mt-4 pt-2 pl-4 pr-4 pb-2">
-            <div class="d-flex justify-content-between position-relative">
+        <div class="bid_input_box mt-3 pt-2 pl-4 pr-4 pb-2" id="bid_inupt_boxs">
+            <div class="d-flex justify-content-between position-relative mb-4" style="color:black;"
+                id="allinput_fields">
                 <span id="digit_input_field_id"></span>
                 <input type="number" placeholder="Enter Point" id="bid_point_input">
                 <div class="bid_dropdown" id="bid_dropdown_id">
                 </div>
             </div>
-            <div class="d-flex justify-content-center mt-3">
+            <div class="d-flex justify-content-center ">
                 <button onclick="handleProceedClick()">PROCEED</button>
             </div>
         </div>
         <script>
+            let bid_inupt_boxs = document.getElementById('bid_inupt_boxs')
+            if (currentBidType == 'HS' || currentBidType == 'FS') {
+                document.getElementById('open_close_id').style.display = "none"
+                bid_inupt_boxs.style.height = '175px'
+            }
+            if (currentBidType == 'HS') {
+                document.getElementById('allinput_fields').className = "position-relative"
+                document.getElementById('allinput_fields').innerHTML =
+                    `
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <label for="" id="hs_digit_label">Open Digit</label>
+                    <input type="text" oninput="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="Enter Digit" id="hs_digit_input" maxlength="1">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1 position-relative">
+                    <label for="" id="hs_panna_label">Close Panna</label>
+                    <span id="digit_input_field_id"></span>
+                    <div class="bid_dropdown" id="bid_dropdown_id" style="right:50px;left:auto;z-index:9999;">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <div style="border-top:2px solid gray; flex-basis:40%;padding-top:10px;">
+                        <small style="color:blue;" onclick="changeHSLabel();" ><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Change</small>
+                    </div>
+                    <input type="number" placeholder="Enter Point" id="bid_point_input">
+                </div>
+                `
+            }
+            if (currentBidType == 'FS') {
+                document.getElementById('allinput_fields').className = "position-relative"
+                document.getElementById('allinput_fields').innerHTML =
+                    `
+                <div class="d-flex justify-content-between align-items-center mb-1 position-relative">
+                    <label for="" >Open Panna</label>
+                    <input type="text" placeholder="Enter Panna" style="padding-left:20px !important;" maxlength="3"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');updateDropDown(this.value,'input_field_digit1')" onfocusout="handleCloseDropdown('bid_dropdown_id1')"  id="input_field_digit1" />
+                    <div class="bid_dropdown" id="bid_dropdown_id1" style="right:50px;left:auto;z-index:9999;">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1 position-relative">
+                    <label for="" id="hs_panna_label">Close Panna</label>
+                    <input type="text" placeholder="Enter Panna" style="padding-left:20px !important;" maxlength="3"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');updateDropDown(this.value)" onfocusout="handleCloseDropdown()"  id="input_field_digit" />
+                    <div class="bid_dropdown" id="bid_dropdown_id" style="right:50px;left:auto;z-index:9999;">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <div style="padding-top:10px;">
+                    </div>
+                    <input type="number" placeholder="Enter Point" id="bid_point_input">
+                </div>
+                `
+            }
             if (currentBidType == 'SD') {
                 document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="1"
                     oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
             } else if (currentBidType == 'JD') {
+                document.getElementById('open_close_id').style.display = "none"
+                bid_inupt_boxs.style.height = '140px'
+                bid_inupt_boxs.style.marginBottom = '50px'
                 document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="2"
                     oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="input_field_digit" />`
-            } else if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == 'FS') {
+            } else if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP') {
                 document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Digit" maxlength="3"
+                    oninput="this.value=this.value.replace(/[^0-9]/g,'');updateDropDown(this.value)" onfocusout="handleCloseDropdown()"  id="input_field_digit" />`
+            } else if (currentBidType == 'HS') {
+                document.getElementById('digit_input_field_id').innerHTML = `<input type="text" placeholder="Enter Panna" style="padding-left:20px !important;" maxlength="3"
                     oninput="this.value=this.value.replace(/[^0-9]/g,'');updateDropDown(this.value)" onfocusout="handleCloseDropdown()"  id="input_field_digit" />`
             }
             var bidList = [];
@@ -177,9 +236,21 @@
             <button class="bid_play_btn" id="bid_play" onclick="handlePlay()">PLAY</button>
         </div>
         <script>
-            function updateDropDown(value) {
-                let bid_dropdown_id = document.getElementById('bid_dropdown_id')
-                bid_dropdown_id.style.display = 'flex'
+            let HSLabelState = 1
+            function changeHSLabel() {
+                let hs_digit_label = document.getElementById('hs_digit_label')
+                let hs_panna_label = document.getElementById('hs_panna_label')
+                if (HSLabelState) {
+                    HSLabelState = 0
+                    hs_digit_label.innerText = 'Close Digit'
+                    hs_panna_label.innerText = 'Open Panna'
+                } else {
+                    hs_digit_label.innerText = 'Open Digit'
+                    hs_panna_label.innerText = 'Close Panna'
+                    HSLabelState = 1
+                }
+            }
+            function updateDropDown(value, field_id) {
                 let filteredArray = []
                 if (currentBidType === 'SP') {
                     filteredArray = spList?.filter(v => `${v}`?.includes(value))
@@ -187,15 +258,36 @@
                     filteredArray = dpList?.filter(v => `${v}`?.includes(value))
                 } else if (currentBidType === "TP") {
                     filteredArray = tpList?.filter(v => `${v}`?.includes(value))
+                } else if (currentBidType === 'HS' || currentBidType == 'FS') {
+                    let totalpannaList = [...spList, ...dpList, ...tpList];
+                    filteredArray = totalpannaList?.filter(v => `${v}`?.includes(value))
                 }
-                bid_dropdown_id.innerHTML = ''
-                for (let i = 0; i < filteredArray.length; i++) {
-                    const element = filteredArray[i];
-                    bid_dropdown_id.innerHTML = bid_dropdown_id.innerHTML +
-                        `<small onclick="document.getElementById('input_field_digit').value=${element};" >${element}</small>`
+                if (field_id == 'input_field_digit1') {
+                    let bid_dropdown_id1 = document.getElementById('bid_dropdown_id1')
+                    bid_dropdown_id1.style.display = 'flex'
+                    bid_dropdown_id1.innerHTML = ''
+                    for (let i = 0; i < filteredArray.length; i++) {
+                        const element = filteredArray[i];
+                        bid_dropdown_id1.innerHTML = bid_dropdown_id1.innerHTML +
+                            `<small onclick="document.getElementById('input_field_digit1').value=${element};" >${element}</small>`
+                    }
+                } else {
+                    let bid_dropdown_id = document.getElementById('bid_dropdown_id')
+                    bid_dropdown_id.style.display = 'flex'
+                    bid_dropdown_id.innerHTML = ''
+                    for (let i = 0; i < filteredArray.length; i++) {
+                        const element = filteredArray[i];
+                        bid_dropdown_id.innerHTML = bid_dropdown_id.innerHTML +
+                            `<small onclick="document.getElementById('input_field_digit').value=${element};" >${element}</small>`
+                    }
                 }
             }
-            function handleCloseDropdown() {
+            function handleCloseDropdown(field_id) {
+                if (field_id == 'bid_dropdown_id1') {
+                    setTimeout(() => {
+                        document.getElementById(field_id).style.display = 'none'
+                    }, 200);
+                }
                 setTimeout(() => {
                     document.getElementById('bid_dropdown_id').style.display = 'none'
                 }, 200);
@@ -211,7 +303,7 @@
                     <th class="text-center">Action</th>
                 </tr>`
                 for (let i = 0; i < bidList.length; i++) {
-                    totalValue = totalValue + bidList[i].points
+                    totalValue = totalValue + parseInt(bidList[i].points)
                     var row = bidTable.insertRow(i + 1);
                     row.innerHTML = `<td class="text-center">${bidList[i].number}</td>
                         <td class="text-center">${bidList[i].points}</td>
@@ -230,6 +322,29 @@
             function handleProceedClick() {
                 let inputFieldDigit = document.getElementById('input_field_digit')
                 let bidPointInput = document.getElementById('bid_point_input')
+                let checkDuplication = []
+                if (currentBidType == 'HS' || currentBidType == "FS") {
+                    if (currentBidType == 'FS') checkDuplication = bidList?.filter(bn => bn?.number == `${document.getElementById('input_field_digit1')?.value}-${inputFieldDigit.value}`)
+                    if (currentBidType == "HS") {
+                        if (HSLabelState) {
+                            checkDuplication = bidList?.filter(bn => bn?.number == `${document.getElementById('hs_digit_input').value}-${inputFieldDigit.value}`)
+                        } else {
+                            checkDuplication = bidList?.filter(bn => bn?.number == `${inputFieldDigit.value}-${document.getElementById('hs_digit_input').value}`)
+                        }
+                    }
+                } else {
+                    checkDuplication = bidList?.filter(bn => bn?.number == inputFieldDigit.value)
+                }
+                if (checkDuplication?.length > 0) {
+                    $.notify({
+                        title: "",
+                        message: `Digit already used.`,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger"
+                    });
+                    return
+                }
                 if (inputFieldDigit.value == "") {
                     $.notify({
                         title: "",
@@ -252,11 +367,11 @@
                         return
                     }
                 }
-                if (currentBidType == 'SP') {
+                if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == "FS") {
                     if (inputFieldDigit.value.length != 3) {
                         $.notify({
                             title: "",
-                            message: `Please enter proper digit`,
+                            message: `Please enter proper panna`,
                             icon: 'fa fa-times'
                         }, {
                             type: "danger"
@@ -264,11 +379,56 @@
                         return
                     }
                 }
-                if (currentBidType == 'DP') {
-                    if (inputFieldDigit.value.length != 3) {
+                let hs_digit_input = null
+                if (currentBidType == 'HS') {
+                    hs_digit_input = document.getElementById('hs_digit_input')
+                    if (hs_digit_input.value == "") {
                         $.notify({
                             title: "",
-                            message: `Please enter proper digit`,
+                            message: `Please enter a digit`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                let input_field_digit1 = null
+                if (currentBidType == 'FS') {
+                    input_field_digit1 = document.getElementById('input_field_digit1')
+                    if (input_field_digit1.value == "" || input_field_digit1?.value?.length != 3) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter a panna`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                    let allListPannFS = [...spList, ...dpList, ...tpList]
+                    let findValueFS = allListPannFS?.filter(spn => `${spn}` == input_field_digit1.value)
+                    if (findValueFS?.length != 1) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter a proper panna.`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                        return
+                    }
+                }
+                if (currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP' || currentBidType == 'HS' || currentBidType == 'FS') {
+                    let selectedPannaList = spList;
+                    if (currentBidType === 'DP') selectedPannaList = dpList
+                    if (currentBidType === 'TP') selectedPannaList = tpList
+                    if (currentBidType === 'HS' || currentBidType === 'FS') selectedPannaList = [...spList, ...dpList, ...tpList]
+                    let findValueSp = selectedPannaList?.filter(spn => `${spn}` == inputFieldDigit.value)
+                    if (findValueSp?.length != 1) {
+                        $.notify({
+                            title: "",
+                            message: `Please enter a proper panna.`,
                             icon: 'fa fa-times'
                         }, {
                             type: "danger"
@@ -287,19 +447,37 @@
                     return
                 }
                 let game_type = 'open'
+                if (currentBidType == "JD" || currentBidType == 'HS' || currentBidType == 'FS') game_type = ""
                 let flexRadioDefault2 = document.getElementById('flexRadioDefault2').checked
                 if (flexRadioDefault2) {
                     game_type = 'close'
                 }
+                let formatedInputFiedlDigit = inputFieldDigit.value
+                if (currentBidType == 'HS') {
+                    if (HSLabelState) {
+                        formatedInputFiedlDigit = `${hs_digit_input.value}-${inputFieldDigit.value}`
+                    } else {
+                        formatedInputFiedlDigit = `${inputFieldDigit.value}-${hs_digit_input.value}`
+                    }
+                }
+                if (currentBidType == 'FS') {
+                    formatedInputFiedlDigit = `${input_field_digit1.value}-${inputFieldDigit.value}`
+                }
                 bidList.push({
-                    number: parseInt(inputFieldDigit.value),
-                    points: parseInt(bidPointInput.value),
+                    number: formatedInputFiedlDigit,
+                    points: bidPointInput.value,
                     game_type: game_type
                 })
-                console.log(bidList)
                 inputFieldDigit.value = ''
                 bidPointInput.value = ''
+                if (currentBidType == 'HS') {
+                    hs_digit_input.value = ''
+                }
+                if (currentBidType == 'FS') {
+                    input_field_digit1.value = ''
+                }
                 createBidTable()
+                console.log(bidList)
             }
             function removeBidItem(index) {
                 bidList.splice(index, 1)
@@ -343,13 +521,12 @@
 
             // If the count down is over, write some text 
             if (distance < 0) {
+                // location.href = "home.html";
                 clearInterval(x);
                 document.getElementById("countdown_id").innerHTML = "0h : 0m : 0s";
             }
         }, 1000);
         function handlePlay() {
-            console.log(document.getElementById('totalBidValue').innerHTML)
-            return
             startLoader()
             let formatedBidType = 'Single Digit'
             switch (currentBidType) {
@@ -374,6 +551,7 @@
                 default:
                     break;
             }
+            console.log(bidList)
             axiosInstance.post('save_bid', {
                 "game_name": formatedBidType,
                 "market_id": gameDetails?.market_id,
