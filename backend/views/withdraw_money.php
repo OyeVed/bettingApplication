@@ -25,6 +25,7 @@ if(auth($token)){
     $user_id = $payload->user_id;
     $withdrawal_amount = $_POST['withdrawal_amount'];
     $upi_id = $_POST['upi_id'];
+    $datetime = date("Y-m-d H:i:s");
     $available_amount = 0;
 
 
@@ -44,11 +45,14 @@ if(auth($token)){
                 }
                 if($available_amount){
                     if($available_amount >= $withdrawal_amount){
-                        $sql = "INSERT INTO  pending_request (user_id, withdrawal_amount, upi_id) VALUES ( :user_id, :withdrawal_amount, :upi_id)";
+                        $sql = "INSERT INTO  pending_request (user_id, withdrawal_amount, upi_id, created_at, updated_at)
+                        VALUES ( :user_id, :withdrawal_amount, :upi_id, :created_at, :updated_at)";
                         $query = $con -> prepare($sql);
                         $query->bindParam(':user_id', $user_id, PDO::PARAM_STR);
                         $query->bindParam(':upi_id', $upi_id, PDO::PARAM_STR);
                         $query->bindParam(':withdrawal_amount', $withdrawal_amount, PDO::PARAM_STR);
+                        $query->bindparam(":created_at", $datetime, PDO::PARAM_STR);
+                        $query->bindparam(":updated_at", $datetime, PDO::PARAM_STR);
                         if($query->execute()){
                             $status = 200;
                             $response = [

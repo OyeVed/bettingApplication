@@ -32,12 +32,3 @@ if(auth($token)){
         ];
     }
 }
-
-
-// $game_rate = [
-//     [
-//         "game" => "Main Baazar",
-//         "minimum_bid_price" => "10",
-//         "winning_price" => "90"
-//     ]
-// ];

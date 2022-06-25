@@ -27,18 +27,21 @@ if(auth($token)){
     $phone_number = $_POST['phone_number'];
     $email = $_POST['email'];
     $full_name = $_POST['full_name'];
+    $datetime = date("Y-m-d H:i:s");
     
     
     $sql = "UPDATE user_table SET 
     user_phonenumber=:user_phonenumber,
     user_email=:user_email, 
-    user_fullname=:user_fullname
+    user_fullname=:user_fullname,
+    updated_at = :updated_at
     WHERE user_id=:user_id";
     $query = $con -> prepare($sql);
     $query->bindParam(':user_phonenumber', $phone_number, PDO::PARAM_STR);
     $query->bindParam(':user_email', $email, PDO::PARAM_STR);
     $query->bindParam(':user_fullname', $full_name, PDO::PARAM_STR);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
+    $query->bindparam(":updated_at", $datetime, PDO::PARAM_STR);
     if($query->execute()){
         $user = $query->fetchAll(PDO::FETCH_OBJ);
         $status = 200;
