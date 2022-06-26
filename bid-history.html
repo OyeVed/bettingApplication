@@ -134,7 +134,7 @@
             axiosInstance.get('bid_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    document.getElementById('total_bid_amount').innerHTML = response?.data?.total_bid_amount
+                    document.getElementById('total_bid_amount').innerHTML = `₹${response?.data?.total_bid_amount}`
                     let transactionList = response.data.bid_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
@@ -148,11 +148,11 @@
                     <div
                         style="flex-basis: 85%;display: flex; justify-content: space-between;border-bottom: 1px solid gray;padding-bottom: 5px;">
                         <div>
-                            <h6>${transactionList[i]?.game_name} - ${transactionList[i]?.game_type} - ${transactionList[i]?.number} - ₹${transactionList[i]?.number}</h6>
+                            <h6>${transactionList[i]?.game_name} - ${transactionList[i]?.game_type} - ${transactionList[i]?.number}</h6>
                             <small>${transactionList[i]?.market_fullname} - ${convertDateAndTime(transactionList[i]?.created_at)}</small>
                         </div>
                         <div>
-                            <p class="float-right mt-2"><b>- ₹256</b><img src="./assets/shapes/clarity_wallet-line.svg"
+                            <p class="float-right mt-2"><b>- ₹${transactionList[i]?.points}</b><img src="./assets/shapes/clarity_wallet-line.svg"
                                     class="ml-1" height="14px" alt=""></p>
                         </div>
                     </div>
