@@ -1,14 +1,19 @@
 <?php
 
-// import db connection
 require("dbcon.php");
 require('middleware.php');
 require_once('../vendor/autoload.php');
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
 
-// retrieve request data
-$_POST = json_decode(file_get_contents("php://input"), true);
+use Dotenv\Dotenv;
+
+// Looing for .env at the root directory
+$dotenv = Dotenv::createImmutable('./');
+$dotenv->load();
+
+//Retrive env variable
+$SECRET_KEY = $_ENV['SECRET_KEY'];
 
 // getting token from cookie
 $token = $_COOKIE["user_jwt"];
@@ -17,8 +22,8 @@ $token = $_COOKIE["user_jwt"];
 if(auth($token)){
 
     //extracting payload from jwt
-    $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
-    $payload = JWT::decode($token, new Key($secret_key, 'HS512'));
+    // $secret_key = "bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=";
+    $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     
     //Checking files specifcation
@@ -32,14 +37,16 @@ if(auth($token)){
             $filename = $_FILES["choosefile"]["name"];
             $tempname = $_FILES["choosefile"]["tmp_name"];
             $image = base64_encode(file_get_contents($tempname));
+            $datetime = date("Y-m-d H:i:s");
         
         
             // query to insert the submitted data
-            $sql = "UPDATE user_table SET profile_image = :profile_image WHERE user_id = :user_id";
+            $sql = "UPDATE user_table SET profile_image = :profile_image,
+            updated_at = :updated_at WHERE user_id = :user_id";
             $query = $con -> prepare($sql);
             $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
-            echo "user_id is: " . $payload->user_id;
             $query->bindParam(':profile_image', $image, PDO::PARAM_LOB);
+            $query->bindparam(":updated_at", $datetime, PDO::PARAM_STR);
             if($query->execute()){
                 $status = 200;
                 $response = [

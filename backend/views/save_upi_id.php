@@ -25,14 +25,17 @@ if(auth($token)){
     
     // retrieve required variables
     $upi_id = $_POST['upi_id'];
+    $datetime = date("Y-m-d H:i:s");
     
     
     $sql = "UPDATE user_table SET 
-    upi_id=:upi_id
+    upi_id=:upi_id,
+    updated_at = :updated_at
     WHERE user_id=:user_id";
     $query = $con -> prepare($sql);
     $query->bindParam(':upi_id', $upi_id, PDO::PARAM_STR);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
+    $query->bindparam(":updated_at", $datetime, PDO::PARAM_STR);
     if($query->execute()){
         $user = $query->fetchAll(PDO::FETCH_OBJ);
         $status = 200;
