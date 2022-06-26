@@ -117,6 +117,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
         authenticate()
@@ -133,7 +134,7 @@
             axiosInstance.get('withdrawal_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    document.getElementById('total_withdrawal_amount').innerHTML = response?.data?.total_withdrawal_amount
+                    document.getElementById('total_withdrawal_amount').innerHTML =  `₹${response?.data?.total_withdrawal_amount}`
                     let transactionList = response.data.withdrawal_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''

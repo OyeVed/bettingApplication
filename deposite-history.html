@@ -135,7 +135,7 @@
             axiosInstance.get('deposit_history').then((response) => {
                 endLoader()
                 if (response.status === 200) {
-                    document.getElementById('total_deposite_amount').innerHTML = response?.data?.total_deposit_amount
+                    document.getElementById('total_deposite_amount').innerHTML = `₹${response?.data?.total_deposit_amount}`
                     let transactionList = response.data.deposit_history
                     let transaction_container = document.getElementById('transaction_container')
                     transaction_container.innerHTML = ''
