@@ -161,6 +161,7 @@
             username.innerText = cookieData?.name
             usernumber.innerText = cookieData?.user_phonenumber
         }
+        let TotalMarketList = []
         window.onload = function () {
             updateWallet()
             startLoader()
@@ -169,6 +170,7 @@
                 endLoader()
                 if (response.status === 200) {
                     let gameList = response.data.game_list
+                    TotalMarketList = [...gameList]
                     let ongoingTabContent = document.getElementById('ongoing_tab_content')
                     for (let i = 0; i < gameList.length; i++) {
                         switch (gameList[i].status) {
@@ -177,10 +179,8 @@
                                 ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
                                     `<div class="ongoing_card">` +
                                     `<img src="./assets/shapes/openRectangle.svg" class="game_card_label" alt="Ongoing card">` +
-                                    `<img src="./assets/shapes/gameplaybtn.svg" onclick="
-                                        ${sessionStorage.setItem('gameDetails', JSON.stringify(gameList[i]))}
-                                        navigate('game.html')
-                                    " class="game_card_play_btn open_game_button" alt="Game play">` +
+                                    `<img src="./assets/shapes/gameplaybtn.svg" onclick='redirectToGame(${gameList[i]?.market_id})' 
+                                        class="game_card_play_btn open_game_button" alt="Game play">` +
                                     `<h4>${gameList[i]?.market_fullname}</h4>` +
                                     `<small><b>${gameList[i]?.result}</b></small><div>` +
                                     ` <small>Open time - ${convertTime(gameList[i]?.market_opentime)}</small>` +
@@ -239,6 +239,15 @@
                     type: "danger"
                 });
             })
+        }
+        function redirectToGame(marketNow) {
+            console.log(TotalMarketList)
+            let nowMarket = TotalMarketList?.filter(tmn => tmn?.market_id == `${marketNow}`)
+            console.log(nowMarket)
+            if (nowMarket) {
+                sessionStorage.setItem('gameDetails', JSON.stringify(nowMarket[0]))
+                navigate('game.html')
+            }
         }
     </script>
     <script>

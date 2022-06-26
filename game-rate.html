@@ -130,7 +130,7 @@
                     for (var i = 0; i < gameRateList.length; i++) {
                         // POPULATE SELECT ELEMENT WITH JSON.
                         game_rate_main_container.innerHTML = game_rate_main_container.innerHTML +
-                            `<div class="game_rate_card"><p>${gameRateList[i].game_name.toUpperCase()}</p><p>₹${gameRateList[i].game_rate}</p></div>`;
+                            `<div class="game_rate_card"><p>${gameRateList[i].game_name.toUpperCase()}</p><p>₹10 - ₹${gameRateList[i].game_rate}</p></div>`;
                     }
                 } else {
                     if (response?.data?.is_logged_out) {

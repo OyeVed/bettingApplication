@@ -128,7 +128,11 @@ function signOut() {
 }
 
 function convertTime(time) {
-  return new Date("1970-01-01T" + time + "Z").toLocaleTimeString("IST", {
+  let todaysMOnth = new Date().getMonth() + 1;
+  let todayDate = `${new Date().getFullYear()}-${
+    todaysMOnth < 10 ? `0${todaysMOnth}` : todaysMOnth
+  }-${new Date().getDate()}`;
+  return new Date(`${todayDate} ${time}`).toLocaleTimeString("IST", {
     timeZone: "IST",
     hour12: true,
     hour: "numeric",
