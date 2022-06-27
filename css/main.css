@@ -15535,11 +15535,6 @@ be a descendant of the grid when it is being dragged.
   z-index: 1030;
 }
 
-@media (min-width: 768px) {
-  .app-header {
-    padding-right: 30px;
-  }
-}
 
 @media print {
   .app-header {
@@ -15560,16 +15555,6 @@ be a descendant of the grid when it is being dragged.
   line-height: 50px;
 }
 
-@media (min-width: 768px) {
-  .app-header__logo {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-    display: block;
-    width: 230px;
-    background-color: #007d71;
-  }
-}
 
 .app-header__logo:focus,
 .app-header__logo:hover {
@@ -15587,13 +15572,13 @@ be a descendant of the grid when it is being dragged.
   transition: background-color 0.3s ease;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) { */
   .app-sidebar__toggle {
     -webkit-box-ordinal-group: 0;
     -ms-flex-order: -1;
     order: -1;
   }
-}
+/* } */
 
 .app-sidebar__toggle:before {
   content: "\f036";
