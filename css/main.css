@@ -15441,7 +15441,7 @@ be a descendant of the grid when it is being dragged.
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 980px) {
   .app-content {
     padding: 15px;
   }
