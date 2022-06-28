@@ -57,8 +57,8 @@ if(auth($token)){
             if($available_amount >= $total_amount){
                 //updating the transaction_details table
                 $available_amount -= $total_amount;
-                $transaction_type = "withdrawal";
-                $transaction_name = "bets placed";
+                $transaction_type = "bet";
+                $transaction_name = "Bets placed";
                 $sql = "INSERT INTO transaction_details ( user_id, transaction_type, transaction_name, transaction_amount, amount_in_wallet, created_at, updated_at) 
                 VALUES (:user_id, :transaction_type, :transaction_name, :transaction_amount, :amount_in_wallet, :created_at, :updated_at)";
                 $query = $con->prepare($sql);
