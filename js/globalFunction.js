@@ -207,6 +207,17 @@ const getDateInWord = (month) => {
   }
 };
 
+// render file
+var loadFile = function (event, preview_id) {
+  var output = document.getElementById(preview_id);
+  output.src = URL.createObjectURL(event.target.files[0]);
+  logoFileData = event.target?.files[0];
+  console.log(logoFileData);
+  output.onload = function () {
+    URL.revokeObjectURL(output.src); // free memory
+  };
+};
+
 const updateWallet = () => {
   let wallet_price = localStorage.getItem("vcds");
   if (wallet_price) {
