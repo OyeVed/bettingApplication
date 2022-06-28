@@ -28,7 +28,7 @@ if(auth($token)){
 
     //updating the transaction_details table
     $transaction_type = "deposit";
-    $transaction_name = "money added to wallet";
+    $transaction_name = "Credited to wallet";
     $transaction_amount = 1000;
     $available_amount += $transaction_amount;
     $sql = "INSERT INTO transaction_details ( user_id, transaction_type, transaction_name, transaction_amount, amount_in_wallet, created_at, updated_at) VALUES

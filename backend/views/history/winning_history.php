@@ -26,8 +26,11 @@ if(auth($token)){
     $payload = JWT::decode($token, new Key($SECRET_KEY, 'HS512'));
 
     //query
-    $sql = "SELECT transaction_type, transaction_name, transaction_amount, amount_in_wallet, created_at FROM transaction_details 
-    WHERE transaction_type = :transaction_type AND user_id=:user_id ORDER BY transaction_id desc ";
+    $sql = "SELECT td.transaction_type, wh.game_name, td.transaction_name, td.transaction_amount, td.amount_in_wallet, td.created_at FROM transaction_details as td
+    LEFT JOIN win_history as wh
+    ON td.user_id = wh.user_id AND td.created_at = wh.created_at
+    WHERE td.transaction_type = :transaction_type AND td.user_id=:user_id 
+    ORDER BY td.transaction_id desc ";
     $query = $con -> prepare($sql);
     $query->bindParam(':user_id', $payload->user_id, PDO::PARAM_STR);
     $query->bindParam(':transaction_type', $transaction_type, PDO::PARAM_STR);
