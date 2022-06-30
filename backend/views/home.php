@@ -18,7 +18,7 @@ if(auth($token)){
         foreach ($markets as $market) {
             $market_on_days = $market->market_on_days;
             $market_on_days = explode(",", $market_on_days);
-            if((date($market->market_closetime) > date("H-i-s")) && (in_array($curr_day, $market_on_days))){
+            if((date($market->market_opentime) < date("H-i-s")) && (date($market->market_closetime) >= date("H-i-s")) && (in_array($curr_day, $market_on_days))){
                 $status = "open";
             }else{
                 $status = "close";

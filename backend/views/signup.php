@@ -47,8 +47,8 @@ if($query->rowCount() === 0){
         if($query->rowCount() === 0){
             $is_code_unique = false;
             $sql = "INSERT INTO 
-            user_table (user_phonenumber, user_password, user_email, user_fullname, referral_code, referred_by) VALUES 
-            ( :user_phonenumber, :user_password, :user_email, :user_fullname, :referral_code, :referred_by)";
+            user_table (user_phonenumber, user_password, user_email, user_fullname, referral_code, referred_by, created_at, updated_at) VALUES 
+            ( :user_phonenumber, :user_password, :user_email, :user_fullname, :referral_code, :referred_by, :created_at, :updated_at)";
             $query = $con -> prepare($sql);
             $query->bindParam(':user_phonenumber', $phone_number, PDO::PARAM_STR);
             $query->bindParam(':user_password', $password, PDO::PARAM_STR);
@@ -56,6 +56,8 @@ if($query->rowCount() === 0){
             $query->bindParam(':user_fullname', $full_name, PDO::PARAM_STR);
             $query->bindParam(':referral_code', $referral_code, PDO::PARAM_STR);
             $query->bindParam(':referred_by', $referred_by, PDO::PARAM_STR);
+            $query->bindparam(":created_at", $datetime, PDO::PARAM_STR);
+            $query->bindparam(":updated_at", $datetime, PDO::PARAM_STR);
         
         
             if($query->execute()){

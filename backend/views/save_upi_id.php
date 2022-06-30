@@ -18,6 +18,8 @@ $SECRET_KEY = $_ENV['SECRET_KEY'];
 // getting token from cookie
 $token = $_COOKIE["user_jwt"];
 
+$_POST = json_decode(file_get_contents("php://input"), true);
+
 // checking is the user authorized 
 if(auth($token)){
 

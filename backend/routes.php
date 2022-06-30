@@ -10,6 +10,12 @@ $router->endpoint('reset_password', './views/reset_password', ['POST'], FALSE, [
 $router->endpoint('middleware', './middleware.php', ['POST'], FALSE, []);
 $router->endpoint('image_upload', './views/image_upload', ['POST'], FALSE, []);
 
+
+//forgot password routes
+$router->endpoint('send_otp', './views/forgot_password/send_otp', ['POST'], FALSE, ['user_email']);
+$router->endpoint('verify_otp', './views/forgot_password/verify_otp', ['POST'], FALSE, ['user_email', 'otp', 'new_password']);
+
+
 //add upi_id
 
 $router->endpoint('save_upi_id', './views/save_upi_id', ['POST'], FALSE, ['upi_id']);

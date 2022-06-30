@@ -17,6 +17,8 @@ $database_tables = array(
         `profile_image` BLOB,
         `referral_code` VARCHAR(255) UNIQUE,
         `referral_by` VARCHAR(255) ,
+        `otp` INTEGER(10),
+        `otp_created_at` VARCHAR(255),
         `created_at` DATETIME NOT NULL,
         `updated_at` DATETIME NOT NULL
     )",
