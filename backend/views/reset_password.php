@@ -52,8 +52,7 @@ if(auth($token)){
             if($query->execute()){
                 $status = 200;
                 $response = [
-                    "msg" => "Password updated successfully",
-                    "payload" => $payload->user_phonenumber
+                    "msg" => "Password updated successfully"
                 ];
             }else{
                 $status = 203;
