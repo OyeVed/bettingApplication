@@ -12,6 +12,7 @@ $password = md5($_POST['password']);
 $email = $_POST['email'];
 $full_name = $_POST['full_name'];
 $referred_by = $_POST['referred_by'];
+$datetime = date("Y-m-d H:i:s");
 
 
 //Finding is the particular user already signed up
