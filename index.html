@@ -62,17 +62,21 @@
                 </p>
             </form>
             <form class="forget-form" action="dashboard.html">
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
-                <div class="form-group">
-                    <label class="control-label">EMAIL</label>
-                    <input class="form-control login_form" type="text" placeholder="Email">
-                </div>
-                <div class="form-group btn-container">
-                    <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
-                </div>
-                <div class="form-group mt-3">
-                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i>
-                            Back to Login</a></p>
+                <div id="forgot_pass_container">
+                    <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+                    <div class="form-group">
+                        <label class="text-white">EMAIL</label>
+                        <input class="form-control" type="text" placeholder="Email" id="email">
+                    </div>
+                    <div class="form-group btn-container">
+                        <button class="btn btn-primary btn-block" type="button" onclick="handleSendCode()"><i
+                                class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+                    </div>
+                    <div class="form-group mt-3">
+                        <p class="semibold-text mb-0"><a href="#" data-toggle="flip"
+                                style="color: rgb(136, 174, 193);"><i class="fa fa-angle-left fa-fw"></i>
+                                Back to Login</a></p>
+                    </div>
                 </div>
             </form>
         </div>
@@ -87,6 +91,7 @@
     <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script src="./js/globalFunction.js"></script>
     <script type="text/javascript">
+        let reset_email_now = ''
         let isLoggedIn = localStorage.getItem("isLoggedIn");
         if (isLoggedIn === "true") {
             location.href = "home.html";
@@ -112,6 +117,141 @@
                     localStorage.setItem('referral_code', response?.data?.referral_code)
                     localStorage.setItem('isLoggedIn', 'true')
                     location.href = "home.html";
+                } else {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
+                }
+            }, (error) => {
+                endLoader()
+                console.log('error', error);
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
+        }
+        function handleSendCode() {
+            startLoader()
+            let email = document.getElementById('email').value
+            if (email == "") {
+                $.notify({
+                    title: "",
+                    message: "Please enter email.",
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger",
+                });
+                endLoader()
+            }
+            reset_email_now = email
+            axiosInstance.post('send_otp',
+                {
+                    "user_email": email
+                }
+            ).then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success",
+                    });
+                    let container_forgot = document.getElementById('forgot_pass_container')
+                    container_forgot.innerHTML = ''
+                    container_forgot.innerHTML = container_forgot.innerHTML +
+                        `
+                    <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Reset Password ?</h3>
+                    <div class="form-group">
+                        <label class="text-white">OTP</label>
+                        <input class="form-control" id="otp" type="text" placeholder="otp" autofocus
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-white">Password</label>
+                        <input class="form-control" id="reset_password" type="password" placeholder="New Password">
+                    </div>
+                    <div class="form-group btn-container">
+                        <button class="btn btn-primary btn-block" type="button" onclick="handleVerify()"><i
+                                class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+                    </div>
+                    <div class="form-group mt-3">
+                        <p class="semibold-text mb-0"><a href="#" data-toggle="flip"
+                                style="color: rgb(136, 174, 193);"><i class="fa fa-angle-left fa-fw"></i>
+                                Back to Login</a></p>
+                    </div>
+                    `
+                } else {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-times'
+                    }, {
+                        type: "danger",
+                    });
+                }
+            }, (error) => {
+                endLoader()
+                console.log('error', error);
+                $.notify({
+                    title: "",
+                    message: `Something went wrong! Please try again.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+            })
+        }
+        function handleVerify() {
+            startLoader()
+            let otp = document.getElementById('otp').value
+            let reset_password = document.getElementById('reset_password').value
+            if (otp == "") {
+                $.notify({
+                    title: "",
+                    message: `Please enter otp.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                endLoader()
+            }
+            if (reset_password == "") {
+                $.notify({
+                    title: "",
+                    message: `Please enter new password.`,
+                    icon: 'fa fa-times'
+                }, {
+                    type: "danger"
+                });
+                endLoader()
+            }
+            axiosInstance.post('verify_otp',
+                {
+                    "user_email": reset_email_now,
+                    "new_password": reset_password,
+                    "otp": otp
+                }
+            ).then((response) => {
+                endLoader()
+                if (response.status === 200) {
+                    $.notify({
+                        title: "",
+                        message: response.data?.msg,
+                        icon: 'fa fa-check'
+                    }, {
+                        type: "success",
+                    });
+                    $('.login-box').toggleClass('flipped');
                 } else {
                     $.notify({
                         title: "",
