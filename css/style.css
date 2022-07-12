@@ -209,7 +209,7 @@
   position: fixed;
   right: 30px;
   bottom: 30px;
-  background-color: var(--default-bg-2);
+  background-color: green;
   border-radius: 50%;
 }
 .home_page_whatsApp span {
