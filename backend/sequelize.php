@@ -54,12 +54,10 @@ $database_tables = array(
         `updated_at` DATETIME NOT NULL,
         FOREIGN KEY (market_id) 
     		REFERENCES market_table(market_id) 
-    		ON DELETE CASCADE 
-            ON UPDATE CASCADE,
+    		ON DELETE CASCADE,
         FOREIGN KEY (user_id) 
     		REFERENCES user_table(user_id) 
-    		ON DELETE CASCADE 
-            ON UPDATE CASCADE
+    		ON DELETE CASCADE
     )",
     "
     CREATE TABLE IF NOT EXISTS `transaction_details` (
@@ -73,8 +71,7 @@ $database_tables = array(
         `updated_at` DATETIME NOT NULL,
         FOREIGN KEY (user_id) 
             REFERENCES user_table(user_id)
-            ON DELETE CASCADE 
-            ON UPDATE CASCADE
+            ON DELETE CASCADE
     )",
     "
     CREATE TABLE IF NOT EXISTS `admin_user_table` (
@@ -101,12 +98,10 @@ $database_tables = array(
         `updated_at` DATETIME NOT NULL,
         FOREIGN KEY (market_id) 
             REFERENCES market_table(market_id)
-            ON DELETE CASCADE 
-            ON UPDATE CASCADE, 
+            ON DELETE CASCADE, 
         FOREIGN KEY (user_id) 
             REFERENCES user_table(user_id)
-            ON DELETE CASCADE 
-            ON UPDATE CASCADE
+            ON DELETE CASCADE
     )",
     "
     CREATE TABLE IF NOT EXISTS `market_results` (
@@ -118,8 +113,7 @@ $database_tables = array(
         `updated_at` DATETIME NOT NULL,
         FOREIGN KEY (market_id) 
             REFERENCES market_table(market_id)
-            ON DELETE CASCADE 
-            ON UPDATE CASCADE
+            ON DELETE CASCADE
     )",
     "
     CREATE TABLE IF NOT EXISTS `pending_request` (
@@ -131,8 +125,7 @@ $database_tables = array(
         `updated_at` DATETIME NOT NULL,
         FOREIGN KEY (user_id) 
             REFERENCES user_table(user_id)
-            ON DELETE CASCADE 
-            ON UPDATE CASCADE
+            ON DELETE CASCADE
     )"
 );
 

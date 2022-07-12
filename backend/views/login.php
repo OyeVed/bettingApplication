@@ -43,7 +43,7 @@ if($query->rowCount() === 0){
         // if user is authenticated then generate a token with JWT
         // $secretKey  = 'bGS6lzFqvvSQ8ALbOxatm7/Vk7mLQyzqaS34Q4oR1ew=';
         $issuedAt   = new DateTimeImmutable();
-        $expire     = $issuedAt->modify('+60 minutes')->getTimestamp();      // Add 60 seconds
+        $expire     = $issuedAt->modify('+30 days')->getTimestamp();      // Add 60 seconds
         $serverName = "http://localhost/matkaApplicaton/backend/login";     // Retrieved from filtered POST data
 
         $data = [
@@ -62,7 +62,7 @@ if($query->rowCount() === 0){
             'HS512'
         );
         // sending jwt token to frontend with cookies
-        setcookie("user_jwt", $jwt, time()+ (86400 * 7), "/","", 0); //86400*7 expiry time to 7 days
+        setcookie("user_jwt", $jwt, time()+ (86400 * 30), "/","", 0); //86400*7 expiry time to 7 days
 
         $status = 200;
         $response = [
