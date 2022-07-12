@@ -42,7 +42,8 @@ if(auth($token)){
         }else{
             $status = 200;
             $response = [
-                "msg" => "No transactions found for user"
+                "msg" => "No transactions found for user",
+                "wallet_balance" => $available_amount
             ];
         }
         
