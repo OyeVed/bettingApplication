@@ -67,6 +67,9 @@ if($query->rowCount() === 0){
         $status = 200;
         $response = [
             "msg" => "User authenticated successfully",
+            "user_name" => $user->user_fullname,
+            "user_phonenumber" => $user->user_phonenumber,
+            "profile_image" => $user->profile_image,
             "referral_code" => $user->referral_code
         ];
 
