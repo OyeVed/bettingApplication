@@ -109,10 +109,7 @@
         let cookieData = getCookie("user_jwt");
         let username = document.getElementById('side_bar_username_id')
         let usernumber = document.getElementById('side_bar_usernumber_id')
-        if (cookieData) {
-            username.innerText = cookieData?.name
-            usernumber.innerText = cookieData?.user_phonenumber
-        }
+
         window.onload = function () {
             updateWallet()
             startLoader()
