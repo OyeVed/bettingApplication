@@ -117,7 +117,9 @@
                 if (response.status === 200) {
                     localStorage.setItem('referral_code', response?.data?.referral_code)
                     localStorage.setItem('isLoggedIn', 'true')
-                    
+                    localStorage.setItem('user_name', response?.data?.user_name)
+                    localStorage.setItem('user_image', response?.data?.profile_image)
+                    localStorage.setItem('user_phone', response?.data?.user_phonenumber)
                     location.href = "home.html";
                 } else {
                     $.notify({

@@ -18,6 +18,20 @@ function authenticate() {
     localStorage.setItem("isLoggedIn", "false");
     location.href = "index.html";
   }
+  let user_name = localStorage.getItem("user_name");
+  let user_image = localStorage.getItem("user_image");
+  let user_phone = localStorage.getItem("user_phone");
+  if (user_image != "null") {
+    document.getElementById(
+      "user_image"
+    ).src = `data:image/png;base64,${user_image}`;
+  }
+  if (user_name != "null") {
+    document.getElementById("side_bar_username_id").innerText = user_name;
+  }
+  if (user_phone != "null") {
+    document.getElementById("side_bar_usernumber_id").innerText = user_name;
+  }
 }
 
 function copyDivToClipboard() {
