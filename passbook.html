@@ -283,7 +283,14 @@
                         `
                         }
                     }
-
+                    if (transactionList.length == 0) {
+                        transaction_container.innerHTML = `<h6 style="
+                            text-align: center;
+                            margin-top: 45%;
+                            float: center;
+                            color: gray;
+                        " >No Transaction Found</h6>`
+                    }
                     document.getElementById('upi_id').value = response?.data?.statement?.upi_id[0]?.upi_id
                 } else {
                     if (response?.data?.is_logged_out) {

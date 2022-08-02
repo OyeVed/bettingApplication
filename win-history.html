@@ -149,6 +149,14 @@
                     </div>
                 </div>`
                     }
+                    if (transactionList.length == 0) {
+                        transaction_container.innerHTML = `<h6 style="
+                            text-align: center;
+                            margin-top: 45%;
+                            float: center;
+                            color: gray;
+                        " >No Transaction Found</h6>`
+                    }
                 } else {
                     if (response?.data?.is_logged_out) {
                         localStorage.setItem("isLoggedIn", "false");
