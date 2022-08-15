@@ -10,6 +10,7 @@ $token = $_COOKIE["user_jwt"];
 if(auth($token)){
     $game_list = [];
     $curr_day = date('l');
+    $curr_time = date('H:i:s');
     $sql = "SELECT * FROM market_table";
     $query = $con -> prepare($sql);
     $query->execute();
@@ -18,11 +19,28 @@ if(auth($token)){
         foreach ($markets as $market) {
             $market_on_days = $market->market_on_days;
             $market_on_days = explode(",", $market_on_days);
-            if((date($market->market_opentime) < date("H-i-s")) && (date($market->market_closetime) >= date("H-i-s")) && (in_array($curr_day, $market_on_days))){
-                $status = "open";
+
+            if(in_array($curr_day, $market_on_days)){
+                if(date("00:00:00") < $curr_time){
+                    if($curr_time < date($market->market_opentime)){
+                        $status = "open";
+                    }else if($curr_time > date($market->market_closetime)){
+                        $status = "disabled";
+                    }else{
+                        $status = "close";
+                    }
+                }else{
+                    $status = "disabled";
+                }
             }else{
-                $status = "close";
+                $status = "disabled";
             }
+            
+            // if((date($market->market_opentime) < date("H-i-s")) && (date($market->market_closetime) >= date("H-i-s")) && (in_array($curr_day, $market_on_days))){
+            //     $status = "open";
+            // }else{
+            //     $status = "close";
+            // }
             $details = [
                 "market_id" => $market->market_id,
                 "market_fullname" => $market->market_fullname,
