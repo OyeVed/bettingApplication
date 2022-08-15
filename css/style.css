@@ -533,7 +533,9 @@
   background-color: #eee;
   border-radius: 50%;
 }
-
+.disable_open_after_time{
+  opacity: 0.66;
+}
 /* On mouse-over, add a grey background color */
 .bid_open_close_btn:hover input ~ .checkmark {
   background-color: #ccc;

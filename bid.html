@@ -115,16 +115,16 @@
             document.getElementById('current_bid_type_id').innerHTML = `&nbsp;&nbsp;&nbsp;${gameDetails.market_fullname} - ` + currentBidType
         </script>
         <div class="mt-4" style="display: flex;justify-content: space-between;" id="open_close_id">
-            <div class="bid_open_close_btn">
+            <div class="bid_open_close_btn disable_open_after_time" onclick="document.getElementById('flexRadioDefault1').checked = true">
                 <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                     <span class="checkmark"></span>&nbsp;&nbsp;
                     <label class="form-check-label" for="flexRadioDefault1">
                         OPEN
                     </label>
                 </div>
             </div>
-            <div class="bid_open_close_btn">
+            <div class="bid_open_close_btn" onclick="document.getElementById('flexRadioDefault2').checked = true">
                 <div class="form-check ">
                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                     <span class="checkmark"></span>&nbsp;&nbsp;
