@@ -78,7 +78,8 @@
             <li><a class="app-menu__item" href="how-to-play.html"><i class="app-menu__icon fa fa-question"></i>How to
                     Play</a></li>
 
-            <li><a class="app-menu__item" href="rules.html"><i class="app-menu__icon fa fa-file-text-o"></i>Notice board /
+            <li><a class="app-menu__item" href="rules.html"><i class="app-menu__icon fa fa-file-text-o"></i>Notice board
+                    /
                     Rules</a></li>
             <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span
                         class="app-menu__label">Contact Us</span></a></li>
@@ -165,7 +166,7 @@
                     for (let i = 0; i < gameList.length; i++) {
                         switch (gameList[i].status) {
                             case 'open':
-                                let timeRemain = calculateTimeRemain(gameList[i]?.market_closetime)
+                                var timeRemain = calculateTimeRemain(gameList[i]?.market_closetime)
                                 ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
                                     `<div class="ongoing_card">` +
                                     `<img src="./assets/shapes/openRectangle.svg" class="game_card_label" alt="Ongoing card">` +
@@ -178,6 +179,19 @@
                                     `<small >Close time - ${convertTime(gameList[i]?.market_closetime)}</small></div></div>`
                                 break;
                             case 'close':
+                                var timeRemain = calculateTimeRemain(gameList[i]?.market_closetime)
+                                ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
+                                    `<div class="ongoing_card">` +
+                                    `<img src="./assets/shapes/openRectangle.svg" class="game_card_label" alt="Ongoing card">` +
+                                    `<img src="./assets/shapes/gameplaybtn.svg" onclick='redirectToGame(${gameList[i]?.market_id})' 
+                                        class="game_card_play_btn open_game_button" alt="Game play">` +
+                                    `<h4>${gameList[i]?.market_fullname}</h4>` +
+                                    `<small><b>${gameList[i]?.result}</b></small><div>` +
+                                    ` <small>Open time - ${convertTime(gameList[i]?.market_opentime)}</small>` +
+                                    ` <small class="text-danger">${timeRemain} left</small>` +
+                                    `<small >Close time - ${convertTime(gameList[i]?.market_closetime)}</small></div></div>`
+                                break;
+                            case 'disabled':
                                 ongoingTabContent.innerHTML = ongoingTabContent.innerHTML +
                                     `<div class="ongoing_card">
                                         <img src="./assets/shapes/closeRectangle.svg" class="game_card_label" alt="Ongoing card">

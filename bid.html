@@ -109,17 +109,19 @@
                 location.href = 'game.html';
             }
             var gameDetails = JSON.parse(sessionStorage.getItem('gameDetails'))
+            let open_btn_status = gameDetails?.status
             if (gameDetails == null) {
                 location.href = 'home.html'
             }
             document.getElementById('current_bid_type_id').innerHTML = `&nbsp;&nbsp;&nbsp;${gameDetails.market_fullname} - ` + currentBidType
         </script>
         <div class="mt-4" style="display: flex;justify-content: space-between;" id="open_close_id">
-            <div class="bid_open_close_btn disable_open_after_time" onclick="document.getElementById('flexRadioDefault1').checked = true">
+            <div class="bid_open_close_btn" id="open_btn_card"
+                onclick="document.getElementById('flexRadioDefault1').checked = true">
                 <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                     <span class="checkmark"></span>&nbsp;&nbsp;
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <label class="form-check-label" id="open_btn_label_id" for="flexRadioDefault1">
                         OPEN
                     </label>
                 </div>
@@ -216,6 +218,25 @@
                     oninput="this.value=this.value.replace(/[^0-9]/g,'');updateDropDown(this.value)" onfocusout="handleCloseDropdown()"  id="input_field_digit" />`
             }
             var bidList = [];
+            // NOTE: open btn status
+            if (open_btn_status === "close") {
+                if (currentBidType == 'SD' || currentBidType == 'SP' || currentBidType == 'DP' || currentBidType == 'TP') {
+                    document.getElementById('open_btn_card').classList = `bid_open_close_btn disable_open_after_time`
+                    document.getElementById('open_btn_card').onclick = function () {
+                        $.notify({
+                            title: "",
+                            message: `Action not allowed.`,
+                            icon: 'fa fa-times'
+                        }, {
+                            type: "danger"
+                        });
+                    }
+                    document.getElementById('flexRadioDefault2').checked = true;
+                    document.getElementById('open_btn_label_id').onclick = function (e) {
+                        e.preventDefault()
+                    }
+                }
+            }
         </script>
         <div class="bid_list_table_container mt-3">
             <table class="table" id="bidTable_id">
