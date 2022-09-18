@@ -41,13 +41,23 @@ if(auth($token)){
             // }else{
             //     $status = "close";
             // }
+
+            $market_result_sql = "SELECT results FROM market_results WHERE market_results.market_id = $market->market_id";
+
+            $market_result_result = $con->prepare($market_result_sql);
+            if($market_result_result->execute() && $market_result_result->rowCount() != 0){
+                $market_result_result = $market_result_result->fetchAll(PDO::FETCH_OBJ)[0]->results;
+            }else{
+                $market_result_result = "--";
+            }
+            
             $details = [
                 "market_id" => $market->market_id,
                 "market_fullname" => $market->market_fullname,
                 "market_opentime" => $market->market_opentime,
                 "market_closetime" => $market->market_closetime,
                 "status" => $status,
-                "result" => "good"
+                "result" => $market_result_result
             ];
             array_push($game_list, $details);
             $status = 200;
@@ -55,6 +65,7 @@ if(auth($token)){
                 "game_list" => $game_list
             ];
         }
+        
     }else{
         $status = 203;
         $response = [
