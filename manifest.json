@@ -1,7 +1,7 @@
 {
 "name": "The name of your application",
 "short_name": "This name will show in your Windows taskbar, in the start menu, and Android homescreen",
-"start_url": "https://betting.oyesters.in",
+"start_url": "/",
 "display": "standalone",
 "description": "A description for your application",
 "lang": "en",
