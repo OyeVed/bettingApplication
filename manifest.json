@@ -1,10 +1,10 @@
 {
-  "name": "The name of your application",
-  "short_name": "This name will show in your Windows taskbar, in the start menu, and Android homescreen",
+  "name": "BHOLE Games",
+  "short_name": "BHOLE Games",
   "start_url": "./",
   "scope": ".",
   "display": "standalone",
-  "description": "A description for your application",
+  "description": "Play your game",
   "lang": "en",
   "dir": "auto",
   "theme_color": "#000000",
@@ -35,14 +35,14 @@
   "related_applications": [
     {
       "platform": "windows",
-      "url": " The URL to your app in that app store"
+      "url": "https://betting.oyesters.in"
     }
   ],
   "prefer_related_applications": true,
   "shortcuts": [
     {
-      "name": "The name you would like to be displayed for your shortcut",
-      "url": "The url you would like to open when the user chooses this shortcut. This must be a URL local to your PWA. For example: If my start_url is /, this URL must be something like /shortcut",
+      "name": "BHOLE Games",
+      "url": "/shortcut",
       "description": "A description of the functionality of this shortcut"
     }
   ]
