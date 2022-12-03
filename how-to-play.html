@@ -16,8 +16,10 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- favicon -->
-        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <script>navigator.serviceWorker.register("service-worker.js")</script>
+    <link rel="manifest" href="manifest.json" />
 </head>
 
 <body class="app sidebar-mini">
@@ -79,11 +81,12 @@
                 </ul>
             </li>
 
-            <li><a class="app-menu__item active" href="how-to-play.html"><i class="app-menu__icon fa fa-question"></i>How to
+            <li><a class="app-menu__item active" href="how-to-play.html"><i
+                        class="app-menu__icon fa fa-question"></i>How to
                     Play</a></li>
 
-            <li><a class="app-menu__item " href="rules.html"><i
-                        class="app-menu__icon fa fa-file-text-o"></i>Notice board
+            <li><a class="app-menu__item " href="rules.html"><i class="app-menu__icon fa fa-file-text-o"></i>Notice
+                    board
                     /
                     Rules</a></li>
             <li><a class="app-menu__item" href="contact-us.html"><i class="app-menu__icon fa fa-headphones"></i><span

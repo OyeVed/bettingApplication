@@ -9,11 +9,13 @@
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-        <!-- favicon -->
-        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <script>navigator.serviceWorker.register("service-worker.js")</script>
+    <link rel="manifest" href="manifest.json" />
 </head>
 
-<body class="app sidebar-mini" >
+<body class="app sidebar-mini">
     <div class=" alert alert-success" id="alert_div">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Indicates a successful or positive action.
@@ -21,7 +23,7 @@
     Welcome to BHOLE Games
     <h6><a href="index.html">Open </a> in mobile device</h6>
     <script>
-        console.log(window.location,'')
+        console.log(window.location, '')
     </script>
 </body>
 
