@@ -17,8 +17,11 @@
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-<script>navigator.serviceWorker.register("service-worker.js")</script> 
-<link rel="manifest" href="manifest.json" />    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <script>navigator.serviceWorker.register("service-worker.js")</script>
+    <link rel="manifest" href="manifest.json" />
+    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+        <!-- favicon -->
+        <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -34,7 +37,7 @@
     </section>
     <section class="login-content">
         <div class="logo">
-            <h1>BHOLE Games</h1>
+            <img src="./assets/favicon.png" alt="" style="height: 100px;">
         </div>
         <div class="login-box" style="min-height:430px;">
             <form class="login-form">
@@ -65,11 +68,12 @@
                 <p class="semibold-text mt-4 text-center"><a href="signup.html" style="color:  #666;">Register Now </a>
                 </p>
             </form>
-            <form class="forget-form" >
-                <div id="forgot_pass_container"  >
-                    <h3 class="login-head" style="color: black;"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+            <form class="forget-form">
+                <div id="forgot_pass_container">
+                    <h3 class="login-head" style="color: black;"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?
+                    </h3>
                     <div class="form-group">
-                        <label  class="control-label">EMAIL</label>
+                        <label class="control-label">EMAIL</label>
                         <input class="form-control login_form" type="email" placeholder="Email" id="email">
                     </div>
                     <div class="form-group btn-container">
